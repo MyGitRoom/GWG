@@ -10,6 +10,7 @@
 #import "IntroduceModel.h"
 #import "DataDetailModel.h"
 #import "DetailTableViewCell.h"
+//#import "IntroduceViewTableViewCell.h"
 #import "NetWorlRequestManager.h"
 #import "MusicPlayerViewController.h"
 
@@ -20,5 +21,6 @@
 
 @property (nonatomic, strong) NSNumber * passId;
 @property (nonatomic, assign) NSInteger flag;
+@property (nonatomic, assign) BOOL tag;//记录tableview是否已经创建
 
 @end

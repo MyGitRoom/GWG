@@ -7,11 +7,16 @@
 //
 
 #import "RadioViewController.h"
+#import "MJRefresh.h"
+#import "MJRefreshAutoFooter.h"
 
 @interface RadioViewController ()<UITableViewDataSource,UITableViewDelegate>
-
+{
+    int page;//记录页数
+}
 @property (nonatomic, strong) UITableView * tab;
 @property (nonatomic, strong) NSMutableArray * dataArray;
+@property (nonatomic, strong) NSMutableArray * loadMoreArray;
 
 @end
 
@@ -27,14 +32,27 @@
     return _dataArray;
 }
 
+- (NSMutableArray *) loadMoreArray
+{
+    if (!_loadMoreArray)
+    {
+        self.loadMoreArray = [NSMutableArray array];
+    }
+    return _loadMoreArray;
+}
+
 
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     self.navigationController.navigationBarHidden = NO;
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    page = 1;
     
-    [self requestData];
+    [self requestData:RADIOURL];
+    [self createTableView];
+    [self creatFooterRefresh];
+    [self creatHeaderRefresh];
 }
 
 #pragma mark- 创建tableview
@@ -64,7 +82,6 @@
     [cell.imageV sd_setImageWithURL:[NSURL URLWithString:datmo.cover_url]];
     cell.titleLab.text = datmo.title;
     cell.introLab.text = datmo.intro;
-//    cell.countLab.text = datmo.cover_path;
     if ([datmo.count_play integerValue]/10000>0)
     {
         NSString * string = [NSString stringWithFormat:@"%.2f万人收听",[datmo.count_play integerValue]/10000.0];
@@ -122,10 +139,10 @@
 */
 
 #pragma mark- 请求数据
-- (void) requestData
+- (void) requestData:(NSString *)string
 {
 
-    [NetWorlRequestManager requestWithType:GET urlString:RADIOURL  ParDic:nil dicOfHeader:nil finish:^(NSData *data) {
+    [NetWorlRequestManager requestWithType:GET urlString:string  ParDic:nil dicOfHeader:nil finish:^(NSData *data) {
 //        NSLog(@"%@",data);
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSArray * dataArray = [dic objectForKey:@"data"];
@@ -137,16 +154,51 @@
             [self.dataArray addObject:dat];
         }
 //        NSLog(@"%@",self.dataArray);
-        
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self createTableView];
+            [_tab reloadData];
         });
         
     } error:^(NSError *error) {
         NSLog(@"Error:%@",error);
     }];
     
+}
+
+#pragma  mark- 上拉加载的方法
+- (void) creatFooterRefresh
+{
+    _tab.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+}
+
+- (void) loadMoreData
+{
+    ++page;
+    [self.loadMoreArray addObject:[@"http://www.duole.fm/api/recommend/collect?app_version=2.0.5&device=iphone&limit=10&sort=3&visitor_uid=0" stringByAppendingFormat:@"&page=%d",page]];
+    [self requestData:[self.loadMoreArray lastObject]];
+    [_tab reloadData];
+    [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
+}
+
+- (void) timeStopP
+{
+    [_tab.mj_footer endRefreshing];
+}
+
+#pragma  -mark 下拉刷新的方法
+-(void)creatHeaderRefresh
+{
+    _tab.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+}
+-(void)loadNewData
+{
+    [self requestData:RADIOURL];
+    [_tab  reloadData];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timeStopPP) userInfo:nil repeats:NO];
+}
+-(void)timeStopPP
+{
+    [_tab.header endRefreshing];
 }
 
 
