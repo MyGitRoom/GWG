@@ -19,7 +19,10 @@
 @end
 
 @implementation MusicPlayerViewController
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden =NO;
+}
 #pragma mark- 懒加载
 - (NSMutableArray *) settings
 {
@@ -72,9 +75,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     
     self.currentIndex = self.detailMod.model_flag;
-    
+    [self creatPopView];
     //初始化返回的按钮
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(16, 24, 20, 20);
@@ -87,6 +91,7 @@
     
     [self setControlButton];
     [self setNameAndAlbumLabel];
+    [self creatDataBank];
     
     //添加一个观察者，观察我们的应用程序有没有计入后台，一旦进入后台系统就会自动给我们发送一个通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadVolume) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -255,6 +260,66 @@
     }
 }
 
+#pragma  -mark  数据库的建立
+-(void)creatDataBank
+{
+    NSLog(@"%@",NSHomeDirectory());
+    BOOL result = [[DataBaseUtil shareDataBase]createDataDetailModelTable];
+    if (result) {
+        NSLog(@"建立电台列表成功");
+    }
+    NSArray * array = [[DataBaseUtil shareDataBase]selectRadioTable];
+    DataDetailModel * de  =[[DataDetailModel alloc]init];
+    //    NSLog(@"%@",array);
+    for (de in array) {
+        if ([de.title isEqualToString:_detailMod.title]) {
+            _btn.selected = YES;
+        }
+    }
+    //    NSLog(@"%d",_btn.selected);
+    
+    
+}
 
+#pragma -mark  创建收藏btn
+-(void)creatPopView
+{
+    _btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 600, 40, 40)];
+    [_btn addTarget:self action:@selector(PopViewToCollect) forControlEvents:UIControlEventTouchDown];
+    [_btn setImage:[UIImage imageNamed:@"未收藏"] forState:UIControlStateNormal];
+    [_btn setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
+    
+    [self.view addSubview:_btn];
+}
+-(void)PopViewToCollect
+{
+    
+    if (_btn.selected == NO) {
+        [[DataBaseUtil shareDataBase]insertObjectOfRadio:_detailMod];
+        _btn.selected = YES;
+        [self popToPrompt:@"收藏成功"];
+        
+        
+    }else
+    {
+        [[DataBaseUtil shareDataBase]deleteRadioWithName:_detailMod.title];
+        [self popToPrompt:@"取消收藏"];
+        _btn.selected = NO;
+        
+    }
+}
+#pragma -mark 弹出提示框
+-(void)popToPrompt:(NSString*)str
+{
+    UIAlertController * alertController =  [UIAlertController alertControllerWithTitle:nil message:str preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:YES completion:nil];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(DismissTheAlert) userInfo:nil repeats:NO];
+    
+}
+
+-(void)DismissTheAlert
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

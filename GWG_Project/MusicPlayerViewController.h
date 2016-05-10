@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "DataDetailModel.h"
 #import "GYPlayer.h"
-
+#import "DataBaseUtil.h"
 @interface MusicPlayerViewController : UITableViewController
 
 //定义一个index用于接收当前需要播放第几首音乐
 @property (nonatomic) NSInteger currentIndex;
 @property (nonatomic, strong) DataDetailModel * detailMod;
 @property (nonatomic, strong) NSMutableArray * passDataArray; 
-
+//收藏按钮//
+@property(nonatomic,strong)UIButton * btn;
 @end

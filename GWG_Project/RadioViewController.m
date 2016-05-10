@@ -21,7 +21,10 @@
 @end
 
 @implementation RadioViewController
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden =NO;
+}
 #pragma mark- 懒加载
 - (NSMutableArray *) dataArray
 {
@@ -44,10 +47,10 @@
 
 #pragma mark- 加载视图
 - (void)viewDidLoad {
-    self.navigationController.navigationBarHidden = NO;
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     page = 1;
+    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     
     [self requestData:RADIOURL];
     [self createTableView];

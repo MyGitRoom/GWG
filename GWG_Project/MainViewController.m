@@ -14,6 +14,8 @@
 #import "RadioViewController.h"
 #import "MovieViewController.h"
 #import "UIImageView+WebCache.h"
+#import "UNCView.h"
+
 #define DAILYURL @"http://dict-mobile.iciba.com/interface/index.php?c=sentence&m=getsentence&client=1&type=1&field=1,2,3,4,5,6,7,8,9,10,11,12,13&timestamp=1434767570&sign=6124a62ff73a033a&uuid=3dd23ff24ea543c1bdca57073d0540e1&uid="
 @interface MainViewController ()
 
@@ -65,7 +67,7 @@
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+   
 
     self.imagev = [[UIImageView alloc]initWithFrame:self.view.frame];
     self.i = 1 ;
@@ -90,6 +92,7 @@
     
     //加载数据
     [self requestData];
+     [self creatRunningBtn];
     
 }
 
@@ -358,7 +361,16 @@
 
 
 }
-
+-(void)creatRunningBtn
+{
+//    UNCView *uncView = [[UNCView alloc] initWithFrame:CGRectMake(0, 10, self.view.frame.size.width, self.view.frame.size.height/3)];
+//    
+//    uncView.bgColor = [UIColor clearColor];
+//    uncView.custViewColor = [UIColor colorWithWhite:0.649 alpha:0];
+//    uncView.uncBtnColor = [UIColor colorWithWhite:0.649 alpha:0.2];
+//    [self.view addSubview:uncView];
+    
+}
 
 
 
