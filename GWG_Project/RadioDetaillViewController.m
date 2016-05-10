@@ -24,7 +24,10 @@
 @end
 
 @implementation RadioDetaillViewController
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden =NO;
+}
 #pragma mark- 懒加载
 - (NSMutableArray *) dataDetailArray
 {
@@ -57,6 +60,7 @@
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
 //    [self loadMoreData];
     page = 1;
     NSDictionary * parDic = [NSDictionary dictionaryWithObjectsAndKeys:@"2.0.5",@"app_version",@"1",@"sort",@"1",@"page",@"0",@"visitor_uid", nil];
@@ -151,11 +155,14 @@
 //    [self requestIntroduce];
 //    NSLog(@"%@",self.introduceArray);
     self.tab = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+
     [self.view addSubview:_tab];
     _tab.delegate = self;
     _tab.dataSource = self;
 //    _tab.separatorStyle = UITableViewCellSelectionStyleNone;
     _tab.showsVerticalScrollIndicator = NO;
+    _tab.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    
     
     //添加headerview
     _tab.tableHeaderView = self.introduceView;

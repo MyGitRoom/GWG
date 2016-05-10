@@ -90,10 +90,16 @@
     if (offsetY>30) {
         if (panTranslationY>0) {//下滑
           [self.navigationController setNavigationBarHidden:NO animated:YES];
-        }else//上滑
+        }
+        else//上滑
         {
           [self.navigationController setNavigationBarHidden:YES animated:YES];
         }
+    }
+    else if (offsetY==0)
+    {
+     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
     }
 }
 #pragma -mark 收藏按钮的创建
