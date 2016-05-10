@@ -100,7 +100,8 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         
     
-        TypeOfMovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//        TypeOfMovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    TypeOfMovieTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell == nil) {
             cell = [[TypeOfMovieTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
         }
@@ -142,12 +143,15 @@
 #pragma mark  - 实现收藏按钮的方法
 
 -(void)like:(UIButton *)btn{
-    if (btn.tag) {
-         [btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
-        btn.tag = 0 ;
-    }else{
-      [btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-        btn.tag = 1 ;
+
+    [btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected];
+  
+    if (btn.selected == NO) {
+        btn.selected = YES;
+    }else
+    {
+        btn.selected = NO;
     }
    
     
