@@ -1,4 +1,4 @@
-//
+ //
 //  RadioDetaillViewController.m
 //  GWG_Project
 //
@@ -7,13 +7,17 @@
 //
 
 #import "RadioDetaillViewController.h"
+#import "MJRefresh.h"
+#import "MJRefreshAutoFooter.h"
 
 @interface RadioDetaillViewController ()<UITableViewDataSource,UITableViewDelegate>
-
+{
+    int page;
+}
 @property (nonatomic, strong) UITableView * tab;
-
 @property (nonatomic, strong) NSMutableArray * dataDetailArray;
 @property (nonatomic, strong) NSMutableArray * introduceArray;
+@property (nonatomic, strong) NSString * tagString;
 
 @property (nonatomic, strong) UIView * introduceView;
 
@@ -44,7 +48,7 @@
 {
     if (!_introduceView)
     {
-        self.introduceView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, KScreenWidth, 400)];
+        self.introduceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, 400)];
         self.introduceView = [[[NSBundle mainBundle]loadNibNamed:@"IntroduceView" owner:self options:nil]lastObject];
     }
     return _introduceView;
@@ -53,106 +57,164 @@
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self requestData];
+//    [self loadMoreData];
+    page = 1;
+    NSDictionary * parDic = [NSDictionary dictionaryWithObjectsAndKeys:@"2.0.5",@"app_version",@"1",@"sort",@"1",@"page",@"0",@"visitor_uid", nil];
+    self.tagString = [DETAILURL stringByAppendingPathComponent:[NSString stringWithFormat:@"&collect_id=%@",[self.passId stringValue]]];
+    [self requestData:self.tagString parDic:parDic];
     
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
-
 #pragma mark- 请求数据
-- (void) requestData
+- (void) requestData:(NSString *)string parDic:(NSDictionary *)dic
 {
     NSDictionary * headerDic = [NSDictionary dictionaryWithObject:@"application/x-www-form-urlencoded" forKey:@"Content-Type"];
-    NSDictionary * parDic = [NSDictionary dictionaryWithObjectsAndKeys:@"app_version",@"2.0.5",@"sort",@"1",@"visitor_uid",@"0",@"page",@"1", nil];
-    [NetWorlRequestManager requestWithType:POST urlString:[DETAILURL stringByAppendingPathComponent:[NSString stringWithFormat:@"&collect_id=%@",[self.passId stringValue]]] ParDic:parDic dicOfHeader:headerDic finish:^(NSData *data) {
-//        NSLog(@"%@",data);
+  
+    
+    [NetWorlRequestManager requestWithType:POST urlString:string ParDic:dic dicOfHeader:headerDic finish:^(NSData *data) {
+//          NSLog(@"%@",dic);
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 //        NSLog(@"%@",dic);
         NSArray * dataArray = [dic objectForKey:@"data"];
         self.flag = 0;
+//        NSLog(@"%@",dataArray);
         for (NSDictionary * dic in dataArray)
         {
             DataDetailModel * dade = [[DataDetailModel alloc]init];
             [dade setValuesForKeysWithDictionary:dic];
             dade.model_flag = self.flag;
             [self.dataDetailArray addObject:dade];
+//            NSLog(@"%@",dic);
+            
             self.flag++;
 //            NSLog(@"%ld",(long)dade.model_flag);
+//            NSLog(@"%@",dade.user);
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self createTableView];
-            [self createView];
+//            [self.tab reloadData];
+            [self requestIntroduce];
+            
         });
         
     } error:^(NSError *error) {
         NSLog(@"Error:%@",error);
     }];
     
-    
-    NSDictionary * parDic2 = [NSDictionary dictionaryWithObject:@"2.0.5" forKey:@"app_version"];
-    [NetWorlRequestManager requestWithType:POST urlString:[DETAILDURL stringByAppendingPathComponent:[NSString stringWithFormat:@"&collect_id=%@",[self.passId stringValue]]] ParDic:parDic2 dicOfHeader:headerDic finish:^(NSData *data) {
-//        NSLog(@"%@",data);
+}
+
+//请求描述内容
+- (void) requestIntroduce
+{
+    NSDictionary * headerDic = [NSDictionary dictionaryWithObject:@"application/x-www-form-urlencoded" forKey:@"Content-Type"];
+    NSDictionary * parDic = [NSDictionary dictionaryWithObject:@"2.0.5" forKey:@"app_version"];
+    [NetWorlRequestManager requestWithType:POST urlString:[DETAILDURL stringByAppendingPathComponent:[NSString stringWithFormat:@"&collect_id=%@",[self.passId stringValue]]] ParDic:parDic dicOfHeader:headerDic finish:^(NSData *data) {
+        //        NSLog(@"%@",data);
         
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"%@",dic);
+        //        NSLog(@"dic = %@",dic);
         NSDictionary * dataDic = [dic objectForKey:@"data"];
         IntroduceModel * introduce = [[IntroduceModel alloc]init];
         [introduce setValuesForKeysWithDictionary:dataDic];
         [self.introduceArray addObject:introduce];
-//        NSLog(@"%@",introduce.tags);
+//                NSLog(@"url = %@",introduce.cover_url);
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tab reloadData];
+            if (!_tag)
+            {
+                [self createTableView];
+                [self creatFooterRefresh];
+                [self creatHeaderRefresh];
+            }
+            
+        });
     } error:^(NSError *error) {
         
     }];
-    
-    
-}
-
-#pragma mark- 电台信息view
-- (void) createView
-{
-    IntroduceModel * model = [self.introduceArray lastObject];
-//    UIImageView * imageV = [[UIImageView alloc]init];
-    
-//    [self.introduceView];
-//    imageV.frame = self.introduceView.frame;
-    
-    
-    UIVisualEffectView *visualView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-    visualView.frame = self.introduceView.frame;
 }
 
 #pragma mark- 创建tableview
 - (void) createTableView
 {
-    self.tab = [[UITableView alloc]initWithFrame:CGRectMake(0, 64+400, KScreenWidth, KScreenHeight) style:UITableViewStylePlain];
+    _tag = YES;
+//    [self requestIntroduce];
+//    NSLog(@"%@",self.introduceArray);
+    self.tab = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, KScreenWidth, KScreenHeight) style:UITableViewStylePlain];
     [self.view addSubview:_tab];
     _tab.delegate = self;
     _tab.dataSource = self;
 //    _tab.separatorStyle = UITableViewCellSelectionStyleNone;
     _tab.showsVerticalScrollIndicator = NO;
+    
+    //添加headerview
+    _tab.tableHeaderView = self.introduceView;
+    IntroduceModel * model = [self.introduceArray lastObject];
+//    NSLog(@"%@",model.title);
+    
+    //背景设置毛玻璃
+    UIImageView * imageV = [[UIImageView alloc]init];
+    imageV.frame = self.introduceView.frame;
+    [self.introduceView addSubview:imageV];
+    [imageV sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
+    UIVisualEffectView * visualView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+    visualView.frame = imageV.frame;
+    [imageV addSubview:visualView];
+    
+    //前景设置圆形图片
+    UIImageView * picImageV = (UIImageView *)[self.introduceView viewWithTag:2];
+    [self.introduceView bringSubviewToFront:picImageV];
+    [picImageV sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
+    picImageV.layer.cornerRadius = 100;
+    picImageV.layer.masksToBounds = YES;
+    
+    UILabel * tieLab = (UILabel *)[self.introduceView viewWithTag:3];
+    [self.introduceView bringSubviewToFront:tieLab];
+    for (int i = 0; i < model.tags.count; i++)
+    {
+        tieLab.text = [tieLab.text stringByAppendingFormat:@" %@",[model.tags[i] objectForKey:@"name"]];
+    }
+//    NSLog(@"%@",tieLab);
+    
+    UILabel * introLab = (UILabel *)[self.introduceView viewWithTag:4];
+    [self.introduceView bringSubviewToFront:introLab];
+    introLab.text = model.intro;
+    
+    UIImageView * tieV1 = (UIImageView *)[self.introduceView viewWithTag:10085];
+    [self.introduceView bringSubviewToFront:tieV1];
+    UIImageView * tieV2 = (UIImageView *)[self.introduceView viewWithTag:20086];
+    [self.introduceView bringSubviewToFront:tieV2];
+    UILabel * tieL1 = (UILabel *)[self.introduceView viewWithTag:1086];
+    [self.introduceView bringSubviewToFront:tieL1];
+    UILabel * tieL2 = (UILabel *)[self.introduceView viewWithTag:2086];
+    [self.introduceView bringSubviewToFront:tieL2];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+    });
+    
 }
 
 #pragma -mark tableview代理方法
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"cell";
-    DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell == nil)
-    {
-//        cell = [[DetailTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
-    }
-    //设置cell无点击效果
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    static NSString * identifier = @"cell";
+    DetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"DetailTableViewCell" owner:self options:nil] lastObject];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        DataDetailModel * dataD = [self.dataDetailArray objectAtIndex:indexPath.row];
+        cell.titleLab.text = dataD.title;
+        cell.typeLab.text = [dataD.user objectForKey:@"nick"];
+        [cell.picView sd_setImageWithURL:[NSURL URLWithString:dataD.cover_url]];
+        cell.countLab.text = [NSString stringWithFormat:@"%@人收听",dataD.count_play];
+        
+        return cell;
     
-    DataDetailModel * dataD = [self.dataDetailArray objectAtIndex:indexPath.row];
-    cell.titleLab.text = dataD.title;
-    cell.typeLab.text = [dataD.user objectForKey:@"nick"];
-    [cell.picView sd_setImageWithURL:[NSURL URLWithString:dataD.cover_url]];
-    cell.countLab.text = [NSString stringWithFormat:@"%@人收听",dataD.count_play];
-    return cell;
 }
 
 
@@ -209,7 +271,44 @@
     }
 }
 
+#pragma  mark- 上拉加载的方法
+- (void) creatFooterRefresh
+{
+    _tab.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+}
 
+- (void) loadMoreData
+{
+    ++page;
+    NSDictionary * parDic = [NSDictionary dictionaryWithObjectsAndKeys:@"2.0.5",@"app_version",@"1",@"sort",[NSString stringWithFormat:@"%d",page],@"page",@"0",@"visitor_uid", nil];
+//    NSLog(@"%@",parDic);
+    [self requestData:self.tagString parDic:parDic];
+    [_tab reloadData];
+    [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
+}
+
+- (void) timeStopP
+{
+    [_tab.mj_footer endRefreshing];
+}
+
+#pragma  -mark 下拉刷新的方法
+-(void)creatHeaderRefresh
+{
+    _tab.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+}
+-(void)loadNewData
+{
+    NSDictionary * parDic = [NSDictionary dictionaryWithObjectsAndKeys:@"app_version",@"2.0.5",@"sort",@"1",@"visitor_uid",@"0",@"page",@"1", nil];
+    [self requestData:self.tagString parDic:parDic];
+    [_tab  reloadData];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timeStopPP) userInfo:nil repeats:NO];
+}
+-(void)timeStopPP
+{
+    [_tab.header endRefreshing];
+}
 
 
 

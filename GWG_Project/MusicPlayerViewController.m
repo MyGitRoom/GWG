@@ -50,7 +50,7 @@
     self.view = _imageV;
     self.view.userInteractionEnabled = YES;
     //毛玻璃效果
-    UIVisualEffectView *visualView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+    UIVisualEffectView * visualView = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
     visualView.frame = self.view.frame;
     [self.view addSubview:visualView];
     
@@ -63,7 +63,7 @@
     [self.view addSubview:_scrollView];
     
     //对控制台设置一个白色的毛玻璃效果
-    UIVisualEffectView *eView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
+    UIVisualEffectView * eView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     eView.frame = CGRectMake(0, kControlBarOriginY, KScreenWidth, kControlBarHeight);
     [self.view addSubview:eView];
     
@@ -189,12 +189,13 @@
 #pragma -mark点击上一首按钮执行的方法
 -(void)handleRewindAction:(UIButton *)sender
 {
-    if (self.currentIndex == 0)
+    self.currentIndex--;
+    if (self.currentIndex == -1)
     {
         self.currentIndex = 0;
     }
     
-    self.currentIndex--;
+//    NSLog(@"%ld",self.currentIndex);
     [self reloadMusic];
 }
 

@@ -2,7 +2,7 @@
 //  IntroduceView.m
 //  GWG_Project
 //
-//  Created by lanou on 16/5/6.
+//  Created by lanou on 16/5/9.
 //  Copyright © 2016年 关振发. All rights reserved.
 //
 
