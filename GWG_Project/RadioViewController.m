@@ -54,6 +54,15 @@
     [self createTableView];
     [self creatFooterRefresh];
     [self creatHeaderRefresh];
+    
+    UIImage * image = [UIImage imageNamed:@"return"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
+}
+
+- (void) touchReturn
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark- 创建tableview

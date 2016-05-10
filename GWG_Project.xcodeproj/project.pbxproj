@@ -43,7 +43,7 @@
 		3FACC3301CE175F90078F7DF /* tie.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FACC32F1CE175F90078F7DF /* tie.png */; settings = {ASSET_TAGS = (); }; };
 		3FACC3341CE17CCE0078F7DF /* RadioTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FACC3321CE17CCE0078F7DF /* RadioTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		3FACC3351CE17CCE0078F7DF /* RadioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FACC3331CE17CCE0078F7DF /* RadioTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
-		3FACC3371CE187BD0078F7DF /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FACC3361CE187BD0078F7DF /* return.png */; settings = {ASSET_TAGS = (); }; };
+		3FACC3391CE1B5070078F7DF /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FACC3381CE1B5070078F7DF /* return.png */; settings = {ASSET_TAGS = (); }; };
 		3FB3D8B21CD379880058CC5B /* DBSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3D8B11CD379880058CC5B /* DBSphereView.m */; };
 		3FB3D8C81CD3886D0058CC5B /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3D8C71CD3886D0058CC5B /* ReadingViewController.m */; };
 		3FB3D8CE1CD388F50058CC5B /* TechnologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3D8CD1CD388F50058CC5B /* TechnologyViewController.m */; };
@@ -205,7 +205,7 @@
 		3FACC3311CE17CCE0078F7DF /* RadioTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioTableViewCell.h; sourceTree = "<group>"; };
 		3FACC3321CE17CCE0078F7DF /* RadioTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioTableViewCell.m; sourceTree = "<group>"; };
 		3FACC3331CE17CCE0078F7DF /* RadioTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadioTableViewCell.xib; sourceTree = "<group>"; };
-		3FACC3361CE187BD0078F7DF /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
+		3FACC3381CE1B5070078F7DF /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
 		3FB3D8A81CD377B70058CC5B /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		3FB3D8A91CD377EC0058CC5B /* WidthAndHeight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WidthAndHeight.h; sourceTree = "<group>"; };
 		3FB3D8AE1CD379880058CC5B /* DBMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMatrix.h; sourceTree = "<group>"; };
@@ -564,13 +564,11 @@
 				3FEF73D01CDB805E0072A0D7 /* play.png */,
 				3FEF73D11CDB805E0072A0D7 /* play_h.png */,
 				3FACC32F1CE175F90078F7DF /* tie.png */,
-				3FACC3361CE187BD0078F7DF /* return.png */,
-
 				3FDE50AF1CE17ECC002D9A0B /* close.png */,
 				3FDE50B01CE17ECC002D9A0B /* showView.png */,
 				3FDE50B31CE18A30002D9A0B /* like.png */,
 				3FDE50B91CE18C7C002D9A0B /* orangeNotLike.png */,
-
+				3FACC3381CE1B5070078F7DF /* return.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1062,14 +1060,13 @@
 				4E30112B1CDDEF0100AA92DA /* 未收藏star.png in Resources */,
 				3FEF73C11CDB6E0E0072A0D7 /* arrowdown.png in Resources */,
 				3FACC3351CE17CCE0078F7DF /* RadioTableViewCell.xib in Resources */,
-
 				3FDE50BA1CE18C7C002D9A0B /* orangeNotLike.png in Resources */,
-
 				3F4E86271CD361EE00B9410A /* Assets.xcassets in Resources */,
 				3F4E86251CD361EE00B9410A /* Main.storyboard in Resources */,
 				4E3011281CDD8EB700AA92DA /* 未收藏.png in Resources */,
 				3FACC3231CE175AE0078F7DF /* DetailTableViewCell.xib in Resources */,
 				3F7E73121CD394B400A2AB90 /* 3.jpg in Resources */,
+				3FACC3391CE1B5070078F7DF /* return.png in Resources */,
 				4E3011271CDD8EB700AA92DA /* 收藏.png in Resources */,
 				3FEF73C31CDB70670072A0D7 /* volumn_slider_thumb@2x.png in Resources */,
 				4E3FE81B1CD9FE0D006E5196 /* MJRefresh.bundle in Resources */,
@@ -1082,7 +1079,6 @@
 				3FEF73CE1CDB79010072A0D7 /* forward.png in Resources */,
 				3F7E73151CD394B400A2AB90 /* 1.jpg in Resources */,
 				3FEF73C71CDB78930072A0D7 /* rewind_h.png in Resources */,
-				3FACC3371CE187BD0078F7DF /* return.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

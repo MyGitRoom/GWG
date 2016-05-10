@@ -43,6 +43,7 @@
     return _albumView;
 }
 
+#pragma mark- 加载视图
 - (void) loadView
 {
     //创建背景视图并且设置毛玻璃效果
@@ -92,6 +93,15 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadVolume) name:UIApplicationDidEnterBackgroundNotification object:nil];
 
     [self firstReloadMusic];
+    
+    UIImage * image = [UIImage imageNamed:@"return"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
+}
+
+- (void) touchReturn
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //点击返回按钮时执行的方法
@@ -134,7 +144,7 @@
 //    [[GYPlayer sharedplayer] seekToTime:sender.value];
 //}
 
-#pragma -mark创建暂停播放等按钮的
+#pragma mark-创建暂停播放等按钮的
 -(void)setControlButton
 {
     //创建播放按钮
@@ -168,14 +178,14 @@
     
 }
 
-#pragma -mark播放器的协议方法(0.1s就会调用一次)
+#pragma mark-播放器的协议方法(0.1s就会调用一次)
 -(void)audioPlayer:(GYPlayer *)player didPlayingWithProgress:(float)progress
 {
     //让图片进行旋转
     self.albumView.transform = CGAffineTransformRotate(self.albumView.transform, M_PI/360);
 }
 
-#pragma -mark点击下一首执行的方法
+//点击下一首执行的方法
 -(void)handleForwordAction:(UIButton *)sender
 {
     self.currentIndex++;
@@ -186,7 +196,7 @@
     
 }
 
-#pragma -mark点击上一首按钮执行的方法
+//点击上一首按钮执行的方法
 -(void)handleRewindAction:(UIButton *)sender
 {
     self.currentIndex--;
@@ -199,7 +209,7 @@
     [self reloadMusic];
 }
 
-#pragma -mark每次切换歌曲的时候把页面的元素全部换成该歌曲的内容
+//每次切换歌曲的时候把页面的元素全部换成该歌曲的内容
 -(void)reloadMusic
 {
     DataDetailModel * model = [self.passDataArray objectAtIndex:self.currentIndex];
@@ -237,7 +247,7 @@
     [player play];
 }
 
-#pragma -mark点击播放按钮时执行的方法
+//点击播放按钮时执行的方法
 -(void)handlePlayPauseAction:(UIButton *)sender
 {
     GYPlayer *player = [GYPlayer sharedplayer];
