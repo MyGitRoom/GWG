@@ -39,7 +39,7 @@
                         <constraint firstAttribute="height" constant="20" id="3mj-bx-4eu"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.59570673279999997" green="0.82750993309999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" tag="20086" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tie.png" translatesAutoresizingMaskIntoConstraints="NO" id="Nqg-EI-3Ee">
@@ -55,7 +55,7 @@
                         <constraint firstAttribute="height" constant="20" id="USL-5g-TV0"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.59570673279999997" green="0.82750993309999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" tag="10085" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tie.png" translatesAutoresizingMaskIntoConstraints="NO" id="ert-nR-mD3">
@@ -100,6 +100,7 @@
                 <outlet property="tieTwo" destination="Nqg-EI-3Ee" id="RZd-ht-SUW"/>
                 <outlet property="titleLab" destination="fJa-Q7-jvY" id="nsr-Gc-JI5"/>
             </connections>
+            <point key="canvasLocation" x="17" y="245"/>
         </view>
     </objects>
     <resources>

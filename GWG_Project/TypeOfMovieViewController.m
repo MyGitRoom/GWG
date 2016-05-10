@@ -13,10 +13,11 @@
 #import "TypeOfMovieModel.h"
 #import "MovieDetailViewController.h"
 #import "MBProgressHUD.h"
-@interface TypeOfMovieViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface TypeOfMovieViewController ()<UITableViewDataSource,UITableViewDelegate,isLike>
 @property (nonatomic ,strong) NSMutableArray <TypeOfMovieModel*>*array ;//建一个数组接收解析数据
 @property (nonatomic,strong) UITableView *tab ;
 @property (nonatomic ,strong)MBProgressHUD *mbHUD;
+@property (nonatomic ,strong) UIButton *likeBtn ;
 
 @end
 
@@ -52,7 +53,14 @@
       [self.view addSubview:self.tab];
     
         [self getData];
-        
+    
+//    self.likeBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.likeBtn setImage:[UIImage imageNamed:@"orangelike"] forState:UIControlStateNormal];
+//    [self.likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected ];
+//    self.likeBtn.frame =  CGRectMake(KScreenWidth-50, 10, 32, 32);
+//    [self.view addSubview:self.likeBtn];
+    
+    
     }
     //获取数据
     -(void)getData{
@@ -92,11 +100,13 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         
     
-        TypeOfMovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//        TypeOfMovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    TypeOfMovieTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell == nil) {
             cell = [[TypeOfMovieTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
         }
-        
+    
+    cell.isLikeDelegate = self ;
         cell.selectionStyle = UITableViewCellSelectionStyleNone ;
         cell.titleLabel.text = self.array[indexPath.row].name ;
         [cell.imageV sd_setImageWithURL:[NSURL URLWithString:self.array[indexPath.row].img_url]];
@@ -129,6 +139,25 @@
 
 }
 
+
+#pragma mark  - 实现收藏按钮的方法
+
+-(void)like:(UIButton *)btn{
+
+    [btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected];
+  
+    if (btn.selected == NO) {
+        btn.selected = YES;
+    }else
+    {
+        btn.selected = NO;
+    }
+   
+    
+}
+
+/*
 //给cell添加动画
 //-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 //{
@@ -174,6 +203,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+ */
 
 /*
 #pragma mark - Navigation

@@ -119,14 +119,14 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
 
 //    NSInteger i = self.array.count - 14 ;
-    return  self.array.count - 6 ;
+    return  self.array.count  ;
 
 }
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
 //   NSLog(@"%f,%f",(KScreenWidth-40)/3,((KScreenWidth-30)/3+20));
-    return CGSizeMake((KScreenWidth-45)/3,(KScreenWidth-45)/3/0.75);
+    return CGSizeMake((KScreenWidth-45)/3,(KScreenWidth-45)/3/0.92);
     
 }
 

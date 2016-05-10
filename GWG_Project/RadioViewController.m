@@ -9,6 +9,7 @@
 #import "RadioViewController.h"
 #import "MJRefresh.h"
 #import "MJRefreshAutoFooter.h"
+#import "RadioTableViewCell.h"
 
 @interface RadioViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -73,16 +74,15 @@
 #pragma -mark tableview代理方法
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"cell";
-    MyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    RadioTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[MyTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"RadioTableViewCell" owner:self options:nil]lastObject];
     }
     //设置cell无点击效果
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    
+
     DataModel * datmo = [_dataArray objectAtIndex:indexPath.row];
-    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:datmo.cover_url]];
+    [cell.picView sd_setImageWithURL:[NSURL URLWithString:datmo.cover_url]];
     cell.titleLab.text = datmo.title;
     cell.introLab.text = datmo.intro;
     if ([datmo.count_play integerValue]/10000>0)
@@ -103,7 +103,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    return 80;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
