@@ -34,7 +34,7 @@
 {
     if (!_albumView)
     {
-        self.albumView = [[UIImageView alloc]initWithFrame:CGRectMake(40, 50, KScreenWidth-80, KScreenWidth-80)];
+        self.albumView = [[UIImageView alloc]initWithFrame:CGRectMake(40, 100, KScreenWidth-80, KScreenWidth-80)];
         //设置圆形的半径
         self.albumView.layer.cornerRadius = (KScreenWidth - 80)/2;
         self.albumView.layer.masksToBounds = YES;
@@ -63,10 +63,10 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:_scrollView];
     
-    //对控制台设置一个白色的毛玻璃效果
-    UIVisualEffectView * eView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
-    eView.frame = CGRectMake(0, kControlBarOriginY, KScreenWidth, kControlBarHeight);
-    [self.view addSubview:eView];
+    UIImageView * imageV = [[UIImageView alloc]init];
+    imageV.frame = CGRectMake(0, kControlBarOriginY, KScreenWidth, kControlBarHeight);
+    imageV.image = [UIImage imageNamed:@"controlbar.jpg"];
+    [self.view addSubview:imageV];
     
 //    NSLog(@"%@",self.detailMod.sound_url);
 }
@@ -120,29 +120,31 @@
 
 -(void)setNameAndAlbumLabel
 {
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    button.frame = CGRectMake(0, 0, 20, 20);
+    button.center = CGPointMake(KScreenWidth/1.1, kControlBarCenterY-50);
+    UIImage * image = [UIImage imageNamed:@"down"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [button setImage:image forState:UIControlStateNormal];
+    [self.view addSubview:button];
+    
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, 40)];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.tag = 20086;
-    nameLabel.font = [UIFont systemFontOfSize:14];
-    nameLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-100);
+    nameLabel.font = [UIFont systemFontOfSize:16];
+    nameLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-80);
     nameLabel.text = self.detailMod.title;
     [self.view addSubview:nameLabel];
     
     UILabel *albumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, 30)];
-    albumLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-70);
+    albumLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-50);
     albumLabel.tag = 20010;
-    albumLabel.font = [UIFont systemFontOfSize:12];
+    albumLabel.font = [UIFont systemFontOfSize:14];
     albumLabel.textAlignment = NSTextAlignmentCenter;
     
     albumLabel.text = [self.detailMod.user objectForKey:@"nick"];
     [self.view addSubview:albumLabel];
 }
-
-//滑动音乐进度条执行的方法
-//-(void)handleProgressChangeAction:(UISlider *)sender
-//{
-//    [[GYPlayer sharedplayer] seekToTime:sender.value];
-//}
 
 #pragma mark-创建暂停播放等按钮的
 -(void)setControlButton
