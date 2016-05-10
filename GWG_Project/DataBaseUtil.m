@@ -93,7 +93,13 @@ static DataBaseUtil *dataBase = nil;
     return NO;
 }
 -(BOOL)insertObjectOfRadio:(DataDetailModel *)radio{
-    return nil;
+    if ([_db open]) {
+        NSString * sql = [NSString stringWithFormat:@"insert into radio (title, cover_url, sound_url) values ('%@','%@','%@')",radio.title,radio.cover_url,radio.sound_url];
+        BOOL result = [_db executeUpdate:sql];
+        [_db close];
+        return result;
+    }
+    return NO;
 }
 -(BOOL)insertObjectOfMovie:(MovieModel *)radio{	
     return nil;
@@ -144,7 +150,26 @@ static DataBaseUtil *dataBase = nil;
         return array;
 }
 -(NSArray *)selectRadioTable{
-return nil;}
+    NSMutableArray *array = [NSMutableArray array];
+    if ([_db open]) {
+        NSString *sql = [NSString stringWithFormat:@"select * from radio"];
+        FMResultSet *set = [_db executeQuery:sql];
+        while ([set next]) {
+            NSString *title = [set stringForColumn:@"title"];
+            NSString *cover_url = [set stringForColumn:@"cover_url"];
+            NSString *sound_url = [set stringForColumn:@"sound_url"];
+            
+            DataDetailModel * rad = [[DataDetailModel alloc]init];
+            rad.title = title;
+            rad.cover_url = cover_url;
+            rad.sound_url = sound_url;
+            [array addObject:rad];
+        }
+        [_db close];
+        return array;
+    }
+    return array;
+}
 -(NSArray *)selectMovieTable{
 return nil;}
 
@@ -177,6 +202,29 @@ return nil;}
         return result;
     }
     return NO;
+}
+
+-(BOOL)deleteRadioWithName:(NSString *)title
+{
+    if ([_db open]) {
+        NSString * sql = [NSString stringWithFormat:@"delete from radio where title = '%@'",title];
+        BOOL result = [_db executeUpdate:sql];
+        [_db close];
+        return result;
+    }
+    return NO;
+
+}
+-(BOOL)deleteMovieWithName:(NSString *)title
+{
+    if ([_db open]) {
+        NSString * sql = [NSString stringWithFormat:@"delete from movie where title = '%@'",title];
+        BOOL result = [_db executeUpdate:sql];
+        [_db close];
+        return result;
+    }
+    return NO;
+    
 }
 
 @end

@@ -29,7 +29,8 @@
 -(BOOL)deleteDataWithTableName:(NSString *)tableName;
 -(BOOL)deleteReadingWithName:(NSString *)title;
 -(BOOL)deleteTeconologyWithName:(NSString *)title;
-
+-(BOOL)deleteRadioWithName:(NSString *)title;
+-(BOOL)deleteMovieWithName:(NSString *)title;
 
 
 
