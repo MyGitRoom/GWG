@@ -80,6 +80,7 @@
     UIVisualEffectView *effectvi = [[UIVisualEffectView alloc]initWithEffect:blur];
     effectvi.frame = CGRectMake(0, 0,KScreenWidth  , KScreenHeight);
 //    effectvi.alpha = .95;
+    
     [self.view addSubview:self.imagev];
     [self.view addSubview:effectvi];
     
