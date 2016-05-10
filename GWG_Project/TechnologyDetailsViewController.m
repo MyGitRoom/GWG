@@ -33,7 +33,14 @@
     [self creatCollection];
     [self creatDatabank];
     
-   
+    UIImage * image = [UIImage imageNamed:@"return"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
+}
+
+- (void) touchReturn
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma  -mark 建立webView
 -(void)creatWebView
