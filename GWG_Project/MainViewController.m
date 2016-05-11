@@ -45,7 +45,6 @@
 @property (nonatomic,strong) LazyFadeInView * fade;
 @property (nonatomic,strong) LazyFadeInView * fadeC;
 
-
 @end
 
 @implementation MainViewController
@@ -68,16 +67,9 @@
     }
     return _player;
 }
-
-
 #pragma mark- 隐藏导航栏
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = YES ;
-    
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
     Message * ms = [_msgArray lastObject];
     //英文
     _fade = [[LazyFadeInView alloc]initWithFrame:CGRectMake(130, 430,  250, 100)];
@@ -88,8 +80,6 @@
     _fadeC.text = ms.note;
     [_imagev addSubview:_fadeC];
 }
-
-
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -200,7 +190,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             //            [self loadTodayView];
             [self createControls];
-            [self viewDidAppear:YES];
+            [self viewWillAppear:YES];
             
         });
         
@@ -368,7 +358,12 @@
     
 }
 
- 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [_fade removeFromSuperview];
+    [_fadeC removeFromSuperview];
+
+}
 
 
 @end

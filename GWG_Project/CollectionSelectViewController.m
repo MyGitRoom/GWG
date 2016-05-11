@@ -18,7 +18,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO ;
-    
+    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,9 +40,11 @@
 -(void)setTagImage
 {
     UIImageView * tagReading =[[UIImageView alloc]initWithFrame:CGRectMake(-10, KScreenHeight/5+50, KScreenWidth/4*3, 80)];
-    tagReading.image = [UIImage imageNamed:@"tagleft"];
+    tagReading.image = [UIImage imageNamed:@""];
     [_imageV addSubview:tagReading];
     UIButton * btnReading = [[UIButton alloc]initWithFrame:tagReading.frame];
+    [btnReading setBackgroundImage:[UIImage imageNamed:@"tagleft"] forState:UIControlStateNormal];
+    
     [btnReading setTitle:@"Reading" forState:UIControlStateNormal];
     btnReading.titleLabel.font = [UIFont systemFontOfSize:20];
     btnReading.contentEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0);
@@ -51,10 +53,11 @@
     [_imageV addSubview:btnReading];
     
     UIImageView * tagTec =[[UIImageView alloc]initWithFrame:CGRectMake(KScreenWidth/4, KScreenHeight/5+150, KScreenWidth/4*3, 80)];
-    tagTec.image = [UIImage imageNamed:@"tagright"];
+    tagTec.image = [UIImage imageNamed:@"tagrit"];
     [_imageV addSubview:tagTec];
     
     UIButton * btnTec = [[UIButton alloc]initWithFrame:tagTec.frame];
+    [btnTec setBackgroundImage:[UIImage imageNamed:@"tagright"] forState:UIControlStateNormal];
     [btnTec setTitle:@"Technology" forState:UIControlStateNormal];
     btnTec.titleLabel.font = [UIFont systemFontOfSize:20];
     btnTec.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);

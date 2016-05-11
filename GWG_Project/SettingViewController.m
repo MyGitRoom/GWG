@@ -14,6 +14,7 @@
 
 @implementation SettingViewController
 -(void)viewWillAppear:(BOOL)animated {
+    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     self.navigationController.navigationBarHidden = NO ;
     
 }
