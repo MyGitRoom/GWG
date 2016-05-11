@@ -14,11 +14,11 @@
 #import "RadioViewController.h"
 #import "MovieViewController.h"
 #import "UIImageView+WebCache.h"
-
-//#import "LazyFadeInView.h"
-
 #import "LazyFadeInView.h"
 #import "UNCView.h"
+#import "CollectionSelectViewController.h"
+#import "SettingViewController.h"
+#import "MyViewController.h"
 
 #define DAILYURL @"http://dict-mobile.iciba.com/interface/index.php?c=sentence&m=getsentence&client=1&type=1&field=1,2,3,4,5,6,7,8,9,10,11,12,13&timestamp=1434767570&sign=6124a62ff73a033a&uuid=3dd23ff24ea543c1bdca57073d0540e1&uid="
 @interface MainViewController ()<btnjump>
@@ -36,15 +36,14 @@
 @property (nonatomic, strong) NSString * tagMP3; //音频的URL
 @property (nonatomic, strong) UIButton * mainBtn;
 @property (nonatomic ,strong) NSTimer *Scaletimer ;//创建一个定时器控制按钮动画
-
 @property (nonatomic,strong)UNCView *uncView;
-//三个按钮；
+//三个按钮控制跳转控制器；
 @property(nonatomic,strong)UIButton * collectionBtn;
 @property(nonatomic,strong)UIButton * setBtn;
 @property(nonatomic,strong)UIButton * myBtn;
-
+//两个渐变字效果
 @property (nonatomic,strong) LazyFadeInView * fade;
-
+@property (nonatomic,strong) LazyFadeInView * fadeC;
 
 @end
 
@@ -68,59 +67,33 @@
     }
     return _player;
 }
-
-
 #pragma mark- 隐藏导航栏
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = YES ;
-    
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    NSString * str = @"Stray birds of summer come to my window to sing and fly away And yellow leaves of autumn, which have no songs";
-    _fade = [[LazyFadeInView alloc]initWithFrame:CGRectMake(30, 150, 150, 200)];
-    _fade.text = str;
+    Message * ms = [_msgArray lastObject];
+    //英文
+    _fade = [[LazyFadeInView alloc]initWithFrame:CGRectMake(130, 430,  250, 100)];
+    _fade.text = ms.content;
     [_imagev addSubview:_fade];
+    //汉子
+    _fadeC = [[LazyFadeInView alloc]initWithFrame:CGRectMake(10, 80,  250, 100)];
+    _fadeC.text = ms.note;
+    [_imagev addSubview:_fadeC];
 }
-
-
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     [super viewDidLoad];
-    Flag = NO;
-    //    self.view.btnjumpdelegate =self ;
+    Flag = NO;//记录是否出现
     self.imagev = [[UIImageView alloc]initWithFrame:self.view.frame];
     self.i = 1 ;
-    self.imagev.image = [UIImage imageNamed:@"1.jpg"];
-    [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(changePic) userInfo:nil repeats:YES];
-    
-    //    NSString * str = @"Stray birds of summer come to my window to sing and fly away And yellow leaves of autumn, which have no songs";
-    //    _fade = [[LazyFadeInView alloc]initWithFrame:CGRectMake(20, 150, 150, 200)];
-    //    _fade.text = str;
-    //    [_imagev addSubview:_fade];
-    
-    
-    
-    //添加毛玻璃效果
-    
-    //    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    //    UIVisualEffectView *effectvi = [[UIVisualEffectView alloc]initWithEffect:blur];
-    //    effectvi.frame = CGRectMake(0, 0,KScreenWidth  , KScreenHeight);
-    //    effectvi.alpha = .95;
+    self.imagev.image = [UIImage imageNamed:@"1"];
     [self.view addSubview:self.imagev];
-    //    [self.view addSubview:effectvi];
-    
-    //    effectvi.hidden = YES ;
-    //    self.vi.hidden = YES ;
-    
     //创建标签云
     [self createCloudTag] ;
     //加载数据
     [self requestData];
+    //创建右上角按钮
     [self creatRunningBtn];
-    
-    
 }
 
 
@@ -198,9 +171,6 @@
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd";
     NSString * string = [formatter stringFromDate:date];
-    //    NSLog(@"%@",string);
-    
-    
     [NetWorlRequestManager requestWithType:GET urlString:[DAILYURL stringByAppendingString:string] ParDic:nil dicOfHeader:nil finish:^(NSData *data) {
         //        NSLog(@"%@",data);
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -219,6 +189,9 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //            [self loadTodayView];
+            [self createControls];
+            [self viewWillAppear:YES];
+            
         });
         
     } error:^(NSError *error) {
@@ -230,19 +203,6 @@
 
 
 #pragma mark- 添加视图
-- (void) loadTodayView
-{
-    
-    self.vi = [[UIView alloc]initWithFrame:CGRectMake(KScreenWidth/2-KScreenWidth/1.3/2, KScreenHeight/2-KScreenHeight/1.3/2-40, KScreenWidth/1.3, KScreenHeight/1.38)];
-    _vi.backgroundColor = [UIColor colorWithWhite:0.850 alpha:1.000];
-    //        _vi.alpha = .8;
-    
-    _vi.layer.cornerRadius = 7;
-    _vi.layer.masksToBounds = YES;
-    [self.view addSubview:_vi];
-    [self createControls];
-}
-
 //创建视图上控件
 - (void) createControls
 {
@@ -256,54 +216,32 @@
     [self.vi addSubview:dateLabel];
     
     //图片
-    self.imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 40+20, self.vi.frame.size.width, self.vi.frame.size.width*0.618)];
-    
+    self.imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 150, KScreenWidth, 230)];
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:msg.picture]];
-    //    self.imageV.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:msg.picture]]];
-    [self.vi addSubview:self.imageV];
-    
-    //中英文对照
-    self.textLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, self.imageV.frame.origin.y + self.vi.frame.size.width*0.618 + 10, self.vi.frame.size.width - 20, 100)];
-    _textLabel.numberOfLines = 20;
-    _textLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:14];
-    //    _textLabel.font = [UIFont fontWithName:@"TimesNewRomanPS-ItalicM" size:12];
-    NSString * text1 = [msg.content stringByAppendingString:@"\n\n"];
-    NSString * text2 = [text1 stringByAppendingString:msg.note];
-    _textLabel.text = text2;
-    [self.vi addSubview:_textLabel];
+    _imageV.layer.cornerRadius = 3;
+    _imageV.layer.shadowColor = [UIColor whiteColor].CGColor;
+    _imageV.layer.shadowOffset = CGSizeMake(0,0);
+    _imageV.layer.shadowOpacity = 1;
+    _imageV.layer.shadowRadius = 5.0;//给imageview添加阴影和边框
+    [self.imagev addSubview:self.imageV];
     
     //播放音频按钮
     self.mainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _mainBtn.layer.cornerRadius = KScreenWidth*0.217/2;
-    _mainBtn.layer.masksToBounds = YES;
-    _mainBtn.layer.borderWidth = 0;
-    //    NSLog(@"%f --%f",_mainBtn.center.x ,_mainBtn.center.y);
-    
-    [_mainBtn setTitle:@"Listen me" forState:UIControlStateNormal];
-    _mainBtn.titleLabel.textColor = [UIColor colorWithWhite:0.911 alpha:1.000];
-    _mainBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    _mainBtn.frame = CGRectMake(KScreenWidth/2- 45, self.vi.frame.size.height -100, KScreenWidth*0.217, KScreenWidth*0.217);
-    _mainBtn.center = CGPointMake(self.vi.center.x-KScreenWidth*0.217/2, self.vi.frame.size.height -KScreenWidth*0.217/2-8) ;
+    [_mainBtn setImage:[UIImage imageNamed:@"listenToWords"] forState:UIControlStateNormal];
+    _mainBtn.frame = CGRectMake(KScreenWidth-35,153,30,30);
     [_mainBtn addTarget:self action:@selector(touchChange:) forControlEvents:UIControlEventTouchUpInside];
-    [self.vi addSubview:_mainBtn];
-    _mainBtn.backgroundColor = [UIColor colorWithRed:60/255.5 green:74/255.0 blue:157/255.0 alpha:.8] ;
-    //    _mainBtn.backgroundColor = [UIColor colorWithRed:0.996 green:0.824 blue:0.224 alpha:1.000];
-    
+    [_mainBtn setAlpha:0.5];
+    [self.uncView addSubview:_mainBtn];
     
 }
 
 
-
+#pragma -mark 点击播放按钮
 - (void) touchChange:(UIButton *)btn
 {
-    
     AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:self.tagMP3]];
-    
     self.player = [AVPlayer playerWithPlayerItem:playerItem];
-    
     [self.player play];
-    
-    
     //添加监听事件,监测音频是否播放结束
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
     /*
@@ -331,13 +269,8 @@
      //        btn.layer.transform = CATransform3DMakeScale(1.2,1.2, 1);
      //    }];
      */
-    
     btn.layer.transform = CATransform3DMakeScale(1, 1, 1);
-    
     self.Scaletimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(AnimationScale) userInfo:nil repeats:YES];
-    
-    
-    
 }
 
 #pragma mark--播放完成调用该方法
@@ -370,7 +303,7 @@
     _uncView.btnjumpdelegate =self;
     
 }
-#pragma -mark 监听按钮的方法
+#pragma -mark 监听右上角按钮的方法
 -(void)settingbtn
 {
     if (Flag ==  NO) {
@@ -407,14 +340,29 @@
 
 #pragma  -mark 跳转到三个页面
 -(void)jumpToCollection{
-    NSLog(@"C");
+    
+    CollectionSelectViewController * collectiong = [[CollectionSelectViewController alloc]init];
+    [self.navigationController pushViewController:collectiong animated:YES];
+    
 }
 -(void)jumpToSet{
-    NSLog(@"S");
+    
+    SettingViewController * setting = [[SettingViewController alloc]init];
+    [self.navigationController pushViewController:setting animated:YES];
 }
 -(void)jumpToMy{
-    NSLog(@"M");
     
+    MyViewController * my = [[MyViewController alloc]init];
+    [self.navigationController pushViewController:my animated:YES];
+    
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [_fade removeFromSuperview];
+    [_fadeC removeFromSuperview];
+
 }
 
 

@@ -39,9 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    
-    self.navigationController.navigationBarHidden = NO ;
+    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     [self getData];
     
     //调用创建collectionView 的方法
