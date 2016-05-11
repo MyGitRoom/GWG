@@ -114,7 +114,8 @@
     [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     
     self.currentIndex = self.detailMod.model_flag;
-    [self creatPopView];
+//    [self creatPopView];
+    
     //初始化返回的按钮
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(16, 24, 20, 20);
@@ -124,6 +125,13 @@
     backBtn.layer.masksToBounds = YES;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:backBtn];
     [backBtn addTarget:self action:@selector(handleDismissAction:) forControlEvents:UIControlEventTouchDown];
+    
+    self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btn.frame = CGRectMake(0, 0, 30, 30);
+    [_btn addTarget:self action:@selector(PopViewToCollect:) forControlEvents:UIControlEventTouchDown];
+    [_btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
+    [_btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_btn];
     
     //创建音乐播放的进度条
     /*
@@ -193,15 +201,15 @@
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, 40)];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.tag = 20086;
-    nameLabel.font = [UIFont systemFontOfSize:16];
-    nameLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-100);
+    nameLabel.font = [UIFont systemFontOfSize:17];
+    nameLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-120);
     nameLabel.text = self.detailMod.title;
     [self.view addSubview:nameLabel];
     
     UILabel *albumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, 30)];
-    albumLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-50);
+    albumLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-70);
     albumLabel.tag = 20010;
-    albumLabel.font = [UIFont systemFontOfSize:14];
+    albumLabel.font = [UIFont systemFontOfSize:15];
     albumLabel.textAlignment = NSTextAlignmentCenter;
     
     albumLabel.text = [self.detailMod.user objectForKey:@"nick"];
@@ -354,7 +362,7 @@
 #pragma  -mark  数据库的建立
 -(void)creatDataBank
 {
-    NSLog(@"%@",NSHomeDirectory());
+//    NSLog(@"%@",NSHomeDirectory());
     BOOL result = [[DataBaseUtil shareDataBase]createDataDetailModelTable];
     if (result) {
         NSLog(@"建立电台列表成功");
@@ -372,17 +380,7 @@
     
 }
 
-#pragma -mark  创建收藏btn
--(void)creatPopView
-{
-    _btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 600, 40, 40)];
-    [_btn addTarget:self action:@selector(PopViewToCollect) forControlEvents:UIControlEventTouchDown];
-    [_btn setImage:[UIImage imageNamed:@"未收藏"] forState:UIControlStateNormal];
-    [_btn setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
-    
-    [self.view addSubview:_btn];
-}
--(void)PopViewToCollect
+- (void) PopViewToCollect:(UIButton *)btn
 {
     
     if (_btn.selected == NO) {
@@ -404,7 +402,7 @@
 {
     UIAlertController * alertController =  [UIAlertController alertControllerWithTitle:nil message:str preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alertController animated:YES completion:nil];
-    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(DismissTheAlert) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(DismissTheAlert) userInfo:nil repeats:NO];
     
 }
 

@@ -19,14 +19,14 @@
 #define kTimeLabelHeight 20
 
 //设置控制台的高度的
-#define kControlBarHeight 300
+#define kControlBarHeight 250
 //设置控制台的y的起点
 #define kControlBarOriginY (KScreenHeight-kControlBarHeight)
 //带参数的宏的定义
 #define kHLColor(r,g,b) [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:1.0]
 //设置控制台的中心
 #define kControlBarCenterX self.view.center.x
-#define kControlBarCenterY (kControlBarOriginY+150)
+#define kControlBarCenterY (kControlBarOriginY+180)
 #define kButtonOffSetX 120
 
 #endif /* WidthAndHeight_h */
