@@ -8,13 +8,13 @@
 
 #import "LazyFadeInLayer.h"
 #import <CoreText/CoreText.h>
-#import <UIKit/UIKit.h>
+
 @interface LazyFadeInLayer ()
 
-@property (strong, nonatomic) CADisplayLink *displayLink; //定时器
-@property (strong, nonatomic) NSMutableArray *alphaArray; //透明度数组
-@property (strong, nonatomic) NSMutableAttributedString *attributedString; //富文本字符串
-@property (strong, nonatomic) NSMutableArray *tmpArray; //临时数组存放
+@property (strong, nonatomic) CADisplayLink *displayLink;
+@property (strong, nonatomic) NSMutableArray *alphaArray;
+@property (strong, nonatomic) NSMutableAttributedString *attributedString;
+@property (strong, nonatomic) NSMutableArray *tmpArray;
 
 @end
 
@@ -29,8 +29,7 @@
     self = [super init];
     if (self)
     {
-//        _duration = 1.2f;
-        _duration = 0.5f ;
+        _duration = .5f;
         _numberOfLayers = 6;
         _interval = 0.2;
         _alphaArray = [NSMutableArray array];
@@ -41,8 +40,6 @@
     return self;
 }
 
-
-//设置显示文本
 - (void)setText:(NSString *)text
 {
     [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
@@ -67,8 +64,6 @@
     }
 }
 
-
-//定时器执行的方法
 - (void)frameUpdate:(id)sender
 {
     [self.attributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:NSMakeRange(0, self.text.length)];
@@ -86,8 +81,7 @@
             shouldRemoveTimer = NO;
         }
         
-//        UIColor *letterColor = [UIColor colorWithWhite:1 alpha:alpha];
-        UIColor *letterColor = [UIColor colorWithRed:0.897 green:0.817 blue:0.877 alpha:alpha];
+        UIColor *letterColor = [UIColor colorWithWhite:1 alpha:alpha];
         [self.attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName
                                       value:(id)letterColor.CGColor
                                       range:NSMakeRange(i, 1)];
@@ -99,8 +93,7 @@
         _displayLink = nil;
     }
     
-    //字体
-    CTFontRef helveticaBold = CTFontCreateWithName(CFSTR("TimesNewRomanPS-ItalicMT"), 20.0, NULL);
+    CTFontRef helveticaBold = CTFontCreateWithName(CFSTR("HelveticaNeue-Light"), 20.0, NULL);
     [self.attributedString addAttribute:(NSString *)kCTFontAttributeName
                                   value:(__bridge id)helveticaBold
                                   range:NSMakeRange(0, self.text.length)];
