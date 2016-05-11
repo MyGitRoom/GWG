@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TypeOfMovieModel.h"
 @interface MovieDetailViewController : UIViewController
 
 @property (nonatomic,strong) UIWebView *wed ;//创建一个webview解析传过来的数据
 
 @property (nonatomic ,strong) NSDictionary *dic ;//创建一个字典接收传过来的请求体
+
+
+@property TypeOfMovieModel *movie ;//创建一个接收电影类型model
 
 @end

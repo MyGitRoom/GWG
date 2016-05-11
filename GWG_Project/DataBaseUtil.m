@@ -61,11 +61,14 @@ static DataBaseUtil *dataBase = nil;
     return NO;
 }
 
-//创建收藏电影类型的表
+#pragma mark -创建收藏电影类型的表
 -(BOOL)createMovieModelTable{
     if ([_db open]) {
         NSString *sql = [NSString stringWithFormat:@"create table if not exists type_movie (id integer primary key autoincrement,identifier NSNumber ,img_url text,name text)"];
         BOOL result = [_db executeUpdate:sql];
+        if (result) {
+            NSLog(@"建表成功");
+        }
         [_db close];
         return result;
     }
@@ -192,8 +195,32 @@ static DataBaseUtil *dataBase = nil;
 #pragma mark -查询电影表
 -(NSArray *)selectMovieTable{
 
+    NSMutableArray *array = [NSMutableArray array];
+    if ([_db open]) {
+        NSString *sql = [NSString stringWithFormat:@"select *from type_movie"];
+        FMResultSet *set = [_db executeQuery:sql];
+        while ([set next]) {
+            NSString *name = [set stringForColumn:@"name"];
+            NSString *identifier = [set stringForColumn:@"identifier"];
+            NSNumber *num = [NSNumber numberWithInteger:[identifier integerValue]];
+            NSString *img_url = [set stringForColumn:@"img_url"];
+            TypeOfMovieModel *movie = [[TypeOfMovieModel alloc]init];
+            movie.name = name ;
+            movie.identifier = num ;
+            movie.img_url = img_url ;
+            
+            [array addObject:movie];
+            
+        }
+        [_db close] ;
+        return  array ;
+    }
+   
     
-    return nil;
+    return array;
+    
+    
+    
 
 }
 
@@ -245,7 +272,7 @@ static DataBaseUtil *dataBase = nil;
 -(BOOL)deleteMovieWithName:(NSString *)title
 {
     if ([_db open]) {
-        NSString * sql = [NSString stringWithFormat:@"delete from movie where title = '%@'",title];
+        NSString * sql = [NSString stringWithFormat:@"delete from type_movie where name = '%@'",title];
         BOOL result = [_db executeUpdate:sql];
         [_db close];
         return result;

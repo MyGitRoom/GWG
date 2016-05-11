@@ -16,8 +16,8 @@
 @interface TypeOfMovieViewController ()<UITableViewDataSource,UITableViewDelegate,isLike>
 @property (nonatomic ,strong) NSMutableArray <TypeOfMovieModel*>*array ;//建一个数组接收解析数据
 @property (nonatomic,strong) UITableView *tab ;
-@property (nonatomic ,strong)MBProgressHUD *mbHUD;
-@property (nonatomic ,strong) UIButton *likeBtn ;
+@property (nonatomic,strong) MBProgressHUD *mbHUD;
+@property (nonatomic,strong) UIButton *likeBtn ;
 
 @end
 
@@ -141,6 +141,8 @@
     
     dic = @{@"Content-Type":@"application/x-www-form-urlencoded",@"id":self.array[indexPath.row].identifier} ;
     movieDeatilVc.dic = dic;
+    
+    movieDeatilVc.movie  = self.array[indexPath.row];
     
 //    [self presentViewController:movieDeatilVc animated:YES completion:nil];
     [self.navigationController pushViewController:movieDeatilVc animated:YES];
