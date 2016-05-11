@@ -48,8 +48,11 @@
         self.tab.separatorStyle = UITableViewCellSeparatorStyleNone ;
         //注册cell
         [self.tab registerClass:[TypeOfMovieTableViewCell class] forCellReuseIdentifier:@"cell"];
-        
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.tab.backgroundColor = [UIColor colorWithRed:0.024 green:0.031 blue:0.063 alpha:1.000];
+
+    self.view.backgroundColor = [UIColor colorWithRed:0.024 green:0.031 blue:0.063 alpha:1.000];
+
       [self.view addSubview:self.tab];
     
         [self getData];

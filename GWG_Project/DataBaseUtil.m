@@ -184,6 +184,7 @@ return nil;}
     }
     return NO;
 }
+
 -(BOOL)deleteReadingWithName:(NSString *)title{
     if ([_db open]) {
         NSString * sql = [NSString stringWithFormat:@"delete from reading where title = '%@'",title];

@@ -54,6 +54,8 @@
 
 -(void)getData{
 
+    
+    self.view.backgroundColor = [UIColor colorWithRed:0.173 green:0.380 blue:0.208 alpha:1.000];
     self.mbHUD = [[MBProgressHUD alloc]initWithView:self.wed];
     [self.mbHUD show:YES];
     [self.wed addSubview:self.mbHUD];
