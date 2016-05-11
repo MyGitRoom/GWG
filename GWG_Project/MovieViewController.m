@@ -39,9 +39,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    
-    self.navigationController.navigationBarHidden = NO ;
     [self getData];
     
     //调用创建collectionView 的方法
