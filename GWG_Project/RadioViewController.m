@@ -9,6 +9,7 @@
 #import "RadioViewController.h"
 #import "MJRefresh.h"
 #import "MJRefreshAutoFooter.h"
+#import "RadioTableViewCell.h"
 
 @interface RadioViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -17,6 +18,8 @@
 @property (nonatomic, strong) UITableView * tab;
 @property (nonatomic, strong) NSMutableArray * dataArray;
 @property (nonatomic, strong) NSMutableArray * loadMoreArray;
+@property (nonatomic, assign) BOOL isPlay;
+
 
 @end
 
@@ -44,15 +47,25 @@
 
 #pragma mark- 加载视图
 - (void)viewDidLoad {
-    self.navigationController.navigationBarHidden = NO;
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     page = 1;
+//    self.isPlay = YES;
+    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     
     [self requestData:RADIOURL];
     [self createTableView];
     [self creatFooterRefresh];
     [self creatHeaderRefresh];
+    
+    UIImage * image = [UIImage imageNamed:@"return"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
+}
+
+- (void) touchReturn
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark- 创建tableview
@@ -70,16 +83,15 @@
 #pragma -mark tableview代理方法
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identifier = @"cell";
-    MyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    RadioTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[MyTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell = [[[NSBundle mainBundle]loadNibNamed:@"RadioTableViewCell" owner:self options:nil]lastObject];
     }
     //设置cell无点击效果
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    
+
     DataModel * datmo = [_dataArray objectAtIndex:indexPath.row];
-    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:datmo.cover_url]];
+    [cell.picView sd_setImageWithURL:[NSURL URLWithString:datmo.cover_url]];
     cell.titleLab.text = datmo.title;
     cell.introLab.text = datmo.intro;
     if ([datmo.count_play integerValue]/10000>0)
@@ -100,7 +112,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    return 80;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -114,29 +126,35 @@
 //给cell添加动画
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //设置Cell的动画效果为3D效果
-    //设置x和y的初始值为0.1；
-    cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
-    //x和y的最终值为1
-    [UIView animateWithDuration:1 animations:^{
-        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
-    }];
+   
+//    if (_isPlay)
+//    {
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+        [UIView animateWithDuration:1 animations:^{
+            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+        }];
+        
+//    }
+    
+
 }
 
-/*
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    _isPlay = YES;
+//}
+
+-(void)viewWillAppear:(BOOL)animated
 {
-    //去除tableview与边缘的15像素的距离
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
-    {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
-    {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
+    self.navigationController.navigationBarHidden = NO;
+//    self.isPlay = YES;
 }
-*/
+
+//- (void) viewDidAppear:(BOOL)animated
+//{
+////    _isPlay = NO;
+//}
+
 
 #pragma mark- 请求数据
 - (void) requestData:(NSString *)string
@@ -155,6 +173,7 @@
         }
 //        NSLog(@"%@",self.dataArray);
         dispatch_async(dispatch_get_main_queue(), ^{
+//            _isPlay = NO;
             [_tab reloadData];
         });
         

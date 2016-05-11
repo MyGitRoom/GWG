@@ -14,7 +14,7 @@
 @property (assign, nonatomic, readwrite) CFTimeInterval duration;
 
 //! @abstract The number of layers lazy loading. Defaults to 3.
-@property (assign, nonatomic, readwrite) NSUInteger numberOfLayers; 
+@property (assign, nonatomic, readwrite) NSUInteger numberOfLayers;
 
 //! @abstract The interval of layers fading. Defaults to 0.2
 @property (assign, nonatomic, readwrite) CFTimeInterval interval;

@@ -49,10 +49,15 @@
     [self createCollectView];
     
    
-    
+    UIImage * image = [UIImage imageNamed:@"return"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
     
 }
-
+- (void) touchReturn
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 //获取数据

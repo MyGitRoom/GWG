@@ -59,11 +59,18 @@
 //    [self.likeBtn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected ];
 //    self.likeBtn.frame =  CGRectMake(KScreenWidth-50, 10, 32, 32);
 //    [self.view addSubview:self.likeBtn];
+    UIImage * image = [UIImage imageNamed:@"return"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
     
-    
-    }
+}
+
+- (void) touchReturn
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
     //获取数据
-    -(void)getData{
+-(void)getData{
 //        NSLog(@"%@",self.dic);
         self.mbHUD = [[MBProgressHUD alloc]initWithView:self.tab];
         [self.mbHUD show:YES];

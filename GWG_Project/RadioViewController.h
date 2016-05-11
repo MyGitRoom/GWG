@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyTableViewCell.h"
 #import "RadioDetaillViewController.h"
 #import "NetWorlRequestManager.h"
 #import "DataModel.h"
