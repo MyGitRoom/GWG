@@ -154,7 +154,8 @@
     _tag = YES;
 //    [self requestIntroduce];
 //    NSLog(@"%@",self.introduceArray);
-    self.tab = [[UITableView alloc]initWithFrame:CGRectMake(0, -64, KScreenWidth, KScreenHeight+64) style:UITableViewStylePlain];
+    self.tab = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+
     [self.view addSubview:_tab];
     _tab.delegate = self;
     _tab.dataSource = self;
