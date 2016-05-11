@@ -60,9 +60,11 @@ static DataBaseUtil *dataBase = nil;
     }
     return NO;
 }
+
+//创建收藏电影类型的表
 -(BOOL)createMovieModelTable{
     if ([_db open]) {
-        NSString *sql = [NSString stringWithFormat:@"create table if not exists movie (id integer primary key autoincrement, title text, link text)"];
+        NSString *sql = [NSString stringWithFormat:@"create table if not exists type_movie (id integer primary key autoincrement,identifier NSNumber ,img_url text,name text)"];
         BOOL result = [_db executeUpdate:sql];
         [_db close];
         return result;
@@ -101,9 +103,25 @@ static DataBaseUtil *dataBase = nil;
     }
     return NO;
 }
+
+//此方法作废
 -(BOOL)insertObjectOfMovie:(MovieModel *)radio{	
     return nil;
 }
+
+
+#pragma mark - 电影类型表插入数据
+-(BOOL)insertObjectOfTypeOfMovie:(TypeOfMovieModel *)typeMovie{
+    if ([_db open]) {
+        NSString *sql = [NSString stringWithFormat:@"insert into type_movie (identifier,img_url,name) values('%@','%@','%@')",typeMovie.identifier,typeMovie.img_url,typeMovie.name];
+        BOOL result = [_db executeUpdate:sql];
+        [_db close];
+        return result ;
+    }
+    
+    return NO ;
+}
+
 #pragma  -mark 查询数据
 -(NSArray *)selectReadingTable{
     NSMutableArray *array = [NSMutableArray array];
@@ -170,8 +188,14 @@ static DataBaseUtil *dataBase = nil;
     }
     return array;
 }
+
+#pragma mark -查询电影表
 -(NSArray *)selectMovieTable{
-return nil;}
+
+    
+    return nil;
+
+}
 
 
 #pragma  -mark 删除数据
@@ -216,6 +240,8 @@ return nil;}
     return NO;
 
 }
+
+#pragma  mark - 删除电影表
 -(BOOL)deleteMovieWithName:(NSString *)title
 {
     if ([_db open]) {
