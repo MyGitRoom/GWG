@@ -161,7 +161,7 @@
     _tab.dataSource = self;
 //    _tab.separatorStyle = UITableViewCellSelectionStyleNone;
     _tab.showsVerticalScrollIndicator = NO;
-    _tab.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+//    _tab.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     
     
     //添加headerview

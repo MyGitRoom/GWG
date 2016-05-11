@@ -14,7 +14,7 @@
 #import "RadioViewController.h"
 #import "MovieViewController.h"
 #import "UIImageView+WebCache.h"
-#import "LazyFadeInView.h"
+//#import "LazyFadeInView.h"
 #define DAILYURL @"http://dict-mobile.iciba.com/interface/index.php?c=sentence&m=getsentence&client=1&type=1&field=1,2,3,4,5,6,7,8,9,10,11,12,13&timestamp=1434767570&sign=6124a62ff73a033a&uuid=3dd23ff24ea543c1bdca57073d0540e1&uid="
 @interface MainViewController ()
 
