@@ -28,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     self.view.backgroundColor = [UIColor whiteColor];
     [self loadData:_tec.aid];
     [self creatCollection];

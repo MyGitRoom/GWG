@@ -26,7 +26,8 @@
     self.window.rootViewController = nav ;
     
     nav.navigationBar.barStyle = UIBarStyleBlack;
-    
+    [[[nav.navigationBar subviews]objectAtIndex:0]setAlpha:1];
+
     return YES;
 }
 

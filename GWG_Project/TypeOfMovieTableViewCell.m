@@ -23,11 +23,12 @@
         [self.likeBtn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
         
 
-      
+        self.contentView.backgroundColor = [UIColor colorWithRed:0.024 green:0.031 blue:0.063 alpha:1.000];
+
 
         [self.contentView addSubview:self.imageV];
         
-        [self.contentView addSubview:self.effectview];
+//        [self.contentView addSubview:self.effectview];
         
         [self.contentView addSubview:self.titleLabel];
         

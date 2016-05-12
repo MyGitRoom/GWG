@@ -26,6 +26,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden =NO;
+    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
 }
 #pragma mark- 懒加载
 - (NSMutableArray *) settings

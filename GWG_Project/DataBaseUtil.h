@@ -12,6 +12,7 @@
 #import "Technology.h"
 #import "DataDetailModel.h"
 #import "MovieModel.h"
+#import "TypeOfMovieModel.h"
 @interface DataBaseUtil : NSObject
 +(DataBaseUtil *)shareDataBase;
 -(BOOL)creatReadingTable;
@@ -22,6 +23,7 @@
 -(BOOL)insertObjectOfTech:(Technology *)technology;
 -(BOOL)insertObjectOfRadio:(DataDetailModel *)radio;
 -(BOOL)insertObjectOfMovie:(MovieModel *)radio;
+-(BOOL)insertObjectOfTypeOfMovie:(TypeOfMovieModel *)typeMovie ;
 -(NSArray *)selectReadingTable;
 -(NSArray *)selectTechnologyTable;
 -(NSArray *)selectRadioTable;
