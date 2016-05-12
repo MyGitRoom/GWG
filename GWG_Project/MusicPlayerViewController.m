@@ -134,24 +134,10 @@
     [_btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_btn];
     
-    //创建音乐播放的进度条
-    /*
-    self.musicProgress = [[UISlider alloc]initWithFrame:CGRectMake(0, kControlBarOriginY, KScreenWidth, 40)];
-    
-    self.musicProgress.minimumTrackTintColor=kHLColor(200, 150, 100);
-    self.musicProgress.maximumTrackTintColor = [UIColor grayColor];
-    
-    [self.musicProgress setThumbImage:[UIImage imageNamed:@"volumn_slider_thumb@2x.png"] forState:UIControlStateNormal];
-    [self.musicProgress addTarget:self action:@selector(handleProgressChangeAction:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:self.musicProgress];
-     */
-    
     [self setControlButton];
     [self setNameAndAlbumLabel];
     [self creatDataBank];
-    
-    
-    
+
     //添加一个观察者，观察我们的应用程序有没有计入后台，一旦进入后台系统就会自动给我们发送一个通知
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadVolume) name:UIApplicationDidEnterBackgroundNotification object:nil];
 
@@ -191,13 +177,6 @@
 
 -(void)setNameAndAlbumLabel
 {
-//    UIButton * button = [UIButton buttonWithType:UIButtonTypeContactAdd];
-//    button.frame = CGRectMake(0, 0, 20, 20);
-//    button.center = CGPointMake(KScreenWidth/1.1, kControlBarCenterY-50);
-//    UIImage * image = [UIImage imageNamed:@"down"];
-//    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    [button setImage:image forState:UIControlStateNormal];
-//    [self.view addSubview:button];
     
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, 40)];
     nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -254,15 +233,6 @@
 #pragma mark-播放器的协议方法(0.1s就会调用一次)
 -(void)audioPlayer:(GYPlayer *)player didPlayingWithProgress:(float)progress
 {
-    /*
-    //主要处理播放过程中需要持续性改变的都写在这里面，因为这个方法，会每隔0.1s就会被调用一次
-    //设置音乐播放的进度条
-    self.musicProgress.value = progress;
-    //设置当前播放多少秒的label的值
-    self.currentTimeLabel.text = [self timeWithInterVal:self.musicProgress.value];
-    float remainTime = self.musicProgress.maximumValue - self.musicProgress.value;
-    self.remainTimeLabel.text = [self timeWithInterVal:remainTime];
-     */
     //让图片进行旋转
     self.albumView.transform = CGAffineTransformRotate(self.albumView.transform, M_PI/360);
 }
@@ -300,17 +270,27 @@
 //每次切换歌曲的时候把页面的元素全部换成该歌曲的内容
 -(void)reloadMusic
 {
+    
+    NSArray * array = [[DataBaseUtil shareDataBase]selectRadioTable];
+    DataDetailModel * de  =[[DataDetailModel alloc]init];
+    //    NSLog(@"%@",array);
+    for (de in array)
+    {
+        if ([de.title isEqualToString:_detailMod.title])
+        {
+            [_btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [_btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
+        }
+    }
+    
     DataDetailModel * model = [self.passDataArray objectAtIndex:self.currentIndex];
     //改变旋转大图的背景
     [self.albumView sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
     [_imageV sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
-    /*
-    self.musicProgress.maximumValue = model.sound_url.floatValue/1000;
-    //设置一个已经播放了多久的时间
-    self.currentTimeLabel.text = @"0:00";
-    //剩余时间的label
-    self.remainTimeLabel.text = [self timeWithInterVal:self.musicProgress.maximumValue];
-     */
+
     //更新title和电台
     [(UILabel *)[self.view viewWithTag:20086] setText:model.title];
     [(UILabel*)[self.view viewWithTag:20010] setText:[model.user objectForKey:@"nick"]];
@@ -326,6 +306,7 @@
 
 - (void) firstReloadMusic
 {
+    
     [_imageV sd_setImageWithURL:[NSURL URLWithString:self.detailMod.cover_url]];
     //改变旋转大图的背景
     [self.albumView sd_setImageWithURL:[NSURL URLWithString:self.detailMod.cover_url]];
@@ -363,7 +344,7 @@
 #pragma  -mark  数据库的建立
 -(void)creatDataBank
 {
-//    NSLog(@"%@",NSHomeDirectory());
+    NSLog(@"%@",NSHomeDirectory());
     BOOL result = [[DataBaseUtil shareDataBase]createDataDetailModelTable];
     if (result) {
         NSLog(@"建立电台列表成功");

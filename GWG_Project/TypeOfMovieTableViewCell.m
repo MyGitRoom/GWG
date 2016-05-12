@@ -18,10 +18,10 @@
         self.blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         self.effectview = [[UIVisualEffectView alloc]initWithEffect:self.blur];
         
-        self.likeBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [self.likeBtn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
-        
+//        self.likeBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
+//        
+//        [self.likeBtn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
+//        
 
         self.contentView.backgroundColor = [UIColor colorWithRed:0.024 green:0.031 blue:0.063 alpha:1.000];
 
@@ -32,7 +32,7 @@
         
         [self.contentView addSubview:self.titleLabel];
         
-        [self.contentView addSubview:self.likeBtn];
+//        [self.contentView addSubview:self.likeBtn];
     }
 
     return  self ;
@@ -58,17 +58,17 @@
     [self.likeBtn addTarget: self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-//实现按钮的方法
--(void)like:(UIButton *)btn {
-    
-    
-    //调用协议的方法
-
-    [self.isLikeDelegate like:btn];
-    
-
-    
-} 
+////实现按钮的方法
+//-(void)like:(UIButton *)btn {
+//    
+//    
+//    //调用协议的方法
+//
+//    [self.isLikeDelegate like:btn];
+//    
+//
+//    
+//} 
 
 
 - (void)awakeFromNib {
