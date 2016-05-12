@@ -126,7 +126,7 @@
 -(void)jump:(UIButton *)btn {
     //点击按钮定时器停止
     [self.sphereView timerStop];
-    [_fade removeFromSuperview];
+
     
     [UIView animateWithDuration:0.3 animations:^{
         btn.transform = CGAffineTransformMakeScale(1.5, 1.5);
