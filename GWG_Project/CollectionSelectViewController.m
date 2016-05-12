@@ -19,16 +19,11 @@
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO ;
     [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
-    [self setBackgrandImage];
+    [self setBackgrandImage];    //建立背景主色调
      [self setTagImage];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //建立背景主色调
-    
-   
-    
-   
     UIImage * image = [UIImage imageNamed:@"return"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
@@ -97,7 +92,7 @@
 -(void)jumpToReadingCollection:(UIButton * )btn
 {
     ReadCollectionViewController *read = [[ReadCollectionViewController alloc]init];
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         btn.frame = CGRectMake(-KScreenWidth/4*3, KScreenHeight/5+50, KScreenWidth/4*3, 80);
     } completion:^(BOOL finished) {
         [self.navigationController pushViewController:read animated:YES];
@@ -110,8 +105,8 @@
 
 -(void)jumpToTecCollection:(UIButton * )btn
 {
-    ReadCollectionViewController *collec= [[ReadCollectionViewController alloc]init];
-    [UIView animateWithDuration:1 animations:^{
+    TechnolofyCollecViewController *collec= [[TechnolofyCollecViewController alloc]init];
+    [UIView animateWithDuration:0.5 animations:^{
         btn.frame = CGRectMake(KScreenWidth, KScreenHeight/5+150, KScreenWidth/4*3, 80);
     } completion:^(BOOL finished) {
         [self.navigationController pushViewController:collec animated:YES];
@@ -123,7 +118,7 @@
 -(void)jumpToMovieCollection:(UIButton * )btn
 {
    MovieCollectViewController *mov = [[MovieCollectViewController alloc]init];
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         btn.frame = CGRectMake(-KScreenWidth/4*3, KScreenHeight/5+250, KScreenWidth/4*3, 80);
     } completion:^(BOOL finished) {
         [self.navigationController pushViewController:mov animated:YES];
@@ -133,7 +128,7 @@
 -(void)jumpToRadioCollection:(UIButton * )btn
 {
     RadioCollectViewController *radio = [[RadioCollectViewController alloc]init];
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         btn.frame = CGRectMake(KScreenWidth, KScreenHeight/5+350, KScreenWidth/4*3, 80);
     } completion:^(BOOL finished) {
         [self.navigationController pushViewController:radio animated:YES];
@@ -145,8 +140,6 @@
 {
     [_imageV removeFromSuperview];
     self.navigationController.navigationBarHidden=NO;
-    
-
 }
 
 @end
