@@ -129,8 +129,6 @@
     NSString * string = [formatter stringFromDate:[NSDate date]];
     DataDetailModel * model = [self.collectionArray objectAtIndex:indexPath.row];
     cell.dateLab.text = string;
-//    cell.nickLab.text = [model.user objectForKey:@"nick"];
-//    NSLog(@"%@",[model.user objectForKey:@"nick"]);
     [cell.picView sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
     cell.titleLab.text = model.title;
     
@@ -149,14 +147,11 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    DataModel * dat = [_dataArray objectAtIndex:indexPath.row];
-//    RadioDetaillViewController * detail = [[RadioDetaillViewController alloc]init];
-//    detail.passId = dat.identifier;
-//    [self.navigationController pushViewController:detail animated:YES];
     DataDetailModel * model = [_collectionArray objectAtIndex:indexPath.row];
     MusicPlayerViewController * mpv = [[MusicPlayerViewController alloc]init];
     mpv.detailMod = model;
     mpv.passDataArray = (NSMutableArray *)self.collectionArray;
+    [self.navigationController pushViewController:mpv animated:YES];
 }
 
 

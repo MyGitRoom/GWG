@@ -270,6 +270,22 @@
 //每次切换歌曲的时候把页面的元素全部换成该歌曲的内容
 -(void)reloadMusic
 {
+    
+    NSArray * array = [[DataBaseUtil shareDataBase]selectRadioTable];
+    DataDetailModel * de  =[[DataDetailModel alloc]init];
+    //    NSLog(@"%@",array);
+    for (de in array)
+    {
+        if ([de.title isEqualToString:_detailMod.title])
+        {
+            [_btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [_btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
+        }
+    }
+    
     DataDetailModel * model = [self.passDataArray objectAtIndex:self.currentIndex];
     //改变旋转大图的背景
     [self.albumView sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
@@ -290,6 +306,7 @@
 
 - (void) firstReloadMusic
 {
+    
     [_imageV sd_setImageWithURL:[NSURL URLWithString:self.detailMod.cover_url]];
     //改变旋转大图的背景
     [self.albumView sd_setImageWithURL:[NSURL URLWithString:self.detailMod.cover_url]];
