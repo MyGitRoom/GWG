@@ -33,12 +33,12 @@
 {
 
     self.navigationController.navigationBarHidden=NO;
-
+[[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:0];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:0];
+    
     self.view.backgroundColor = [UIColor colorWithRed:0.820 green:0.750 blue:0.376 alpha:1.000];
     _readingArray = [NSMutableArray array];
 

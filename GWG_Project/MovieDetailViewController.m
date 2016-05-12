@@ -28,11 +28,15 @@
     
     
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor =  [UIColor colorWithRed:1.000 green:0.922 blue:0.850 alpha:1.000];
 
-    
+//    self.wed.backgroundColor =  [UIColor colorWithRed:0.947 green:0.856 blue:0.735 alpha:1.000];
+//    self.wed..backgroundColor =  [UIColor colorWithRed:0.947 green:0.856 blue:0.735 alpha:1.000];
+//    self.wed.scrollView.backgroundColor =  [UIColor colorWithRed:0.947 green:0.856 blue:0.735 alpha:1.000];
     self.wed = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight-2)];
+    self.wed.scrollView.bounces = NO ;
     [self getData];
+    self.wed.delegate = self ;
     [self.view addSubview:self.wed];
 
 
@@ -74,7 +78,7 @@
                 
            
            [self.view reloadInputViews];
-        
+                 
             [self.mbHUD hide:YES];
        });
    } err:^(NSError *error) {
@@ -84,7 +88,8 @@
 
  }
 
-//-(void)webViewDidFinishLoad:(UIWebView *)webView{
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+        [_wed stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.backgroundColor='rgb(225,207,191)'"];
 //    NSString *string = @"<script type=\"text/javascript\" src=\"http://mark.intlime.com/Public/js/singledetail.js?v=15\"></script>";
 //   NSString *string2 =@"<script> var MOVIES=eval('(' +'[{\"movie_id\":\"19920\",\"db_num\":19971387,\"name\":\"\u6234\u5b89\u5a1c\",\"img_url\":\"https:\/\/img1.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p2043239543.jpg\",\"is_done\":\"-1\"},{\"movie_id\":\"30837\",\"db_num\":3073073,\"name\":\"\u7b80\u7231\",\"img_url\":\"https:\/\/img3.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p1590560080.jpg\",\"is_done\":\"-1\"},{\"movie_id\":\"30847\",\"db_num\":3073158,\"name\":\"\u94c1\u5a18\u5b50\uff1a\u575a\u56fa\u67d4\u60c5\",\"img_url\":\"https:\/\/img1.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p1223336524.jpg\",\"is_done\":\"-1\"},{\"movie_id\":\"42208\",\"db_num\":3236520,\"name\":\"\u9999\u5948\u513f\",\"img_url\":\"https:\/\/img1.doubanio.com\/lpic\/s3372469.jpg\",\"is_done\":\"-1\"},{\"movie_id\":\"52143\",\"db_num\":1866264,\"name\":\"\u5973\u738b\",\"img_url\":\"https:\/\/img1.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p664458467.jpg\",\"is_done\":\"-1\"},{\"movie_id\":\"60617\",\"db_num\":1433990,\"name\":\"\u98ce\u96e8\u54c8\u4f5b\u8def\",\"img_url\":\"https:\/\/img1.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p2184507337.jpg\",\"is_done\":\"-1\"},{\"movie_id\":\"65794\",\"db_num\":1293050,\"name\":\"\u6c38\u4e0d\u59a5\u534f\",\"img_url\":\"https:\/\/img1.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p643400568.jpg\",\"is_done\":\"-1\"},{\"movie_id\":\"70970\",\"db_num\":1295804,\"name\":\"\u8d1d\u9686\u592b\u4eba\",\"img_url\":\"https:\/\/img3.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p1576766113.jpg\",\"is_done\":\"-1\"},{\"movie_id\":\"73323\",\"db_num\":1293818,\"name\":\"\u94a2\u7434\u8bfe\",\"img_url\":\"https:\/\/img3.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p764799071.jpg\",\"is_done\":\"-1\"},{\"movie_id\":\"96264\",\"db_num\":1482072,\"name\":\"\u7a7f\u666e\u62c9\u8fbe\u7684\u5973\u738b\",\"img_url\":\"https:\/\/img3.doubanio.com\/view\/movie_poster_cover\/lpst\/public\/p735379215.jpg\",\"is_done\":\"-1\"}]'+ ')'); </script>" ;
 //    
@@ -92,7 +97,7 @@
 //    
 
 
-//}
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
