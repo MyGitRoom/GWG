@@ -131,13 +131,11 @@
     }
     NSArray * array = [[DataBaseUtil shareDataBase]selectReadingTable];
     Reading * read = [[Reading alloc]init];
-    //    NSLog(@"%@",array);
     for (read in array) {
         if ([read.title isEqualToString:_read.title]) {
             _btn.selected = YES;
         }
     }
-    //    NSLog(@"%d",_btn.selected);
   
     
 }
