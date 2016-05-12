@@ -20,6 +20,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _backgrand = [[UIImageView alloc]init];
+        [self.contentView addSubview:_backgrand];
         _imageV = [[UIImageView alloc]init];
         [self.contentView addSubview:_imageV];
         _title = [[UILabel alloc]init];
@@ -38,6 +40,8 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
+    _backgrand.frame = CGRectMake(1, 1, KCellWidth-2, KCellHeight-2);
+    _backgrand.image = [UIImage imageNamed:@"net1"];
     _imageV.frame = CGRectMake(10, 10, 100, 80);
     _typeLabel.textColor = [UIColor colorWithRed:0.765 green:0.620 blue:0.259 alpha:0.8];
     _typeLabel.frame = CGRectMake(130, 10, 60, 20);

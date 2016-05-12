@@ -79,6 +79,8 @@
     _tab.delegate  =self;
     _tab.dataSource = self;
     _tab.showsVerticalScrollIndicator = NO;
+    _tab.separatorStyle = UITableViewCellSelectionStyleNone;
+    _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tab];
 }
 
