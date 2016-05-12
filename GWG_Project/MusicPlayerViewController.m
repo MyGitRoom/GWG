@@ -134,24 +134,10 @@
     [_btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_btn];
     
-    //创建音乐播放的进度条
-    /*
-    self.musicProgress = [[UISlider alloc]initWithFrame:CGRectMake(0, kControlBarOriginY, KScreenWidth, 40)];
-    
-    self.musicProgress.minimumTrackTintColor=kHLColor(200, 150, 100);
-    self.musicProgress.maximumTrackTintColor = [UIColor grayColor];
-    
-    [self.musicProgress setThumbImage:[UIImage imageNamed:@"volumn_slider_thumb@2x.png"] forState:UIControlStateNormal];
-    [self.musicProgress addTarget:self action:@selector(handleProgressChangeAction:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:self.musicProgress];
-     */
-    
     [self setControlButton];
     [self setNameAndAlbumLabel];
     [self creatDataBank];
-    
-    
-    
+
     //添加一个观察者，观察我们的应用程序有没有计入后台，一旦进入后台系统就会自动给我们发送一个通知
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadVolume) name:UIApplicationDidEnterBackgroundNotification object:nil];
 
