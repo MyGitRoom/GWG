@@ -33,6 +33,7 @@
     [super viewDidLoad];
       self.view.backgroundColor = [UIColor darkGrayColor];
     
+
 //    NSLog(@"-->%@",NSHomeDirectory());
     
     self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -78,9 +79,17 @@
     [self.Visual addSubview:self.lazyView];
 
      [self.view addSubview:self.btn];
+
+    UIImage * image = [UIImage imageNamed:@"return"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
+
 }
 
-
+- (void) touchReturn
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void)clearCaches{
 

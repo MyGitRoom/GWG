@@ -7,6 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlaceHolderView.h"
+#import "RadioCollectionTableViewCell.h"
+#import "DataDetailModel.h"
+#import "DataBaseUtil.h"
+#import "MusicPlayerViewController.h"
 
 @interface RadioCollectViewController : UIViewController
 

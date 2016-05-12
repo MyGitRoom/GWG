@@ -27,6 +27,7 @@
     
 }
 
+
 -(void)viewDidLoad{
 
     self.textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0 ,69,KScreenWidth-5,40)] ;
@@ -49,6 +50,19 @@
     
     [self.view addSubview:self.textView];
     
+
+
+//- (void)viewDidLoad {
+//    [super viewDidLoad];
+      self.view.backgroundColor = [UIColor grayColor];
+    UIImage * image = [UIImage imageNamed:@"return"];
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
+}
+
+- (void) touchReturn
+{
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 
