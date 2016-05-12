@@ -9,10 +9,14 @@
 #import "MovieDetailViewController.h"
 #import "NetWorkRequestManager.h"
 #import "MBProgressHUD.h"
+#import "DataBaseUtil.h"
 @interface MovieDetailViewController ()<UIWebViewDelegate>
 
 @property (nonatomic ,strong) MBProgressHUD *mbHUD ;
 
+@property (nonatomic ,strong) UIButton *btn ;//创建收藏按钮
+
+@property (nonatomic ,assign) NSInteger flag ;//判断收藏状态
 @end
 
 @implementation MovieDetailViewController
@@ -25,24 +29,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //一加载创建收藏表
+    [[DataBaseUtil shareDataBase]createMovieModelTable];
+    
+//    NSLog(@"%@",self.movie.name);
     [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     
-    
+
     self.view.backgroundColor =  [UIColor colorWithRed:1.000 green:0.922 blue:0.850 alpha:1.000];
 
-//    self.wed.backgroundColor =  [UIColor colorWithRed:0.947 green:0.856 blue:0.735 alpha:1.000];
-//    self.wed..backgroundColor =  [UIColor colorWithRed:0.947 green:0.856 blue:0.735 alpha:1.000];
-//    self.wed.scrollView.backgroundColor =  [UIColor colorWithRed:0.947 green:0.856 blue:0.735 alpha:1.000];
     self.wed = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight-2)];
     self.wed.scrollView.bounces = NO ;
-    [self getData];
     self.wed.delegate = self ;
+    [self getData];
     [self.view addSubview:self.wed];
 
 
     UIImage * image = [UIImage imageNamed:@"return"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
+    
+    //添加收藏按钮
+    self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _btn.frame = CGRectMake(0, 0, 30, 30);
+    [_btn addTarget:self action:@selector(collectMovie:) forControlEvents:UIControlEventTouchDown];
+    [_btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
+    [_btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_btn];
+
 
 }
 
@@ -52,8 +66,58 @@
 }
 
 
+#pragma mark -实现收藏电影类型
+
+-(void)collectMovie:(UIButton *)btn
+{
+    
+    if (btn.selected == NO) {
+        
+       BOOL result = [[DataBaseUtil shareDataBase]insertObjectOfTypeOfMovie:self.movie];
+        if (result) {
+            btn.selected = YES;
+            [self popToPrompt:@"收藏成功"];
+            NSLog(@"收藏成功");
+        }else{
+            NSLog(@"收藏失败");
+        }
+        
+        
+        
+    }else
+    {
+       BOOL result = [[DataBaseUtil shareDataBase]deleteMovieWithName:self.movie.name];
+        if (result) {
+            [self popToPrompt:@"取消收藏"];
+            btn.selected = NO;
+            NSLog(@"取消成功");
+        }else{
+        
+            NSLog(@"取消失败");
+        }
+        
+        
+        
+    }
+}
+#pragma -mark 弹出提示框
+-(void)popToPrompt:(NSString*)str
+{
+    UIAlertController * alertController =  [UIAlertController alertControllerWithTitle:nil message:str preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:YES completion:nil];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(DismissTheAlert) userInfo:nil repeats:NO];
+    
+}
+
+-(void)DismissTheAlert
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 -(void)getData{
 
+    
+    self.view.backgroundColor = [UIColor colorWithRed:0.173 green:0.380 blue:0.208 alpha:1.000];
     self.mbHUD = [[MBProgressHUD alloc]initWithView:self.wed];
     [self.mbHUD show:YES];
     [self.wed addSubview:self.mbHUD];
