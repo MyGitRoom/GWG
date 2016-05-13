@@ -186,15 +186,7 @@
             cell.deleteImg.image = [UIImage imageNamed:@"delete"];
             times =0;
         }
-    
     }
-    
-    
-
-    player.detailMod = model;
-    player.passArray = (NSMutableArray *)self.collectionArray;
-    [self.navigationController pushViewController:player animated:YES];
-
 }
 
 

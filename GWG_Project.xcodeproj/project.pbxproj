@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3F1B889A1CDA39B60071E862 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B88991CDA39B60071E862 /* Message.m */; };
-		3F2FE1F31CE5B4D3009F754B /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2FE1F21CE5B4D3009F754B /* setting.png */; settings = {ASSET_TAGS = (); }; };
-		3F2FE1F91CE5B95C009F754B /* setting3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2FE1F81CE5B95C009F754B /* setting3.png */; settings = {ASSET_TAGS = (); }; };
+		3F2FE1F31CE5B4D3009F754B /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2FE1F21CE5B4D3009F754B /* setting.png */; };
+		3F2FE1F91CE5B95C009F754B /* setting3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2FE1F81CE5B95C009F754B /* setting3.png */; };
 		3F418ED41CDA18B4004E0BF4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F418ED31CDA18B4004E0BF4 /* AppDelegate.m */; };
 		3F418ED71CDA18C9004E0BF4 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F418ED61CDA18C9004E0BF4 /* MainNavigationController.m */; };
 		3F418EDA1CDA1907004E0BF4 /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F418ED91CDA1907004E0BF4 /* MovieViewController.m */; };
@@ -81,8 +81,13 @@
 		3FEF73CF1CDB79010072A0D7 /* forward_h.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF73CD1CDB79010072A0D7 /* forward_h.png */; };
 		3FEF73D21CDB805E0072A0D7 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF73D01CDB805E0072A0D7 /* play.png */; };
 		3FEF73D31CDB805E0072A0D7 /* play_h.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF73D11CDB805E0072A0D7 /* play_h.png */; };
+
 		3FF445781CE586850001481C /* MovieCollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF445771CE586850001481C /* MovieCollectTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		3FF457FE1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */; settings = {ASSET_TAGS = (); }; };
+
+		3FF445781CE586850001481C /* MovieCollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF445771CE586850001481C /* MovieCollectTableViewCell.m */; };
+		3FF457FE1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */; };
+
 		3FFE0A551CD8A23400A63113 /* ReadingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE0A541CD8A23400A63113 /* ReadingTableViewCell.m */; };
 		3FFE0A581CD8D0BD00A63113 /* Reading.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE0A571CD8D0BD00A63113 /* Reading.m */; };
 		3FFE0A5B1CD8D18F00A63113 /* NetWorlRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE0A5A1CD8D18F00A63113 /* NetWorlRequestManager.m */; };
@@ -1069,12 +1074,14 @@
 				3FD2CD241CE46C5000C2F754 /* PlaceHolderView.h */,
 				3FD2CD251CE46C5000C2F754 /* PlaceHolderView.m */,
 				3FD2CD271CE46C6100C2F754 /* PlaceHolderView.xib */,
+
 				4EBD8FFC1CE46CCF00973475 /* ReadCollectionTableViewCell.h */,
 				4EBD8FFD1CE46CCF00973475 /* ReadCollectionTableViewCell.m */,
 				4EBD8FFF1CE46CDF00973475 /* TecCollectionTableViewCell.h */,
 				4EBD90001CE46CDF00973475 /* TecCollectionTableViewCell.m */,
 				3FF445761CE586850001481C /* MovieCollectTableViewCell.h */,
 				3FF445771CE586850001481C /* MovieCollectTableViewCell.m */,
+
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1084,6 +1091,7 @@
 			children = (
 				4E79FEED1CE35D1000B9BE59 /* CollectionSelectViewController.h */,
 				4E79FEEE1CE35D1000B9BE59 /* CollectionSelectViewController.m */,
+
 				4E79FEEF1CE35D1000B9BE59 /* MovieCollectViewController.h */,
 				4E79FEF01CE35D1000B9BE59 /* MovieCollectViewController.m */,
 				4E79FEF11CE35D1000B9BE59 /* RadioCollectViewController.h */,
@@ -1094,6 +1102,7 @@
 				4E79FEF41CE35D1000B9BE59 /* ReadCollectionViewController.m */,
 				4E79FEF51CE35D1000B9BE59 /* TechnolofyCollecViewController.h */,
 				4E79FEF61CE35D1000B9BE59 /* TechnolofyCollecViewController.m */,
+
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1284,6 +1293,8 @@
 		4E7FAAC01CE5B554009E93DD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3FF445761CE586850001481C /* MovieCollectTableViewCell.h */,
+				3FF445771CE586850001481C /* MovieCollectTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1408,7 +1419,7 @@
 				TargetAttributes = {
 					3F4E86161CD361EE00B9410A = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = 5LXY5GA6GX;
+						DevelopmentTeam = L2MRT6YJ79;
 					};
 					3F4E862F1CD361EE00B9410A = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -1767,7 +1778,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GWG_Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = juijkkkvggh;
+				PRODUCT_BUNDLE_IDENTIFIER = juijkkkvggh11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1781,7 +1792,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GWG_Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = juijkkkvggh;
+				PRODUCT_BUNDLE_IDENTIFIER = juijkkkvggh11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
