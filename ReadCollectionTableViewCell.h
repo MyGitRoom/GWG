@@ -20,6 +20,8 @@
 
 @property (nonatomic,strong)UIImageView * deleteno;
 
+@property (nonatomic,strong)UIImageView * backgrand;
+
 
 
 @end

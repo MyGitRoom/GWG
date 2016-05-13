@@ -56,8 +56,16 @@
     [_btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
     [_btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_btn];
-
-
+    
+    NSArray *array = [self selectMovie];
+    for (TypeOfMovieModel *type_movie in array) {
+        if ([self.movie.name isEqualToString:type_movie.name]) {
+            _btn.selected = YES ;
+        }
+    }
+    
+    
+  
 }
 
 - (void) touchReturn
@@ -113,6 +121,17 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+#pragma  mark - 实现查询数据库是否存在记录决定图标状态
+
+-(NSArray *)selectMovie{
+    
+    NSArray *array =  [[DataBaseUtil shareDataBase]selectMovieTable] ;
+    return  array ;
+
+}
+
 
 -(void)getData{
 

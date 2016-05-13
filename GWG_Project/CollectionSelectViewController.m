@@ -67,7 +67,7 @@
     //movie
     UIButton * btnMovie = [[UIButton alloc]initWithFrame:CGRectMake(-10, KScreenHeight/5+250, KScreenWidth/4*3, 80)];
     [btnMovie setBackgroundImage:[UIImage imageNamed:@"tagleft"] forState:UIControlStateNormal];
-    [btnMovie setTitle:@"Movie" forState:UIControlStateNormal];
+    [btnMovie setTitle:@"Radio" forState:UIControlStateNormal];
     btnMovie.titleLabel.font = [UIFont systemFontOfSize:20];
     btnMovie.contentEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0);
     [btnMovie setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -78,7 +78,7 @@
     //radio
     UIButton * btnRadio = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth/4, KScreenHeight/5+350, KScreenWidth/4*3, 80)];
     [btnRadio setBackgroundImage:[UIImage imageNamed:@"tagright"] forState:UIControlStateNormal];
-    [btnRadio  setTitle:@"Radio" forState:UIControlStateNormal];
+    [btnRadio  setTitle:@"Movie" forState:UIControlStateNormal];
     btnRadio .titleLabel.font = [UIFont systemFontOfSize:20];
     [btnRadio  addTarget:self action:@selector(jumpToRadioCollection:) forControlEvents:UIControlEventTouchDown];
     [_imageV addSubview:btnRadio];
@@ -117,21 +117,23 @@
 }
 -(void)jumpToMovieCollection:(UIButton * )btn
 {
-   MovieCollectViewController *mov = [[MovieCollectViewController alloc]init];
+  RadioCollectViewController *radio = [[RadioCollectViewController alloc]init];
     [UIView animateWithDuration:0.5 animations:^{
         btn.frame = CGRectMake(-KScreenWidth/4*3, KScreenHeight/5+250, KScreenWidth/4*3, 80);
     } completion:^(BOOL finished) {
-        [self.navigationController pushViewController:mov animated:YES];
+      [self.navigationController pushViewController:radio animated:YES];
         [btn removeFromSuperview];
     }];
 }
 -(void)jumpToRadioCollection:(UIButton * )btn
 {
-    RadioCollectViewController *radio = [[RadioCollectViewController alloc]init];
+    
+    MovieCollectViewController *mov = [[MovieCollectViewController alloc]init];
     [UIView animateWithDuration:0.5 animations:^{
         btn.frame = CGRectMake(KScreenWidth, KScreenHeight/5+350, KScreenWidth/4*3, 80);
     } completion:^(BOOL finished) {
-        [self.navigationController pushViewController:radio animated:YES];
+        
+         [self.navigationController pushViewController:mov animated:YES];
         [btn removeFromSuperview];
     }];
     

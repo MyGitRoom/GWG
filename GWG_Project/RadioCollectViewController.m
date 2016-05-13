@@ -76,21 +76,8 @@
 {
     //显示隐藏导航栏
     self.navigationController.navigationBarHidden = NO ;
-    
-    
-}
-
-- (void) viewDidAppear:(BOOL)animated
-{
-//    if (self.collectionArray.count == 0)
-//    {
-//        NSLog(@"%@",self.collectionArray);
-//        [self createPlaceHolderView];
-//    }
-//    else
-//    {
-//        [self.vi removeFromSuperview];
-//    }
+    self.collectionArray = [[DataBaseUtil shareDataBase]selectRadioTable];
+    [self.tab reloadData];
 }
 
 #pragma mark- 没有收藏时的占位图
@@ -148,10 +135,10 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DataDetailModel * model = [_collectionArray objectAtIndex:indexPath.row];
-    MusicPlayerViewController * mpv = [[MusicPlayerViewController alloc]init];
-    mpv.detailMod = model;
-    mpv.passDataArray = (NSMutableArray *)self.collectionArray;
-    [self.navigationController pushViewController:mpv animated:YES];
+    RadioCollectionPlayerViewController * player = [[RadioCollectionPlayerViewController alloc]init];
+    player.detailMod = model;
+    player.passArray = (NSMutableArray *)self.collectionArray;
+    [self.navigationController pushViewController:player animated:YES];
 }
 
 
