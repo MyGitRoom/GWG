@@ -12,7 +12,8 @@
 
 @property (nonatomic, strong) UITableView * tab;
 @property (nonatomic, strong) NSArray * collectionArray;//收藏数组
-@property (nonatomic, strong) UIView * vi;//占位图
+@property (nonatomic, strong) UIView * vi;
+@property (nonatomic, strong) UIView * placeHolderView;//占位图
 
 
 @end
@@ -77,6 +78,16 @@
     //显示隐藏导航栏
     self.navigationController.navigationBarHidden = NO ;
     self.collectionArray = [[DataBaseUtil shareDataBase]selectRadioTable];
+    if (self.collectionArray.count == 0)
+    {
+        self.placeHolderView = [[[NSBundle mainBundle]loadNibNamed:@"PlaceHolderView" owner:self options:nil]lastObject];
+        self.placeHolderView.frame = self.view.bounds;
+        [self.view addSubview:_placeHolderView];
+    }
+    else
+    {
+        [self.placeHolderView removeFromSuperview];
+    }
     [self.tab reloadData];
 }
 
