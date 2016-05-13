@@ -27,6 +27,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"收藏类型";
     UIImage * image = [UIImage imageNamed:@"return"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];

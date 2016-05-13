@@ -63,7 +63,7 @@
     UNCBaseButton *custBtn_3;
     custBtn_1 = [[UNCBaseButton alloc] initWithFrame:CGRectMake(0 , -self.frame.size.width/18, self.frame.size.width/9, self.frame.size.width/9)];
     custBtn_1.transform = CGAffineTransformMakeRotation(M_PI_4*0.5);
-    custBtn_1.backgroundColor = [UIColor colorWithRed:0.137 green:0.482 blue:0.490 alpha:1.000];
+    custBtn_1.backgroundColor = [UIColor colorWithRed:0.163 green:0.592 blue:0.579 alpha:1.000];
     lable_1 = [[UILabel alloc] initWithFrame:custBtn_1.bounds];
     lable_1.text = @"C";
     lable_1.textColor = [UIColor redColor];
@@ -72,7 +72,7 @@
     [custBtn_1 addSubview:lable_1];
     custBtn_2 = [[UNCBaseButton alloc] initWithFrame:CGRectMake(0 ,  -self.frame.size.width/18, self.frame.size.width/9, self.frame.size.width/9)];
     custBtn_2.transform = CGAffineTransformMakeRotation(M_PI_4);
-    custBtn_2.backgroundColor = [UIColor colorWithRed:0.514 green:0.173 blue:0.310 alpha:1.000];
+    custBtn_2.backgroundColor = [UIColor colorWithRed:0.491 green:0.269 blue:0.315 alpha:1.000];
     lable_2 = [[UILabel alloc] initWithFrame:custBtn_2.bounds];
     lable_2.text = @"S";
     lable_2.textColor = [UIColor redColor];
@@ -81,7 +81,7 @@
     [custBtn_2 addSubview:lable_2];
     custBtn_3 = [[UNCBaseButton alloc] initWithFrame:CGRectMake(0 ,  -self.frame.size.width/18, self.frame.size.width/9, self.frame.size.width/9)];
     custBtn_3.transform = CGAffineTransformMakeRotation(M_PI_4*1.5);
-    custBtn_3.backgroundColor = [UIColor colorWithRed:0.954 green:0.821 blue:0.588 alpha:1.000];
+    custBtn_3.backgroundColor = [UIColor colorWithRed:0.461 green:0.462 blue:0.460 alpha:1.000];
     lable_3 = [[UILabel alloc] initWithFrame:custBtn_2.bounds];
     lable_3.text = @"M";
     lable_3.textColor = [UIColor redColor];

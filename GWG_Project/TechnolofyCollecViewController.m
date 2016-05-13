@@ -13,6 +13,8 @@
 #import "Technology.h"
 #import "TechnologyTableViewCell.h"
 #import "TechnologyDetailsViewController.h"
+#import "TecCollectionTableViewCell.h"
+
 
 @interface TechnolofyCollecViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -92,7 +94,7 @@
     _tab.delegate  =self;
     _tab.dataSource = self;
     _tab.showsVerticalScrollIndicator = NO;
-    
+    _tab.backgroundColor = [UIColor colorWithRed:0.024 green:0.031 blue:0.063 alpha:1.000];
     _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tab.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:_tab];
@@ -106,13 +108,13 @@
 -(UITableViewCell * )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * identifier = @"cell";
-    ReadCollectionTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    TecCollectionTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
-        cell = [[ReadCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell = [[TecCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
      Technology* tec = [_dataArray objectAtIndex:indexPath.row];
-    cell.title.text = tec.title;
+    cell.titleLabel.text = tec.title;
     [cell.imageV sd_setImageWithURL:[NSURL URLWithString:tec.pic_url] placeholderImage:nil ];
     if (flag == 1) {
         if (all ==0) {
@@ -131,7 +133,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+   return  (KScreenWidth-10)*0.518;
 }
 #pragma -mark cell点击方法
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,7 +146,7 @@
     [self.navigationController pushViewController:tecD animated:YES];
     }
     else{
-        ReadCollectionTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        TecCollectionTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
         if (times ==0) {//按钮删除状态
             [_deleteArray addObject:tec];//删除数组
             cell.deleteno.image = [UIImage imageNamed:@"deleteyes"];

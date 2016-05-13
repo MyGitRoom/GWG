@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TecCollectionTableViewCell : UITableViewCell
+@property (nonatomic ,strong) UILabel *titleLabel ; //标题
+@property (nonatomic ,strong) UIImageView *imageV ; //背景
+@property (nonatomic,strong)UIImageView * deleteno;
 
 @end

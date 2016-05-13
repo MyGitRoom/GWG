@@ -194,7 +194,7 @@
     ++page;
     [self.loadMoreArray addObject:[@"http://www.duole.fm/api/recommend/collect?app_version=2.0.5&device=iphone&limit=10&sort=3&visitor_uid=0" stringByAppendingFormat:@"&page=%d",page]];
     [self requestData:[self.loadMoreArray lastObject]];
-    [_tab reloadData];
+  
     [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
 }
 
