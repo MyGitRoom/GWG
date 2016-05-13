@@ -48,7 +48,7 @@
 #pragma -mark 弹出视图
 -(void)creatPopView
 {
-    _btn = [[UIButton alloc]initWithFrame:CGRectMake(5, 0, 40, 40)];
+    _btn = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth-40-5, 0, 40, 40)];
     [_btn addTarget:self action:@selector(PopViewToCollect) forControlEvents:UIControlEventTouchDown];
     [_btn setImage:[UIImage imageNamed:@"未收藏"] forState:UIControlStateNormal];
     [_btn setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];

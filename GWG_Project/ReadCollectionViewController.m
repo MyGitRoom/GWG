@@ -39,15 +39,30 @@
     _deleteArray = [NSMutableArray array];
     [self creatTabView];
     [self creatPopViewToDelete];
+    [self creatBtnTo];
     self.view.backgroundColor = [UIColor lightGrayColor];
     
 
-    
+  
+}
+#pragma -mark 导航栏按钮
+-(void)creatBtnTo
+{
+    //返回按钮
     UIImage * image = [UIImage imageNamed:@"return"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"选择" style:UIBarButtonItemStylePlain target:self action:@selector(selectType)];
+    
+    //删除按钮
+    UIImage * rightImage = [UIImage imageNamed:@"clear11"];
+    rightImage = [rightImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:rightImage forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 20, 20);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+    [button addTarget:self action:@selector(selectType) forControlEvents:UIControlEventTouchDown];
 }
+
 -(void)selectType
 {
     if (flag == 0) {
@@ -79,8 +94,9 @@
     _tab.delegate  =self;
     _tab.dataSource = self;
     _tab.showsVerticalScrollIndicator = NO;
-    _tab.separatorStyle = UITableViewCellSelectionStyleNone;
+
     _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tab.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:_tab];
 }
 
@@ -96,7 +112,7 @@
     if (cell == nil) {
         cell = [[ReadCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
-
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     Reading * read = [_dataArray objectAtIndex:indexPath.row];
     cell.title.text = read.title;
     [cell.imageV sd_setImageWithURL:[NSURL URLWithString:read.thumbnail] placeholderImage:nil options:SDWebImageProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize) {
