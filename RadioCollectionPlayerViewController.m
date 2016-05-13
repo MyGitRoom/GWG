@@ -64,7 +64,8 @@
     [self firstReloadMusic];
     [self setNameLabel];
     [self setControlButton];
-   
+
+
 }
 
 #pragma mark- 创建左右侧视图

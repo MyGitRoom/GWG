@@ -77,7 +77,11 @@
 		3FEF73CF1CDB79010072A0D7 /* forward_h.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF73CD1CDB79010072A0D7 /* forward_h.png */; };
 		3FEF73D21CDB805E0072A0D7 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF73D01CDB805E0072A0D7 /* play.png */; };
 		3FEF73D31CDB805E0072A0D7 /* play_h.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF73D11CDB805E0072A0D7 /* play_h.png */; };
+
 		3FF457FE1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */; };
+
+		3FF457FE1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */; settings = {ASSET_TAGS = (); }; };
+
 		3FFE0A551CD8A23400A63113 /* ReadingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE0A541CD8A23400A63113 /* ReadingTableViewCell.m */; };
 		3FFE0A581CD8D0BD00A63113 /* Reading.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE0A571CD8D0BD00A63113 /* Reading.m */; };
 		3FFE0A5B1CD8D18F00A63113 /* NetWorlRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE0A5A1CD8D18F00A63113 /* NetWorlRequestManager.m */; };
@@ -1063,6 +1067,18 @@
 			children = (
 				4E79FEED1CE35D1000B9BE59 /* CollectionSelectViewController.h */,
 				4E79FEEE1CE35D1000B9BE59 /* CollectionSelectViewController.m */,
+
+				4E79FEEF1CE35D1000B9BE59 /* MovieCollectViewController.h */,
+				4E79FEF01CE35D1000B9BE59 /* MovieCollectViewController.m */,
+				4E79FEF11CE35D1000B9BE59 /* RadioCollectViewController.h */,
+				4E79FEF21CE35D1000B9BE59 /* RadioCollectViewController.m */,
+				3FF457FC1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.h */,
+				3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */,
+				4E79FEF31CE35D1000B9BE59 /* ReadCollectionViewController.h */,
+				4E79FEF41CE35D1000B9BE59 /* ReadCollectionViewController.m */,
+				4E79FEF51CE35D1000B9BE59 /* TechnolofyCollecViewController.h */,
+				4E79FEF61CE35D1000B9BE59 /* TechnolofyCollecViewController.m */,
+
 			);
 			name = Controller;
 			sourceTree = "<group>";

@@ -190,6 +190,11 @@
     }
     
     
+
+    player.detailMod = model;
+    player.passArray = (NSMutableArray *)self.collectionArray;
+    [self.navigationController pushViewController:player animated:YES];
+
 }
 
 
