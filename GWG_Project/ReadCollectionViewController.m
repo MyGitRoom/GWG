@@ -16,13 +16,12 @@
 @interface ReadCollectionViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     BOOL flag;//判断cell的点击模式
-    NSInteger  times;
+    BOOL  times;//按钮删除状态
     BOOL all;//全选监控状态
 }
 @property(nonatomic,strong)UITableView * tab;
 @property (nonatomic,strong)NSArray * dataArray;
 @property(nonatomic,strong)NSMutableArray * deleteArray; //删除的数组
-@property (nonatomic,strong)UIButton * btn;//删除按钮；
 @property (nonatomic,strong)UIView * deleteV;//底部删除视图
 @end
 
@@ -35,15 +34,12 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"阅读";
     self.navigationController.navigationBarHidden = NO;
     _deleteArray = [NSMutableArray array];
     [self creatTabView];
     [self creatPopViewToDelete];
     [self creatBtnTo];
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    
-
-  
 }
 #pragma -mark 导航栏按钮
 -(void)creatBtnTo
@@ -62,7 +58,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     [button addTarget:self action:@selector(selectType) forControlEvents:UIControlEventTouchDown];
 }
-
+#pragma -mark 选择cell跳转模式
 -(void)selectType
 {
     if (flag == 0) {
@@ -199,7 +195,6 @@
     
 
 }
-
 #pragma  -mark 删除按钮
 -(void)deleteSelectCell
 {

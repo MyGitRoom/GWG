@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *picView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *dateLab;
+@property (weak, nonatomic) IBOutlet UIImageView *deleteImg;
 
 @end
