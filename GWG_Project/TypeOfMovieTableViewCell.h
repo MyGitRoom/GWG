@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol isLike <NSObject>
-
--(void)like:(UIButton *)btn ;
-
-
-@end
+//@protocol isLike <NSObject>
+//
+//-(void)like:(UIButton *)btn ;
+//
+//
+//@end
 
 
 @interface TypeOfMovieTableViewCell : UITableViewCell
@@ -24,7 +24,7 @@
 @property (nonatomic ,strong) UIBlurEffect *blur ; //毛玻璃效果
 @property (nonatomic ,strong) UIVisualEffectView *effectview ;
 
-@property (nonatomic) id<isLike> isLikeDelegate ;
+//@property (nonatomic) id<isLike> isLikeDelegate ;
 
 
 @end

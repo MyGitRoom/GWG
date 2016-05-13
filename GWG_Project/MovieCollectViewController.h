@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+//#import "MovieCollectionViewCell.h"
+
+//#import "MovieCollectionViewCell.h"
+
 @interface MovieCollectViewController : UIViewController
 
 @end
