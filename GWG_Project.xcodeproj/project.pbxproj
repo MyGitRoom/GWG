@@ -26,9 +26,16 @@
 		3F4E862A1CD361EE00B9410A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F4E86281CD361EE00B9410A /* LaunchScreen.storyboard */; };
 		3F4E86351CD361EE00B9410A /* GWG_ProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E86341CD361EE00B9410A /* GWG_ProjectTests.m */; };
 		3F4E86401CD361EE00B9410A /* GWG_ProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4E863F1CD361EE00B9410A /* GWG_ProjectUITests.m */; };
+
 		3F610D4C1CE4A2D600F39329 /* plan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F610D4B1CE4A2D600F39329 /* plan.png */; settings = {ASSET_TAGS = (); }; };
 		3F610D4E1CE4B1D900F39329 /* settingBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F610D4D1CE4B1D900F39329 /* settingBg.jpg */; settings = {ASSET_TAGS = (); }; };
 		3F610D521CE4CF1000F39329 /* cache_trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F610D511CE4CF1000F39329 /* cache_trash.png */; settings = {ASSET_TAGS = (); }; };
+
+		3F610D4C1CE4A2D600F39329 /* plan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F610D4B1CE4A2D600F39329 /* plan.png */; };
+		3F610D4E1CE4B1D900F39329 /* settingBg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F610D4D1CE4B1D900F39329 /* settingBg.jpg */; };
+		3F610D501CE4CCE800F39329 /* cache_trash2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F610D4F1CE4CCE800F39329 /* cache_trash2.png */; };
+		3F610D521CE4CF1000F39329 /* cache_trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F610D511CE4CF1000F39329 /* cache_trash.png */; };
+
 		3F7E73121CD394B400A2AB90 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E730E1CD394B400A2AB90 /* 3.jpg */; };
 		3F7E73141CD394B400A2AB90 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E73101CD394B400A2AB90 /* 4.jpg */; };
 		3F7E73151CD394B400A2AB90 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E73111CD394B400A2AB90 /* 1.jpg */; };
@@ -78,7 +85,15 @@
 		3FEF73CF1CDB79010072A0D7 /* forward_h.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF73CD1CDB79010072A0D7 /* forward_h.png */; };
 		3FEF73D21CDB805E0072A0D7 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF73D01CDB805E0072A0D7 /* play.png */; };
 		3FEF73D31CDB805E0072A0D7 /* play_h.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF73D11CDB805E0072A0D7 /* play_h.png */; };
+
 		3FF445781CE586850001481C /* MovieCollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF445771CE586850001481C /* MovieCollectTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+
+
+		3FF457FE1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */; };
+
+		3FF457FE1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */; settings = {ASSET_TAGS = (); }; };
+
+
 		3FFE0A551CD8A23400A63113 /* ReadingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE0A541CD8A23400A63113 /* ReadingTableViewCell.m */; };
 		3FFE0A581CD8D0BD00A63113 /* Reading.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE0A571CD8D0BD00A63113 /* Reading.m */; };
 		3FFE0A5B1CD8D18F00A63113 /* NetWorlRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE0A5A1CD8D18F00A63113 /* NetWorlRequestManager.m */; };
@@ -287,8 +302,13 @@
 		3FEF73CD1CDB79010072A0D7 /* forward_h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_h.png; sourceTree = "<group>"; };
 		3FEF73D01CDB805E0072A0D7 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		3FEF73D11CDB805E0072A0D7 /* play_h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_h.png; sourceTree = "<group>"; };
+
 		3FF445761CE586850001481C /* MovieCollectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCollectTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		3FF445771CE586850001481C /* MovieCollectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCollectTableViewCell.m; sourceTree = SOURCE_ROOT; };
+
+		3FF457FC1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioCollectionPlayerViewController.h; sourceTree = SOURCE_ROOT; };
+		3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioCollectionPlayerViewController.m; sourceTree = SOURCE_ROOT; };
+
 		3FFE0A531CD8A23400A63113 /* ReadingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadingTableViewCell.h; sourceTree = "<group>"; };
 		3FFE0A541CD8A23400A63113 /* ReadingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadingTableViewCell.m; sourceTree = "<group>"; };
 		3FFE0A561CD8D0BD00A63113 /* Reading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reading.h; sourceTree = "<group>"; };
@@ -1054,18 +1074,17 @@
 		4E79FE741CE355C200B9BE59 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3FD2CD1D1CE4619400C2F754 /* RadioCollectionTableViewCell.h */,
-				3FD2CD1E1CE4619400C2F754 /* RadioCollectionTableViewCell.m */,
-				3FD2CD2B1CE480DE00C2F754 /* RadioCollectionTableViewCell.xib */,
 				3FD2CD241CE46C5000C2F754 /* PlaceHolderView.h */,
 				3FD2CD251CE46C5000C2F754 /* PlaceHolderView.m */,
 				3FD2CD271CE46C6100C2F754 /* PlaceHolderView.xib */,
+
 				4EBD8FFC1CE46CCF00973475 /* ReadCollectionTableViewCell.h */,
 				4EBD8FFD1CE46CCF00973475 /* ReadCollectionTableViewCell.m */,
 				4EBD8FFF1CE46CDF00973475 /* TecCollectionTableViewCell.h */,
 				4EBD90001CE46CDF00973475 /* TecCollectionTableViewCell.m */,
 				3FF445761CE586850001481C /* MovieCollectTableViewCell.h */,
 				3FF445771CE586850001481C /* MovieCollectTableViewCell.m */,
+
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1075,14 +1094,18 @@
 			children = (
 				4E79FEED1CE35D1000B9BE59 /* CollectionSelectViewController.h */,
 				4E79FEEE1CE35D1000B9BE59 /* CollectionSelectViewController.m */,
+
 				4E79FEEF1CE35D1000B9BE59 /* MovieCollectViewController.h */,
 				4E79FEF01CE35D1000B9BE59 /* MovieCollectViewController.m */,
 				4E79FEF11CE35D1000B9BE59 /* RadioCollectViewController.h */,
 				4E79FEF21CE35D1000B9BE59 /* RadioCollectViewController.m */,
+				3FF457FC1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.h */,
+				3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */,
 				4E79FEF31CE35D1000B9BE59 /* ReadCollectionViewController.h */,
 				4E79FEF41CE35D1000B9BE59 /* ReadCollectionViewController.m */,
 				4E79FEF51CE35D1000B9BE59 /* TechnolofyCollecViewController.h */,
 				4E79FEF61CE35D1000B9BE59 /* TechnolofyCollecViewController.m */,
+
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1090,6 +1113,10 @@
 		4E79FE801CE355C200B9BE59 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				4E7FAAB81CE5B507009E93DD /* radio */,
+				4E7FAAB71CE5B500009E93DD /* technology */,
+				4E7FAAB61CE5B4FC009E93DD /* movie */,
+				4E7FAAB51CE5B4F5009E93DD /* read */,
 				4E79FE731CE355C200B9BE59 /* Model */,
 				4E79FE741CE355C200B9BE59 /* View */,
 				4E79FE7F1CE355C200B9BE59 /* Controller */,
@@ -1172,6 +1199,147 @@
 			);
 			name = OthersC;
 			path = "../../../gwg_project 2/GWG/GWG_Project";
+			sourceTree = "<group>";
+		};
+		4E7FAAB51CE5B4F5009E93DD /* read */ = {
+			isa = PBXGroup;
+			children = (
+				4E7FAAC41CE5B57C009E93DD /* Model */,
+				4E7FAAC31CE5B577009E93DD /* View */,
+				4E7FAAC21CE5B560009E93DD /* Controller */,
+			);
+			name = read;
+			sourceTree = "<group>";
+		};
+		4E7FAAB61CE5B4FC009E93DD /* movie */ = {
+			isa = PBXGroup;
+			children = (
+				4E7FAAC11CE5B558009E93DD /* Model */,
+				4E7FAAC01CE5B554009E93DD /* View */,
+				4E7FAABF1CE5B54B009E93DD /* Controller */,
+			);
+			name = movie;
+			sourceTree = "<group>";
+		};
+		4E7FAAB71CE5B500009E93DD /* technology */ = {
+			isa = PBXGroup;
+			children = (
+				4E7FAABE1CE5B544009E93DD /* Model */,
+				4E7FAABD1CE5B540009E93DD /* View */,
+				4E7FAABC1CE5B53A009E93DD /* Controller */,
+			);
+			name = technology;
+			sourceTree = "<group>";
+		};
+		4E7FAAB81CE5B507009E93DD /* radio */ = {
+			isa = PBXGroup;
+			children = (
+				4E7FAABB1CE5B524009E93DD /* Model */,
+				4E7FAABA1CE5B519009E93DD /* View */,
+				4E7FAAB91CE5B50D009E93DD /* Controller */,
+			);
+			name = radio;
+			sourceTree = "<group>";
+		};
+		4E7FAAB91CE5B50D009E93DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4E79FEF11CE35D1000B9BE59 /* RadioCollectViewController.h */,
+				4E79FEF21CE35D1000B9BE59 /* RadioCollectViewController.m */,
+				3FF457FC1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.h */,
+				3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4E7FAABA1CE5B519009E93DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3FD2CD1D1CE4619400C2F754 /* RadioCollectionTableViewCell.h */,
+				3FD2CD1E1CE4619400C2F754 /* RadioCollectionTableViewCell.m */,
+				3FD2CD2B1CE480DE00C2F754 /* RadioCollectionTableViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4E7FAABB1CE5B524009E93DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4E7FAABC1CE5B53A009E93DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4E79FEF51CE35D1000B9BE59 /* TechnolofyCollecViewController.h */,
+				4E79FEF61CE35D1000B9BE59 /* TechnolofyCollecViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4E7FAABD1CE5B540009E93DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4EBD8FFF1CE46CDF00973475 /* TecCollectionTableViewCell.h */,
+				4EBD90001CE46CDF00973475 /* TecCollectionTableViewCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4E7FAABE1CE5B544009E93DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4E7FAABF1CE5B54B009E93DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4E79FEEF1CE35D1000B9BE59 /* MovieCollectViewController.h */,
+				4E79FEF01CE35D1000B9BE59 /* MovieCollectViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4E7FAAC01CE5B554009E93DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4E7FAAC11CE5B558009E93DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4E7FAAC21CE5B560009E93DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4E79FEF31CE35D1000B9BE59 /* ReadCollectionViewController.h */,
+				4E79FEF41CE35D1000B9BE59 /* ReadCollectionViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4E7FAAC31CE5B577009E93DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4EBD8FFC1CE46CCF00973475 /* ReadCollectionTableViewCell.h */,
+				4EBD8FFD1CE46CCF00973475 /* ReadCollectionTableViewCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4E7FAAC41CE5B57C009E93DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		4E8A89AA1CE225C300731473 /* btnrunning */ = {
@@ -1344,7 +1512,10 @@
 				3FDE50B51CE18A30002D9A0B /* like.png in Resources */,
 				4EBD90031CE4700600973475 /* jumpTo.png in Resources */,
 				4EBD90071CE488C400973475 /* deleteyes.png in Resources */,
+
 				3F2FE1F31CE5B4D3009F754B /* setting.png in Resources */,
+
+
 				3FEF73C61CDB78930072A0D7 /* rewind.png in Resources */,
 				3FEF73CA1CDB78F00072A0D7 /* pause.png in Resources */,
 				3FEF73CB1CDB78F00072A0D7 /* pause_h.png in Resources */,
@@ -1427,6 +1598,7 @@
 				3F418EE01CDA1920004E0BF4 /* MovieDetailViewController.m in Sources */,
 				4E3FE8151CD9FE0D006E5196 /* MJRefreshBackGifFooter.m in Sources */,
 				4E8A89C31CE22AE600731473 /* LazyFadeInView.m in Sources */,
+				3FF457FE1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m in Sources */,
 				3FB3D8CE1CD388F50058CC5B /* TechnologyViewController.m in Sources */,
 				4E3FE8121CD9FE0D006E5196 /* MJRefreshAutoGifFooter.m in Sources */,
 				4E3FE8181CD9FE0D006E5196 /* MJRefreshGifHeader.m in Sources */,

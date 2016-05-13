@@ -33,7 +33,7 @@
 {
 
     self.navigationController.navigationBarHidden=NO;
-
+   
 }
 
 - (void)viewDidLoad {
@@ -188,6 +188,5 @@
 {
     [_readingTableView.header endRefreshing];
 }
-
 
 @end

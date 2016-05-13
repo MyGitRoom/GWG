@@ -12,6 +12,7 @@
 #import "DataDetailModel.h"
 #import "DataBaseUtil.h"
 #import "MusicPlayerViewController.h"
+#import "RadioCollectionPlayerViewController.h"
 
 @interface RadioCollectViewController : UIViewController
 

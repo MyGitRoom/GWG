@@ -13,6 +13,9 @@
 #import "RadioCollectViewController.h"
 @interface CollectionSelectViewController ()
 @property (nonatomic,strong)UIImageView * imageV;
+@property (nonatomic,strong)UIImageView * typeImageV;
+@property (nonatomic,strong)UILabel * wordLabel;
+
 @end
 @implementation CollectionSelectViewController
 
@@ -31,6 +34,7 @@
 
 - (void) touchReturn
 {
+     [_typeImageV removeFromSuperview];
     [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma -mark 建立背景主色调
@@ -46,6 +50,17 @@
 #pragma  -mark 建立标签视图
 -(void)setTagImage
 {
+    _typeImageV = [[UIImageView alloc]initWithFrame:CGRectMake(-KScreenWidth/2+40, KScreenHeight/8,  KScreenWidth/4*3, 80)];
+    _typeImageV.image = [UIImage imageNamed:@"tagleft"];
+    [_imageV addSubview:_typeImageV];
+    _wordLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, KScreenHeight/6.5+5, 100, 40)];
+//    wordLabel.center = typeImageV.center;
+    _wordLabel.textAlignment = NSTextAlignmentCenter;
+    _wordLabel.text = @"The Type ";
+//    wordLabel.backgroundColor = [UIColor redColor];
+    [_imageV addSubview:_wordLabel];
+    
+    
     //reading
     UIButton * btnReading = [[UIButton alloc]initWithFrame:CGRectMake(-10, KScreenHeight/5+50, KScreenWidth/4*3, 80)];
     [btnReading setBackgroundImage:[UIImage imageNamed:@"tagleft"] forState:UIControlStateNormal];
@@ -91,10 +106,12 @@
 #pragma -mark 跳转方法
 -(void)jumpToReadingCollection:(UIButton * )btn
 {
+    
     ReadCollectionViewController *read = [[ReadCollectionViewController alloc]init];
     [UIView animateWithDuration:0.5 animations:^{
         btn.frame = CGRectMake(-KScreenWidth/4*3, KScreenHeight/5+50, KScreenWidth/4*3, 80);
     } completion:^(BOOL finished) {
+        
         [self.navigationController pushViewController:read animated:YES];
         [btn removeFromSuperview];
     }];
@@ -142,6 +159,8 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [_imageV removeFromSuperview];
+   
+    [_wordLabel removeFromSuperview];
     self.navigationController.navigationBarHidden=NO;
 }
 

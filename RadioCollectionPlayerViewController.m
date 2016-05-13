@@ -1,33 +1,27 @@
 //
-//  MusicPlayerViewController.m
+//  RadioCollectionPlayerViewController.m
 //  GWG_Project
 //
-//  Created by lanou on 16/5/5.
+//  Created by lanou on 16/5/13.
 //  Copyright © 2016年 关振发. All rights reserved.
 //
 
-#import "MusicPlayerViewController.h"
+#import "RadioCollectionPlayerViewController.h"
 
-@interface MusicPlayerViewController ()<GYPlayerDelegate>
+@interface RadioCollectionPlayerViewController ()
 
 @property (nonatomic, strong) UIView * vi;
+@property (nonatomic, strong) UIImageView * imageV;
+@property (nonatomic, strong) UIButton * btn;
 
 @property (nonatomic, strong) UIImageView * albumView;
-@property (nonatomic, strong) UIImageView * imageV;
 
 @end
 
-@implementation MusicPlayerViewController
-
--(void)viewWillAppear:(BOOL)animated
-{
-    self.navigationController.navigationBarHidden =NO;
-    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
-}
+@implementation RadioCollectionPlayerViewController
 
 #pragma mark- 懒加载
-
--(UIImageView *)albumView
+- (UIImageView *) albumView
 {
     if (!_albumView)
     {
@@ -52,42 +46,73 @@
     visualView.frame = self.view.frame;
     [self.view addSubview:visualView];
     
+    //显示图片的View
     self.vi = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight-kControlBarHeight)];
-    [self.view addSubview:self.vi];
+    [self.view addSubview:_vi];
     
     UIVisualEffectView * eView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     eView.frame = CGRectMake(0, kControlBarOriginY, KScreenWidth, kControlBarHeight);
     [self.view addSubview:eView];
     
-//    NSLog(@"%@",self.detailMod.sound_url);
+    //    NSLog(@"%@",self.detailMod.sound_url);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     
-    self.currentIndex = self.detailMod.model_flag;
-//    [self creatPopView];
-    
+    [self createLeftAndRightView];
+    [self firstReloadMusic];
+    [self setNameLabel];
+    [self setControlButton];
+
+
+}
+
+#pragma mark- 创建左右侧视图
+- (void) createLeftAndRightView
+{
+    //右侧
     self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
     _btn.frame = CGRectMake(0, 0, 30, 30);
     [_btn addTarget:self action:@selector(PopViewToCollect:) forControlEvents:UIControlEventTouchDown];
     [_btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
     [_btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateSelected];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_btn];
+    _btn.selected = YES;
     
-    [self setControlButton];
-    [self setNameAndAlbumLabel];
-    [self creatDataBank];
-
-    //添加一个观察者，观察我们的应用程序有没有计入后台，一旦进入后台系统就会自动给我们发送一个通知
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadVolume) name:UIApplicationDidEnterBackgroundNotification object:nil];
-
-    [self firstReloadMusic];
-    
+    //左侧
     UIImage * image = [UIImage imageNamed:@"return"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
+}
+
+- (void) PopViewToCollect:(UIButton *)btn
+{
+    
+    if (_btn.selected == NO)
+    {
+        [[DataBaseUtil shareDataBase]insertObjectOfRadio:_detailMod];
+        _btn.selected = YES;
+        [self popToPrompt:@"收藏成功"];
+    }
+    else
+    {
+        [[DataBaseUtil shareDataBase]deleteRadioWithName:_detailMod.title];
+        _btn.selected = NO;
+        [self popToPrompt:@"取消收藏"];
+    }
+}
+
+//弹出提示框
+-(void)popToPrompt:(NSString*)str
+{
+    UIAlertController * alertController =  [UIAlertController alertControllerWithTitle:nil message:str preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:YES completion:nil];
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(DismissTheAlert) userInfo:nil repeats:NO];
+}
+-(void)DismissTheAlert
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) touchReturn
@@ -95,9 +120,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)setNameAndAlbumLabel
+#pragma mark- 创建title
+-(void)setNameLabel
 {
-    
     UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, 40)];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.tag = 20086;
@@ -105,15 +130,6 @@
     nameLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-120);
     nameLabel.text = self.detailMod.title;
     [self.view addSubview:nameLabel];
-    
-    UILabel * albumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, 30)];
-    albumLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-70);
-    albumLabel.tag = 20010;
-    albumLabel.font = [UIFont systemFontOfSize:15];
-    albumLabel.textAlignment = NSTextAlignmentCenter;
-    
-    albumLabel.text = [self.detailMod.user objectForKey:@"nick"];
-    [self.view addSubview:albumLabel];
 }
 
 #pragma mark-创建暂停播放等按钮的
@@ -150,7 +166,7 @@
     
 }
 
-#pragma mark-播放器的协议方法(0.1s就会调用一次)
+//播放器的协议方法(0.1s就会调用一次)
 -(void)audioPlayer:(GYPlayer *)player didPlayingWithProgress:(float)progress
 {
     //让图片进行旋转
@@ -161,6 +177,10 @@
 -(void)handleForwordAction:(UIButton *)sender
 {
     self.currentIndex++;
+    if (self.currentIndex > self.passArray.count-1)
+    {
+        self.currentIndex = 0;
+    }
     GYPlayer *player = [GYPlayer sharedplayer];
     [player stop];
     //切换音乐
@@ -182,22 +202,36 @@
     {
         self.currentIndex = 0;
     }
-    
-//    NSLog(@"%ld",self.currentIndex);
     [self reloadMusic];
 }
 
 //每次切换歌曲的时候把页面的元素全部换成该歌曲的内容
 -(void)reloadMusic
 {
-    DataDetailModel * model = [self.passDataArray objectAtIndex:self.currentIndex];
+    
+//    NSArray * array = [[DataBaseUtil shareDataBase]selectRadioTable];
+//    DataDetailModel * de  =[[DataDetailModel alloc]init];
+//    //    NSLog(@"%@",array);
+//    for (de in array)
+//    {
+//        if ([de.title isEqualToString:_detailMod.title])
+//        {
+//            [_btn setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+//        }
+//        else
+//        {
+//            [_btn setImage:[UIImage imageNamed:@"orangeNotLike"] forState:UIControlStateNormal];
+//        }
+//    }
+    
+    DataDetailModel * model = [self.passArray objectAtIndex:self.currentIndex];
     //改变旋转大图的背景
     [self.albumView sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
     [_imageV sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
-
-    //更新title和电台
+    
+    //更新title
     [(UILabel *)[self.view viewWithTag:20086] setText:model.title];
-    [(UILabel*)[self.view viewWithTag:20010] setText:[model.user objectForKey:@"nick"]];
+//    [(UILabel*)[self.view viewWithTag:20010] setText:[model.user objectForKey:@"nick"]];
     //保证每次切换新歌的时候旋转的图片都从正上方看是旋转
     self.albumView.transform  = CGAffineTransformMakeRotation(0);
     //更换音乐播放器，让音乐播放器，播放当前的音乐
@@ -216,7 +250,7 @@
     [self.albumView sd_setImageWithURL:[NSURL URLWithString:self.detailMod.cover_url]];
     //更新歌名和专辑名字
     [(UILabel *)[self.view viewWithTag:20086] setText:self.detailMod.title];
-    [(UILabel*)[self.view viewWithTag:20010] setText:[self.detailMod.user objectForKey:@"nick"]];
+//    [(UILabel*)[self.view viewWithTag:20010] setText:[self.detailMod.user objectForKey:@"nick"]];
     //保证每次切换新歌的时候旋转的图片都从正上方看是旋转
     self.albumView.transform  = CGAffineTransformMakeRotation(0);
     GYPlayer *player = [GYPlayer sharedplayer];
@@ -245,59 +279,20 @@
     }
 }
 
-#pragma  -mark  数据库的建立
--(void)creatDataBank
-{
-//    NSLog(@"%@",NSHomeDirectory());
-    BOOL result = [[DataBaseUtil shareDataBase]createDataDetailModelTable];
-    if (result)
-    {
-        NSLog(@"建立电台列表成功");
-    }
-    NSArray * array = [[DataBaseUtil shareDataBase]selectRadioTable];
-    DataDetailModel * de = [[DataDetailModel alloc]init];
-    //    NSLog(@"%@",array);
-    for (de in array)
-    {
-        if ([de.title isEqualToString:_detailMod.title])
-        {
-            _btn.selected = YES;
-        }
-    }
-    //    NSLog(@"%d",_btn.selected);
-    
-    
-}
 
-- (void) PopViewToCollect:(UIButton *)btn
-{
-    
-    if (_btn.selected == NO) {
-        [[DataBaseUtil shareDataBase]insertObjectOfRadio:_detailMod];
-        _btn.selected = YES;
-        [self popToPrompt:@"收藏成功"];
-        
-        
-    }else
-    {
-        [[DataBaseUtil shareDataBase]deleteRadioWithName:_detailMod.title];
-        [self popToPrompt:@"取消收藏"];
-        _btn.selected = NO;
-        
-    }
-}
-#pragma -mark 弹出提示框
--(void)popToPrompt:(NSString*)str
-{
-    UIAlertController * alertController =  [UIAlertController alertControllerWithTitle:nil message:str preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertController animated:YES completion:nil];
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(DismissTheAlert) userInfo:nil repeats:NO];
-    
-}
 
--(void)DismissTheAlert
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end

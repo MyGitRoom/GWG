@@ -16,13 +16,12 @@
 @interface ReadCollectionViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     BOOL flag;//判断cell的点击模式
-    NSInteger  times;
+    BOOL  times;//按钮删除状态
     BOOL all;//全选监控状态
 }
 @property(nonatomic,strong)UITableView * tab;
 @property (nonatomic,strong)NSArray * dataArray;
 @property(nonatomic,strong)NSMutableArray * deleteArray; //删除的数组
-@property (nonatomic,strong)UIButton * btn;//删除按钮；
 @property (nonatomic,strong)UIView * deleteV;//底部删除视图
 @end
 
@@ -35,19 +34,31 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"阅读";
     self.navigationController.navigationBarHidden = NO;
     _deleteArray = [NSMutableArray array];
     [self creatTabView];
     [self creatPopViewToDelete];
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    
-
-    
+    [self creatBtnTo];
+}
+#pragma -mark 导航栏按钮
+-(void)creatBtnTo
+{
+    //返回按钮
     UIImage * image = [UIImage imageNamed:@"return"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"选择" style:UIBarButtonItemStylePlain target:self action:@selector(selectType)];
+    
+    //删除按钮
+    UIImage * rightImage = [UIImage imageNamed:@"clear11"];
+    rightImage = [rightImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:rightImage forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 20, 20);
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+    [button addTarget:self action:@selector(selectType) forControlEvents:UIControlEventTouchDown];
 }
+#pragma -mark 选择cell跳转模式
 -(void)selectType
 {
     if (flag == 0) {
@@ -79,8 +90,9 @@
     _tab.delegate  =self;
     _tab.dataSource = self;
     _tab.showsVerticalScrollIndicator = NO;
-    _tab.separatorStyle = UITableViewCellSelectionStyleNone;
+
     _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tab.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:_tab];
 }
 
@@ -96,7 +108,7 @@
     if (cell == nil) {
         cell = [[ReadCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
-
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     Reading * read = [_dataArray objectAtIndex:indexPath.row];
     cell.title.text = read.title;
     [cell.imageV sd_setImageWithURL:[NSURL URLWithString:read.thumbnail] placeholderImage:nil options:SDWebImageProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize) {
@@ -183,7 +195,6 @@
     
 
 }
-
 #pragma  -mark 删除按钮
 -(void)deleteSelectCell
 {

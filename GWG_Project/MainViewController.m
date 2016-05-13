@@ -70,15 +70,7 @@
 #pragma mark- 隐藏导航栏
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = YES ;
-    Message * ms = [_msgArray lastObject];
-    //英文
-    _fade = [[LazyFadeInView alloc]initWithFrame:CGRectMake(130, 430,  250, 100)];
-    _fade.text = ms.content;
-    [_imagev addSubview:_fade];
-    //汉子
-    _fadeC = [[LazyFadeInView alloc]initWithFrame:CGRectMake(10, 80,  250, 100)];
-    _fadeC.text = ms.note;
-    [_imagev addSubview:_fadeC];
+    [self layoutViewsOfWord];//布局
 }
 #pragma mark- 加载视图
 - (void)viewDidLoad {
@@ -96,6 +88,31 @@
     [self creatRunningBtn];
 }
 
+#pragma -mark 布局淡入淡出字体
+-(void)layoutViewsOfWord
+{
+    Message * ms = [_msgArray lastObject];
+    //英文
+    _fade = [[LazyFadeInView alloc]initWithFrame:CGRectMake(KScreenWidth/3, KScreenHeight/5*2.9,KScreenWidth/3*2, KScreenHeight/3)];
+    
+    [_imagev addSubview:_fade];
+    //汉字
+    _fadeC = [[LazyFadeInView alloc]initWithFrame:CGRectMake(10, KScreenHeight/13,  KScreenWidth/3*2.2, KScreenHeight/6)];
+    
+    [_imagev addSubview:_fadeC];
+    
+    if ((ms.content.length>100 || ms.note.length>30)) {
+        _fadeC.text = @"知识给你力量，品格给你别人的尊敬。－－李小龙";
+        _fade.text = @"knowledge will give you power but character respect for you";
+        _fadeC.frame =CGRectMake(10, KScreenHeight/10,  KScreenWidth/3*2.2, KScreenHeight/6);
+        _fade.frame =CGRectMake(KScreenWidth/2.4, KScreenHeight/5*2.9,KScreenWidth/3*1.8, KScreenHeight/3);
+//        _sphereView.frame =CGRectMake(40, KScreenHeight-64-49+20, 80, 80);
+    }else
+    {    _fade.text = ms.content;
+        _fadeC.text = ms.note;
+        
+    }
+}
 
 #pragma mark- 创建云标签
 -(void)createCloudTag{
@@ -153,17 +170,6 @@
         [self.navigationController pushViewController:technoloVc animated:YES];
     }
 }
-#pragma mark- 切换图片的方法
--(void)changePic{
-    if (_i==5) {
-        //    self.imagev.image =[UIImage imageNamed:[NSString stringWithFormat:@"%ld.jpg",_i]];
-        //    if (_i==4) {
-        _i=1;
-    }
-    self.imagev.image =[UIImage imageNamed:[NSString stringWithFormat:@"%ld.jpg",_i]];
-    _i++ ;
-}
-
 #pragma mark- 请求数据
 - (void) requestData
 {
@@ -216,7 +222,7 @@
     [self.vi addSubview:dateLabel];
     
     //图片
-    self.imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 150, KScreenWidth, 230)];
+    self.imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight/4.5, KScreenWidth, KScreenHeight/3)];
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:msg.picture]];
     _imageV.layer.cornerRadius = 3;
     _imageV.layer.shadowColor = [UIColor whiteColor].CGColor;
@@ -228,9 +234,9 @@
     //播放音频按钮
     self.mainBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_mainBtn setImage:[UIImage imageNamed:@"listenToWords"] forState:UIControlStateNormal];
-    _mainBtn.frame = CGRectMake(KScreenWidth-35,153,30,30);
+    _mainBtn.frame = CGRectMake(KScreenWidth-35,KScreenHeight/4.5+3,30,30);
     [_mainBtn addTarget:self action:@selector(touchChange:) forControlEvents:UIControlEventTouchUpInside];
-    [_mainBtn setAlpha:0.5];
+//    [_mainBtn setAlpha:0.8];
     [self.uncView addSubview:_mainBtn];
     
 }
@@ -351,11 +357,8 @@
     [self.navigationController pushViewController:setting animated:YES];
 }
 -(void)jumpToMy{
-    
     MyViewController * my = [[MyViewController alloc]init];
     [self.navigationController pushViewController:my animated:YES];
-    
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
