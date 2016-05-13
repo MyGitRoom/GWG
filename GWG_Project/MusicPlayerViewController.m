@@ -153,22 +153,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-/*
-//滑动音乐进度条执行的方法
--(void)handleProgressChangeAction:(UISlider *)sender
-{
-    [[GYPlayer sharedplayer] seekToTime:sender.value];
-}
-
-#pragma mark- 处理时间格式的方法
--(NSString *)timeWithInterVal:(float)interVal
-{
-    int minute = interVal / 60;
-    int second = (int)interVal % 60;
-    return [NSString stringWithFormat:@"%d:%02d",minute,second];
-}
- */
-
 //点击返回按钮时执行的方法
 -(void)handleDismissAction:(UIButton *)sender
 {
@@ -178,7 +162,7 @@
 -(void)setNameAndAlbumLabel
 {
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, 40)];
+    UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, 40)];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.tag = 20086;
     nameLabel.font = [UIFont systemFontOfSize:17];
@@ -186,7 +170,7 @@
     nameLabel.text = self.detailMod.title;
     [self.view addSubview:nameLabel];
     
-    UILabel *albumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, 30)];
+    UILabel * albumLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, 30)];
     albumLabel.center = CGPointMake(KScreenWidth/2, kControlBarCenterY-70);
     albumLabel.tag = 20010;
     albumLabel.font = [UIFont systemFontOfSize:15];
@@ -200,7 +184,7 @@
 -(void)setControlButton
 {
     //创建播放按钮
-    UIButton *playPauseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton * playPauseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     playPauseButton.frame = CGRectMake(0, 0, 30, 30);
     playPauseButton.center = CGPointMake(kControlBarCenterX, kControlBarCenterY);
@@ -211,7 +195,7 @@
     [self.view addSubview:playPauseButton];
     
     //创建上一首的按钮
-    UIButton *rewindButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton * rewindButton = [UIButton buttonWithType:UIButtonTypeCustom];
     rewindButton.frame = CGRectMake(0, 0, 30, 30);
     rewindButton.center = CGPointMake(kControlBarCenterX-kButtonOffSetX, kControlBarCenterY);
     [rewindButton setImage:[UIImage imageNamed:@"rewind.png"] forState:UIControlStateNormal];
@@ -220,7 +204,7 @@
     [self.view addSubview:rewindButton];
     
     //创建下一首音乐的按钮
-    UIButton *forwordButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton * forwordButton =[UIButton buttonWithType:UIButtonTypeCustom];
     forwordButton.frame = CGRectMake(0, 0, 30, 30);
     forwordButton.center = CGPointMake(kControlBarCenterX+kButtonOffSetX, kControlBarCenterY);
     [forwordButton setImage:[UIImage imageNamed:@"forward.png"] forState:UIControlStateNormal];
