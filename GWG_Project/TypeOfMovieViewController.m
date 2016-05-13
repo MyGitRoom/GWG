@@ -13,7 +13,8 @@
 #import "TypeOfMovieModel.h"
 #import "MovieDetailViewController.h"
 #import "MBProgressHUD.h"
-@interface TypeOfMovieViewController ()<UITableViewDataSource,UITableViewDelegate,isLike>
+//@interface TypeOfMovieViewController ()<UITableViewDataSource,UITableViewDelegate,isLike>
+@interface TypeOfMovieViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,strong) NSMutableArray <TypeOfMovieModel*>*array ;//建一个数组接收解析数据
 @property (nonatomic,strong) UITableView *tab ;
 @property (nonatomic,strong) MBProgressHUD *mbHUD;
@@ -46,10 +47,11 @@
         self.tab.dataSource = self ;
     
         self.tab.separatorStyle = UITableViewCellSeparatorStyleNone ;
+    
         //注册cell
         [self.tab registerClass:[TypeOfMovieTableViewCell class] forCellReuseIdentifier:@"cell"];
     
-    self.tab.backgroundColor = [UIColor colorWithRed:0.024 green:0.031 blue:0.063 alpha:1.000];
+      self.tab.backgroundColor = [UIColor colorWithRed:0.024 green:0.031 blue:0.063 alpha:1.000];
 
     self.view.backgroundColor = [UIColor colorWithRed:0.024 green:0.031 blue:0.063 alpha:1.000];
 
@@ -110,13 +112,13 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         
     
-//        TypeOfMovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    TypeOfMovieTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        TypeOfMovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//    TypeOfMovieTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (cell == nil) {
             cell = [[TypeOfMovieTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
         }
     
-    cell.isLikeDelegate = self ;
+//    cell.isLikeDelegate = self ;
         cell.selectionStyle = UITableViewCellSelectionStyleNone ;
         cell.titleLabel.text = self.array[indexPath.row].name ;
         [cell.imageV sd_setImageWithURL:[NSURL URLWithString:self.array[indexPath.row].img_url]];

@@ -16,12 +16,12 @@
 @property (nonatomic ,strong) UIImageView *imageV ; //背景视图
 
 @property (nonatomic ,strong) UIBlurEffect *blur ; //毛玻璃模糊层
-@property (nonatomic ,strong) UIVisualEffectView *Visual ;//毛玻璃视图
+@property (nonatomic ,strong) UIVisualEffectView *Visual ; //毛玻璃视图
 
 @property (nonatomic ,strong) LazyFadeInView *lazyView ; //文字渐变视图
 
-@property (nonatomic ,assign) float tmpSize ;//计算缓存的大小
-@property (nonatomic ,strong)UIAlertController *alert ;//提示框
+@property (nonatomic ,assign) float tmpSize ; //计算缓存的大小
+@property (nonatomic ,strong) UIAlertController *alert ; //提示框
 
 @end
 
@@ -38,6 +38,8 @@
     }
     
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -55,6 +57,7 @@
 
 }
 
+
 #pragma mark - 创建返回键
 -(void)createReturnBtn {
    
@@ -65,11 +68,13 @@
 
 }
 
+
 #pragma mark - 导航栏返回方法
 - (void) touchReturn
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 #pragma mark - 创建毛玻璃效果
 -(void)createVisual{
@@ -127,6 +132,7 @@
 
 }
 
+
 -(void)clearCaches{
 
 
@@ -135,6 +141,7 @@
             NSLog(@"缓存清除完毕");
             [UIView animateWithDuration:2 animations:^{
                 //            self.view.backgroundColor = [UIColor lightGrayColor];
+                self.tmpSize = 0.0 ;
                 self.Visual.alpha = 0 ;
             }];
         }];

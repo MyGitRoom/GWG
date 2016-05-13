@@ -50,12 +50,12 @@
     
     self.imageV.frame = CGRectMake(6, 0, KCellWidth-15, KCellHeight-8);
     
-    self.effectview.frame = self.imageV.frame ;
-    self.effectview.alpha = 0.1 ;
-    
-    self.likeBtn.frame =  CGRectMake(KScreenWidth-50, 10, 32, 32);
+//    self.effectview.frame = self.imageV.frame ;
+//    self.effectview.alpha = 0.1 ;
+//    
+//    self.likeBtn.frame =  CGRectMake(KScreenWidth-50, 10, 32, 32);
 
-    [self.likeBtn addTarget: self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.likeBtn addTarget: self action:@selector(like:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 ////实现按钮的方法
