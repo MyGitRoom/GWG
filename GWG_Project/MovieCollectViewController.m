@@ -35,6 +35,7 @@
 
 @property (nonatomic ,strong) UIView *deleteV ;// 底部删除视图
 
+@property (nonatomic ,assign) NSInteger i ;
 @end
 
 @implementation MovieCollectViewController
@@ -48,16 +49,32 @@
 //    return self.array;
 }
 
+//-(NSMutableArray*)deleteArray{
+//
+//    if (!_deleteArray) {
+//        self.deleteArray = [NSMutableArray array];
+//    }
+//    
+//    return _deleteArray ;
+//    
+//}
+
+
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO ;
     
     self.array = [[DataBaseUtil shareDataBase] selectMovieTable];
     NSLog(@"--->%ld",self.array.count);
+//    _dataArray = [NSArray array];
+//    _dataArray =  [[DataBaseUtil shareDataBase]selectReadingTable];
+    [_tab reloadData];
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
-
+   
+    _deleteArray = [NSMutableArray array];
     [self creataReturnBtn];
     
     [self createTabelView] ;
@@ -114,6 +131,7 @@
         }];
         _flag =0;
     }
+    
     [_tab reloadData];
     NSLog(@"cell点击状态%d",_flag);
 
@@ -143,7 +161,8 @@
 -(void)selectAll{
     if ( _all == 0) {
         _all =1;
-        for (TypeOfMovieModel *movie in _dataArray) {
+        for (TypeOfMovieModel *movie in _array) {
+            
             [_deleteArray addObject:movie];
         }
     }
@@ -159,11 +178,12 @@
 -(void)deleteSelectCell{
 
     for ( TypeOfMovieModel * movie in _deleteArray) {
-//        NSLog(@"%@",read.title);
-        [[DataBaseUtil shareDataBase]deleteReadingWithName:movie.name];
+//        NSLog(@"%@",movie.name);
+
+        [[DataBaseUtil shareDataBase]deleteMovieWithName:movie.name];
     };
-    _dataArray =  [[DataBaseUtil shareDataBase]selectMovieTable];
-    NSLog(@"%@",_dataArray);
+    _array =  [[DataBaseUtil shareDataBase]selectMovieTable];
+    NSLog(@"%@",_array);
     [_tab reloadData];
 
 
@@ -263,16 +283,48 @@
     else{
         
         MovieCollectTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (_times ==0) {//按钮删除状态
-            [_deleteArray addObject:self.array[indexPath.row]];//删除数组
-            cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
-            _times =1;
-        }else if (_times ==1)
-        {
-            [_deleteArray removeObject:self.array[indexPath.row]];
-            cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
-            _times =0;
+        
+       NSInteger  index = indexPath.row ;
+        
+        if (index == _i) {
+            _i = index ;
+            if (_times ==0) {//按钮删除状态
+                [_deleteArray addObject:self.array[indexPath.row]];//删除数组
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
+                _times =1;
+                NSLog(@"%ld",_deleteArray.count);
+                //        }else if (_times ==1)
+            }else
+            {
+                [_deleteArray removeObject:self.array[indexPath.row]];
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+                _times =0;
+                
+                NSLog(@"%ld",_deleteArray.count);
+                
+            }
+ 
+        }else{
+//            _times = 0 ;
+            _i = index ;
+            if (_times ==0) {//按钮删除状态
+                [_deleteArray addObject:self.array[indexPath.row]];//删除数组
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
+                _times =1;
+                NSLog(@"%ld",_deleteArray.count);
+                //        }else if (_times ==1)
+            }else
+            {
+                [_deleteArray removeObject:self.array[indexPath.row]];
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+                _times =0;
+                
+                NSLog(@"%ld",_deleteArray.count);
+                
+            }
+ 
         }
+        
     }
 
 
