@@ -311,7 +311,8 @@
 #pragma  -mark 下拉刷新的方法
 -(void)creatHeaderRefresh
 {
-    _tab.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    _tab.mj_header  = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    
 }
 -(void)loadNewData
 {
@@ -323,7 +324,7 @@
 }
 -(void)timeStopPP
 {
-    [_tab.header endRefreshing];
+    [_tab.mj_header  endRefreshing];
 }
 
 

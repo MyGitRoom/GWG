@@ -50,11 +50,11 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
     
     //删除按钮
-    UIImage * rightImage = [UIImage imageNamed:@"clear11"];
+    UIImage * rightImage = [UIImage imageNamed:@"setting"];
     rightImage = [rightImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:rightImage forState:UIControlStateNormal];
-    button.frame = CGRectMake(0, 0, 20, 20);
+    button.frame = CGRectMake(0, 0, 30, 30);
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     [button addTarget:self action:@selector(selectType) forControlEvents:UIControlEventTouchDown];
 }

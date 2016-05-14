@@ -13,4 +13,5 @@
 @property (nonatomic ,strong) UILabel *titleLabel ; //标题
 @property (nonatomic ,strong) UIImageView *imageV ; //背景
 
+@property (nonatomic ,strong) UIImageView *deleteimageV ;//删除视图
 @end

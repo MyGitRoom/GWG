@@ -22,6 +22,20 @@
 @property (nonatomic ,strong) TypeOfMovieModel *type_movie;//创建一个电影类型Model
 
 @property (nonatomic ,strong) UIButton *settingBtn ; //设置按钮
+
+@property (nonatomic ,strong) NSMutableArray *deleteArray ; //删除数组
+
+@property (nonatomic ,strong) NSArray *dataArray ;
+
+@property (nonatomic ,assign) BOOL flag ;
+
+@property (nonatomic ,assign) BOOL all ;
+
+@property (nonatomic ,assign) BOOL times ;
+
+@property (nonatomic ,strong) UIView *deleteV ;// 底部删除视图
+
+@property (nonatomic ,assign) NSInteger i ;
 @end
 
 @implementation MovieCollectViewController
@@ -35,22 +49,39 @@
 //    return self.array;
 }
 
+//-(NSMutableArray*)deleteArray{
+//
+//    if (!_deleteArray) {
+//        self.deleteArray = [NSMutableArray array];
+//    }
+//    
+//    return _deleteArray ;
+//    
+//}
+
+
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO ;
     
     self.array = [[DataBaseUtil shareDataBase] selectMovieTable];
     NSLog(@"--->%ld",self.array.count);
+//    _dataArray = [NSArray array];
+//    _dataArray =  [[DataBaseUtil shareDataBase]selectReadingTable];
+    [_tab reloadData];
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
-
+   
+    _deleteArray = [NSMutableArray array];
     [self creataReturnBtn];
     
     [self createTabelView] ;
     
     [self creatSettingBtn];
-   
+    
+    [self creatPopViewToDelete];
     
 }
 
@@ -87,12 +118,76 @@
 
 -(void)editMovie{
 
-
+    if (_flag == 0) {
+        _flag = 1;
+        [UIView animateWithDuration:0.5 animations:^{
+            _deleteV.frame = CGRectMake(0, KScreenHeight-50, KScreenWidth, 50);
+        }];
+        
+    }else
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            _deleteV.frame = CGRectMake(0, KScreenHeight, KScreenWidth, 50);
+        }];
+        _flag =0;
+    }
+    
+    [_tab reloadData];
+    NSLog(@"cell点击状态%d",_flag);
 
 
 
 }
 
+#pragma -mark 创建下方弹出窗口删除
+-(void)creatPopViewToDelete
+{
+    _deleteV= [[UIView alloc]initWithFrame:CGRectMake(0, KScreenHeight, KScreenWidth, 50)];
+    _deleteV.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:_deleteV];
+    UIButton * leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+    [leftBtn addTarget:self action:@selector(selectAll) forControlEvents:UIControlEventTouchDown];
+    [leftBtn setTitle:@"全选" forState:UIControlStateNormal];
+    [_deleteV addSubview:leftBtn];
+    
+    UIButton * rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth-50, 0, 50, 50)];
+    [rightBtn addTarget:self action:@selector(deleteSelectCell) forControlEvents:UIControlEventTouchDown];
+    [rightBtn setTitle:@"删除" forState:UIControlStateNormal];
+    [_deleteV addSubview:rightBtn];
+    
+}
+
+#pragma mark - 删除和全选按钮方法
+-(void)selectAll{
+    if ( _all == 0) {
+        _all =1;
+        for (TypeOfMovieModel *movie in _array) {
+            
+            [_deleteArray addObject:movie];
+        }
+    }
+    else
+    {
+        [_deleteArray removeAllObjects];
+        _all=0;
+    }
+    [_tab reloadData];
+
+}
+
+-(void)deleteSelectCell{
+
+    for ( TypeOfMovieModel * movie in _deleteArray) {
+//        NSLog(@"%@",movie.name);
+
+        [[DataBaseUtil shareDataBase]deleteMovieWithName:movie.name];
+    };
+    _array =  [[DataBaseUtil shareDataBase]selectMovieTable];
+    NSLog(@"%@",_array);
+    [_tab reloadData];
+
+
+}
 #pragma mark - 创建tableview
 
 -(void)createTabelView {
@@ -129,20 +224,37 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     static NSString *identifer = @"cell" ;
-    MovieCollectTableViewCell *moviecell = [tableView dequeueReusableCellWithIdentifier:identifer forIndexPath:indexPath];
+    MovieCollectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer forIndexPath:indexPath];
     
     
-    if (moviecell == nil) {
+    if (cell == nil) {
        
-        moviecell = [[MovieCollectTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifer];
+      cell = [[MovieCollectTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifer];
         
     }
-    moviecell.selectionStyle = UITableViewCellSelectionStyleNone ;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone ;
     self.type_movie = [[TypeOfMovieModel alloc]init];
     self.type_movie = _array[indexPath.row];
-    moviecell.titleLabel.text = self.type_movie.name ;
-    [moviecell.imageV sd_setImageWithURL:[NSURL URLWithString:self.type_movie.img_url]];
-    return  moviecell ;
+   cell.titleLabel.text = self.type_movie.name ;
+    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:self.type_movie.img_url]];
+    if (_flag == 1) {
+        if (_all ==0) {
+            
+            cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+        }else
+        {
+            cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
+        }
+        
+    }
+    else if (_flag == 0)
+    {
+        cell.deleteimageV.image = [UIImage imageNamed:@""];//移除cell上的删除按钮。
+    }
+    
+    
+    
+    return  cell ;
 }
 
 
@@ -158,16 +270,63 @@
    
     MovieDetailViewController *movieVc = [[MovieDetailViewController alloc]init];
     
-    movieVc.movie = self.array [indexPath.row];
+    if (_flag == 0) {
+        movieVc.movie = self.array [indexPath.row];
+        
+        NSDictionary *dic = [NSDictionary dictionary];
+        
+        dic = @{@"Content-Type":@"application/x-www-form-urlencoded",@"id":movieVc.movie.identifier} ;
+        movieVc.dic = dic;
+        //        NSLog(@"%@",movieVc.movie.identifier);
+        [self.navigationController pushViewController:movieVc animated:YES];
+    }
+    else{
+        
+        MovieCollectTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+       NSInteger  index = indexPath.row ;
+        
+        if (index == _i) {
+            _i = index ;
+            if (_times ==0) {//按钮删除状态
+                [_deleteArray addObject:self.array[indexPath.row]];//删除数组
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
+                _times =1;
+                NSLog(@"%ld",_deleteArray.count);
+                //        }else if (_times ==1)
+            }else
+            {
+                [_deleteArray removeObject:self.array[indexPath.row]];
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+                _times =0;
+                
+                NSLog(@"%ld",_deleteArray.count);
+                
+            }
+ 
+        }else{
+//            _times = 0 ;
+            _i = index ;
+            if (_times ==0) {//按钮删除状态
+                [_deleteArray addObject:self.array[indexPath.row]];//删除数组
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
+                _times =1;
+                NSLog(@"%ld",_deleteArray.count);
+                //        }else if (_times ==1)
+            }else
+            {
+                [_deleteArray removeObject:self.array[indexPath.row]];
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+                _times =0;
+                
+                NSLog(@"%ld",_deleteArray.count);
+                
+            }
+ 
+        }
+        
+    }
 
-    NSDictionary *dic = [NSDictionary dictionary];
-    
-    dic = @{@"Content-Type":@"application/x-www-form-urlencoded",@"id":movieVc.movie.identifier} ;
-    movieVc.dic = dic;
-//        NSLog(@"%@",movieVc.movie.identifier);
-    [self.navigationController pushViewController:movieVc animated:YES];
-  
-    
 
 }
 

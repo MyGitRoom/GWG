@@ -14,6 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "ReadingDetailViewController.h"
 #import "DataBaseUtil.h"
+#import "MBProgressHUD.h"
 @interface ReadingViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
     //记录接口数组下标
@@ -26,6 +27,8 @@
 @property (nonatomic,strong)NSMutableArray * readingArray;
 /*装数据接口的数组*/
 @property (nonatomic,strong)NSMutableArray * dataOpenArray;
+
+@property (nonatomic,strong) MBProgressHUD *mbHUD;
 @end
 
 @implementation ReadingViewController
@@ -65,6 +68,9 @@
 -(void)loadReadingData:(NSString * )str
 {
     //单读
+    self.mbHUD = [[MBProgressHUD alloc]initWithView:_readingTableView];
+    [self.mbHUD show:YES];
+    [_readingTableView addSubview:self.mbHUD];
     [NetWorlRequestManager requestWithType:GET urlString:str ParDic:nil dicOfHeader:nil finish:^(NSData *data) {
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
@@ -78,6 +84,8 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [_readingTableView reloadData];
+             [self.mbHUD hide: YES];
+            
         });
         
     } error:^(NSError *error) {
@@ -174,7 +182,7 @@
 #pragma  -mark 下拉刷新的方法
 -(void)creatHeaderRefresh
 {
-    _readingTableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    _readingTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
 }
 -(void)loadNewData
 {
@@ -186,7 +194,7 @@
 }
 -(void)timeStopPP
 {
-    [_readingTableView.header endRefreshing];
+    [_readingTableView.mj_header  endRefreshing];
 }
 
 @end

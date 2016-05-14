@@ -21,8 +21,13 @@
         
         self.contentView.backgroundColor =  [UIColor colorWithRed:0.024 green:0.031 blue:0.063 alpha:1.000];
         
+        
+        self.deleteimageV = [[UIImageView alloc]init];
+        self.deleteimageV.alpha = 0.8 ;
+        
         [self.contentView addSubview:self.imageV];
         [self.contentView addSubview:self.titleLabel];
+        [self.contentView addSubview:self.deleteimageV];
                            
     }
 
@@ -40,6 +45,10 @@
     self.imageV.frame = CGRectMake(6, 0, KCellWidth-14, KCellHeight-8);
     self.imageV.layer.cornerRadius = 8 ;
     self.imageV.layer.masksToBounds = YES ;
+    
+    
+    self.deleteimageV.frame = CGRectMake(KCellWidth-55, 15, 30, 30) ;
+    
 
 }
 

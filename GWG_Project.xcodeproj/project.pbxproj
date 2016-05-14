@@ -34,6 +34,9 @@
 		3F7E73151CD394B400A2AB90 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E73111CD394B400A2AB90 /* 1.jpg */; };
 		3F7E73171CD3950A00A2AB90 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E73161CD3950A00A2AB90 /* 2.jpg */; };
 		3F9B517F1CDAE44E0037C869 /* play1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F9B517B1CDAE44E0037C869 /* play1.png */; };
+		3FA543791CE5FED400850B66 /* deleteN.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA543781CE5FED400850B66 /* deleteN.png */; };
+		3FA5437B1CE5FEF700850B66 /* deleteY.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5437A1CE5FEF700850B66 /* deleteY.png */; };
+		3FA5437D1CE602DB00850B66 /* deleteW.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5437C1CE602DB00850B66 /* deleteW.png */; };
 		3FACC3161CE175A10078F7DF /* RadioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FACC3111CE175A10078F7DF /* RadioViewController.m */; };
 		3FACC3171CE175A10078F7DF /* RadioDetaillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FACC3131CE175A10078F7DF /* RadioDetaillViewController.m */; };
 		3FACC3181CE175A10078F7DF /* MusicPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FACC3151CE175A10078F7DF /* MusicPlayerViewController.m */; };
@@ -61,7 +64,6 @@
 		3FD2CD2D1CE4A28B00C2F754 /* clear11.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD2CD2C1CE4A28B00C2F754 /* clear11.png */; };
 		3FDE50B11CE17ECC002D9A0B /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE50AF1CE17ECC002D9A0B /* close.png */; };
 		3FDE50B21CE17ECC002D9A0B /* showView.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE50B01CE17ECC002D9A0B /* showView.png */; };
-		3FDE50B51CE18A30002D9A0B /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE50B31CE18A30002D9A0B /* like.png */; };
 		3FDE50BA1CE18C7C002D9A0B /* orangeNotLike.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE50B91CE18C7C002D9A0B /* orangeNotLike.png */; };
 		3FEC25081CE32B9900746DAD /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEC25051CE32B9900746DAD /* placeholder.png */; };
 		3FEC25091CE32B9900746DAD /* XRCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEC25071CE32B9900746DAD /* XRCarouselView.m */; };
@@ -158,6 +160,7 @@
 		4EBD90031CE4700600973475 /* jumpTo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD90021CE4700600973475 /* jumpTo.png */; };
 		4EBD90051CE484DA00973475 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD90041CE484DA00973475 /* delete.png */; };
 		4EBD90071CE488C400973475 /* deleteyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBD90061CE488C400973475 /* deleteyes.png */; };
+		4EF530161CE6BF1900F84FDC /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE50B31CE18A30002D9A0B /* like.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,6 +226,9 @@
 		3F7E73111CD394B400A2AB90 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		3F7E73161CD3950A00A2AB90 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		3F9B517B1CDAE44E0037C869 /* play1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play1.png; sourceTree = "<group>"; };
+		3FA543781CE5FED400850B66 /* deleteN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteN.png; sourceTree = "<group>"; };
+		3FA5437A1CE5FEF700850B66 /* deleteY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteY.png; sourceTree = "<group>"; };
+		3FA5437C1CE602DB00850B66 /* deleteW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteW.png; sourceTree = "<group>"; };
 		3FACC3101CE175A10078F7DF /* RadioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioViewController.h; sourceTree = "<group>"; };
 		3FACC3111CE175A10078F7DF /* RadioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioViewController.m; sourceTree = "<group>"; };
 		3FACC3121CE175A10078F7DF /* RadioDetaillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioDetaillViewController.h; sourceTree = "<group>"; };
@@ -478,7 +484,6 @@
 		3F4E860E1CD361EE00B9410A = {
 			isa = PBXGroup;
 			children = (
-				4E360F121CE06688008F1376 /* libsqlite3.0.tbd */,
 				3F4E86191CD361EE00B9410A /* GWG_Project */,
 				3F4E86331CD361EE00B9410A /* GWG_ProjectTests */,
 				3F4E863E1CD361EE00B9410A /* GWG_ProjectUITests */,
@@ -593,9 +598,6 @@
 		3F4E86521CD362E200B9410A /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				4E360EFE1CE062DD008F1376 /* fmdb */,
-				4E3FE7E01CD9FE0D006E5196 /* MJRefresh */,
-				3FFE0A5C1CD8D2EB00A63113 /* SDWebImage */,
 				3FFE0A591CD8D18F00A63113 /* NetWorlRequestManager.h */,
 				3FFE0A5A1CD8D18F00A63113 /* NetWorlRequestManager.m */,
 				3FB3D8A81CD377B70058CC5B /* PrefixHeader.pch */,
@@ -607,10 +609,14 @@
 		3F4E86531CD362F100B9410A /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				4E360F121CE06688008F1376 /* libsqlite3.0.tbd */,
 				4E8A89BC1CE22AE600731473 /* LazyFadeInView */,
 				4E8A89AA1CE225C300731473 /* btnrunning */,
 				3FEF73B01CDB64730072A0D7 /* GYPlayer */,
 				3F4E86571CD3633F00B9410A /* OpenResource */,
+				4E360EFE1CE062DD008F1376 /* fmdb */,
+				4E3FE7E01CD9FE0D006E5196 /* MJRefresh */,
+				3FFE0A5C1CD8D2EB00A63113 /* SDWebImage */,
 				3F4E86551CD3632400B9410A /* Images */,
 			);
 			name = Resource;
@@ -676,6 +682,9 @@
 				3F610D511CE4CF1000F39329 /* cache_trash.png */,
 				3F2FE1F21CE5B4D3009F754B /* setting.png */,
 				3F2FE1F81CE5B95C009F754B /* setting3.png */,
+				3FA543781CE5FED400850B66 /* deleteN.png */,
+				3FA5437A1CE5FEF700850B66 /* deleteY.png */,
+				3FA5437C1CE602DB00850B66 /* deleteW.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1060,6 +1069,12 @@
 				3FD2CD241CE46C5000C2F754 /* PlaceHolderView.h */,
 				3FD2CD251CE46C5000C2F754 /* PlaceHolderView.m */,
 				3FD2CD271CE46C6100C2F754 /* PlaceHolderView.xib */,
+				4EBD8FFC1CE46CCF00973475 /* ReadCollectionTableViewCell.h */,
+				4EBD8FFD1CE46CCF00973475 /* ReadCollectionTableViewCell.m */,
+				4EBD8FFF1CE46CDF00973475 /* TecCollectionTableViewCell.h */,
+				4EBD90001CE46CDF00973475 /* TecCollectionTableViewCell.m */,
+				3FF445761CE586850001481C /* MovieCollectTableViewCell.h */,
+				3FF445771CE586850001481C /* MovieCollectTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1069,6 +1084,16 @@
 			children = (
 				4E79FEED1CE35D1000B9BE59 /* CollectionSelectViewController.h */,
 				4E79FEEE1CE35D1000B9BE59 /* CollectionSelectViewController.m */,
+				4E79FEEF1CE35D1000B9BE59 /* MovieCollectViewController.h */,
+				4E79FEF01CE35D1000B9BE59 /* MovieCollectViewController.m */,
+				4E79FEF11CE35D1000B9BE59 /* RadioCollectViewController.h */,
+				4E79FEF21CE35D1000B9BE59 /* RadioCollectViewController.m */,
+				3FF457FC1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.h */,
+				3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */,
+				4E79FEF31CE35D1000B9BE59 /* ReadCollectionViewController.h */,
+				4E79FEF41CE35D1000B9BE59 /* ReadCollectionViewController.m */,
+				4E79FEF51CE35D1000B9BE59 /* TechnolofyCollecViewController.h */,
+				4E79FEF61CE35D1000B9BE59 /* TechnolofyCollecViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1207,10 +1232,6 @@
 		4E7FAAB91CE5B50D009E93DD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4E79FEF11CE35D1000B9BE59 /* RadioCollectViewController.h */,
-				4E79FEF21CE35D1000B9BE59 /* RadioCollectViewController.m */,
-				3FF457FC1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.h */,
-				3FF457FD1CE56B2E003D5DC8 /* RadioCollectionPlayerViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1235,8 +1256,6 @@
 		4E7FAABC1CE5B53A009E93DD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4E79FEF51CE35D1000B9BE59 /* TechnolofyCollecViewController.h */,
-				4E79FEF61CE35D1000B9BE59 /* TechnolofyCollecViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1244,8 +1263,6 @@
 		4E7FAABD1CE5B540009E93DD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4EBD8FFF1CE46CDF00973475 /* TecCollectionTableViewCell.h */,
-				4EBD90001CE46CDF00973475 /* TecCollectionTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1260,8 +1277,6 @@
 		4E7FAABF1CE5B54B009E93DD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4E79FEEF1CE35D1000B9BE59 /* MovieCollectViewController.h */,
-				4E79FEF01CE35D1000B9BE59 /* MovieCollectViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1269,8 +1284,6 @@
 		4E7FAAC01CE5B554009E93DD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3FF445761CE586850001481C /* MovieCollectTableViewCell.h */,
-				3FF445771CE586850001481C /* MovieCollectTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1285,8 +1298,6 @@
 		4E7FAAC21CE5B560009E93DD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4E79FEF31CE35D1000B9BE59 /* ReadCollectionViewController.h */,
-				4E79FEF41CE35D1000B9BE59 /* ReadCollectionViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1294,8 +1305,6 @@
 		4E7FAAC31CE5B577009E93DD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4EBD8FFC1CE46CCF00973475 /* ReadCollectionTableViewCell.h */,
-				4EBD8FFD1CE46CCF00973475 /* ReadCollectionTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1394,7 +1403,7 @@
 		3F4E860F1CD361EE00B9410A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "关振发";
 				TargetAttributes = {
 					3F4E86161CD361EE00B9410A = {
@@ -1438,6 +1447,7 @@
 			files = (
 				3FEF73AF1CDB61390072A0D7 /* listen.png in Resources */,
 				3F7E73141CD394B400A2AB90 /* 4.jpg in Resources */,
+				3FA5437B1CE5FEF700850B66 /* deleteY.png in Resources */,
 				3F9B517F1CDAE44E0037C869 /* play1.png in Resources */,
 				3FEF73CF1CDB79010072A0D7 /* forward_h.png in Resources */,
 				3F4E862A1CD361EE00B9410A /* LaunchScreen.storyboard in Resources */,
@@ -1471,15 +1481,16 @@
 				4EBD90051CE484DA00973475 /* delete.png in Resources */,
 				3FEF73D21CDB805E0072A0D7 /* play.png in Resources */,
 				3F610D4E1CE4B1D900F39329 /* settingBg.jpg in Resources */,
-				3FDE50B51CE18A30002D9A0B /* like.png in Resources */,
+				3FA543791CE5FED400850B66 /* deleteN.png in Resources */,
+				4EF530161CE6BF1900F84FDC /* like.png in Resources */,
 				3F610D4C1CE4A2D600F39329 /* plan.png in Resources */,
 				3FD2CD2D1CE4A28B00C2F754 /* clear11.png in Resources */,
-				3FDE50B51CE18A30002D9A0B /* like.png in Resources */,
 				4EBD90031CE4700600973475 /* jumpTo.png in Resources */,
 				4EBD90071CE488C400973475 /* deleteyes.png in Resources */,
 				3F2FE1F31CE5B4D3009F754B /* setting.png in Resources */,
 				3FEF73C61CDB78930072A0D7 /* rewind.png in Resources */,
 				3FEF73CA1CDB78F00072A0D7 /* pause.png in Resources */,
+				3FA5437D1CE602DB00850B66 /* deleteW.png in Resources */,
 				3FEF73CB1CDB78F00072A0D7 /* pause_h.png in Resources */,
 				3FACC3301CE175F90078F7DF /* tie.png in Resources */,
 				3FD2CD291CE480DE00C2F754 /* RadioCollectionTableViewCell.xib in Resources */,
