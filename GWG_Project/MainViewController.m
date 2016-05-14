@@ -19,7 +19,7 @@
 #import "CollectionSelectViewController.h"
 #import "SettingViewController.h"
 #import "MyViewController.h"
-
+#import "FirstTimeLoginView.h"
 #define DAILYURL @"http://dict-mobile.iciba.com/interface/index.php?c=sentence&m=getsentence&client=1&type=1&field=1,2,3,4,5,6,7,8,9,10,11,12,13&timestamp=1434767570&sign=6124a62ff73a033a&uuid=3dd23ff24ea543c1bdca57073d0540e1&uid="
 @interface MainViewController ()<btnjump>
 {
@@ -75,6 +75,14 @@
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    //引导图
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *string = [user stringForKey:@"guide"];
+ 
+    
+    
     Flag = NO;//记录是否出现
     self.imagev = [[UIImageView alloc]initWithFrame:self.view.frame];
     self.i = 1 ;
@@ -86,6 +94,14 @@
     [self requestData];
     //创建右上角按钮
     [self creatRunningBtn];
+    
+    if(![string isEqualToString:@"first"]){
+        //        MyView *view = [[MyView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        FirstTimeLoginView *vi = [[FirstTimeLoginView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight)];
+        vi.imageArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"guide1"],[UIImage imageNamed:@"guide2"],[UIImage imageNamed:@"guide3"],[UIImage imageNamed:@"guide4"], nil];
+        [self.view addSubview:vi];
+        
+    }
 }
 
 #pragma -mark 布局淡入淡出字体
@@ -101,9 +117,9 @@
     
     [_imagev addSubview:_fadeC];
     
-    if ((ms.content.length>100 || ms.note.length>30)) {
-        _fadeC.text = @"知识给你力量，品格给你别人的尊敬。－－李小龙";
-        _fade.text = @"knowledge will give you power but character respect for you";
+    if ((ms.content.length>120 && ms.note.length>30)) {
+        _fadeC.text = @"把握机遇的人，才能心想事成。－－歌德";
+        _fade.text = @"He who seizes the right, moment is the right man";
         _fadeC.frame =CGRectMake(10, KScreenHeight/10,  KScreenWidth/3*2.2, KScreenHeight/6);
         _fade.frame =CGRectMake(KScreenWidth/2.4, KScreenHeight/5*2.9,KScreenWidth/3*1.8, KScreenHeight/3);
 //        _sphereView.frame =CGRectMake(40, KScreenHeight-64-49+20, 80, 80);
@@ -118,7 +134,7 @@
 -(void)createCloudTag{
     self.sphereView = [[DBSphereView alloc]initWithFrame:CGRectMake(50, KScreenHeight-64-49-20, 100, 100)];
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
-    NSArray *titleArr = [NSArray arrayWithObjects:@"Movie",@"Reading",@"Radio",@"Science", nil];
+    NSArray *titleArr = [NSArray arrayWithObjects:@"Movie",@"Reading",@"Radio",@"digital", nil];
     for (NSInteger i = 0; i<4; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         //根据tag标记进行跳转到那个页面
@@ -159,7 +175,7 @@
     if(btn.tag == 0){
         MovieViewController *movieVc = [[MovieViewController alloc]init];
         [self.navigationController pushViewController:movieVc animated:YES];
-    }else if (btn.tag ==1){
+    }else if (btn.tag == 1){
         ReadingViewController *readingVc = [[ReadingViewController alloc]init];
         [self.navigationController pushViewController:readingVc animated:YES];
     }else if (btn.tag == 2){
@@ -365,7 +381,6 @@
 {
     [_fade removeFromSuperview];
     [_fadeC removeFromSuperview];
-
 }
 
 

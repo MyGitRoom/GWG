@@ -36,6 +36,8 @@
 @property (nonatomic ,strong) UIView *deleteV ;// 底部删除视图
 
 @property (nonatomic ,assign) NSInteger i ;
+
+@property (nonatomic, strong) UIImageView * placeHolderView;
 @end
 
 @implementation MovieCollectViewController
@@ -67,6 +69,17 @@
     NSLog(@"--->%ld",self.array.count);
 //    _dataArray = [NSArray array];
 //    _dataArray =  [[DataBaseUtil shareDataBase]selectReadingTable];
+    if (self.array.count == 0)
+    {
+        self.placeHolderView = [[[NSBundle mainBundle]loadNibNamed:@"PlaceHolderView" owner:self options:nil]lastObject];
+        self.placeHolderView.frame = CGRectMake(0, 60, KScreenWidth, 200);
+        self.placeHolderView.backgroundColor = [UIColor colorWithRed:0.027 green:0.035 blue:0.055 alpha:1.000];
+        [self.view addSubview:_placeHolderView];
+    }
+    else
+    {
+        [self.placeHolderView removeFromSuperview];
+    }
     [_tab reloadData];
 
 }
@@ -145,21 +158,24 @@
     _deleteV= [[UIView alloc]initWithFrame:CGRectMake(0, KScreenHeight, KScreenWidth, 50)];
     _deleteV.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:_deleteV];
-    UIButton * leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-    [leftBtn addTarget:self action:@selector(selectAll) forControlEvents:UIControlEventTouchDown];
+    UIButton * leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 50)];
+    [leftBtn addTarget:self action:@selector(selectAll:) forControlEvents:UIControlEventTouchDown];
+    [leftBtn setImage:[UIImage imageNamed:@"selectallN"] forState:UIControlStateNormal];
     [leftBtn setTitle:@"全选" forState:UIControlStateNormal];
     [_deleteV addSubview:leftBtn];
     
     UIButton * rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth-50, 0, 50, 50)];
     [rightBtn addTarget:self action:@selector(deleteSelectCell) forControlEvents:UIControlEventTouchDown];
-    [rightBtn setTitle:@"删除" forState:UIControlStateNormal];
+//    [rightBtn setTitle:@"删除" forState:UIControlStateNormal];
+    [rightBtn setImage:[UIImage imageNamed:@"deletecollect"] forState:UIControlStateNormal];
     [_deleteV addSubview:rightBtn];
     
 }
 
 #pragma mark - 删除和全选按钮方法
--(void)selectAll{
+-(void)selectAll:(UIButton *)leftBtn{
     if ( _all == 0) {
+        [leftBtn setImage:[UIImage imageNamed:@"selectallY"] forState:UIControlStateNormal];
         _all =1;
         for (TypeOfMovieModel *movie in _array) {
             
@@ -168,6 +184,7 @@
     }
     else
     {
+         [leftBtn setImage:[UIImage imageNamed:@"selectallN"] forState:UIControlStateNormal];
         [_deleteArray removeAllObjects];
         _all=0;
     }
@@ -240,7 +257,7 @@
     if (_flag == 1) {
         if (_all ==0) {
             
-            cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+            cell.deleteimageV.image = [UIImage imageNamed:@"deleteN"];
         }else
         {
             cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
@@ -284,10 +301,8 @@
         
         MovieCollectTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
         
-       NSInteger  index = indexPath.row ;
-        
-        if (index == _i) {
-            _i = index ;
+
+
             if (_times ==0) {//按钮删除状态
                 [_deleteArray addObject:self.array[indexPath.row]];//删除数组
                 cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
@@ -297,34 +312,13 @@
             }else
             {
                 [_deleteArray removeObject:self.array[indexPath.row]];
-                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteN"];
                 _times =0;
                 
                 NSLog(@"%ld",_deleteArray.count);
                 
             }
- 
-        }else{
-//            _times = 0 ;
-            _i = index ;
-            if (_times ==0) {//按钮删除状态
-                [_deleteArray addObject:self.array[indexPath.row]];//删除数组
-                cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
-                _times =1;
-                NSLog(@"%ld",_deleteArray.count);
-                //        }else if (_times ==1)
-            }else
-            {
-                [_deleteArray removeObject:self.array[indexPath.row]];
-                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
-                _times =0;
-                
-                NSLog(@"%ld",_deleteArray.count);
-                
-            }
- 
-        }
-        
+      
     }
 
 

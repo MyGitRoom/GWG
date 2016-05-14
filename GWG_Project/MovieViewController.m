@@ -13,12 +13,14 @@
 #import "MovieModel.h"
 #include "TypeOfMovieViewController.h"
 #import "XRCarouselView.h"
+#import "MBProgressHUD.h"
 @interface MovieViewController ()<UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UIScrollViewDelegate ,XRCarouselViewDelegate>
 
 @property (nonatomic ,strong)UICollectionView *collectView ;
 @property (nonatomic ,strong)NSMutableArray<MovieModel*>  *array ;
 
 @property (nonatomic ,strong) XRCarouselView *scrollView ;
+@property (nonatomic ,strong) MBProgressHUD *mbHUD ;
 
 @end
 
@@ -40,12 +42,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
-    [self getData];
+    
     
     //调用创建collectionView 的方法
 
     [self createCollectView];
-    
+    [self getData];
    
     UIImage * image = [UIImage imageNamed:@"return"];
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -57,9 +59,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+-(void)carouselView:(XRCarouselView *)carouselView didClickImage:(NSInteger)index
+{
+}
 //获取数据
 -(void)getData {
+    
+    self.mbHUD = [[MBProgressHUD alloc]initWithView:self.collectView];
+    [self.mbHUD show:YES];
+    [self.collectView addSubview:self.mbHUD];
+
 
   [NetWorkRequestManager requestWithType:GET urlString:@"http://114.215.104.21/v130/singles/groupcat" ParDic:nil finish:^(NSData *data) {
       
@@ -78,6 +87,7 @@
        NSLog(@"%ld",self.array.count);
       dispatch_async(dispatch_get_main_queue(), ^{
           [self.collectView reloadData];
+          [self.mbHUD hide:YES];
       });
       
       

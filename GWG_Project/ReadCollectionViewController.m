@@ -23,6 +23,7 @@
 @property (nonatomic,strong)NSArray * dataArray;
 @property(nonatomic,strong)NSMutableArray * deleteArray; //删除的数组
 @property (nonatomic,strong)UIView * deleteV;//底部删除视图
+@property (nonatomic, strong) UIImageView * placeHolderView;
 @end
 
 @implementation ReadCollectionViewController
@@ -30,6 +31,16 @@
     self.navigationController.navigationBarHidden = NO;
     _dataArray = [NSArray array];
     _dataArray =  [[DataBaseUtil shareDataBase]selectReadingTable];
+    if (self.dataArray.count == 0)
+    {
+        self.placeHolderView = [[[NSBundle mainBundle]loadNibNamed:@"PlaceHolderView" owner:self options:nil]lastObject];
+        self.placeHolderView.frame = CGRectMake(0, 60, KScreenWidth, 200);
+        [self.view addSubview:_placeHolderView];
+    }
+    else
+    {
+        [self.placeHolderView removeFromSuperview];
+    }
     [_tab reloadData];
 }
 - (void)viewDidLoad {
@@ -50,11 +61,11 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
     
     //删除按钮
-    UIImage * rightImage = [UIImage imageNamed:@"clear11"];
+    UIImage * rightImage = [UIImage imageNamed:@"setting"];
     rightImage = [rightImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:rightImage forState:UIControlStateNormal];
-    button.frame = CGRectMake(0, 0, 20, 20);
+    button.frame = CGRectMake(0, 0, 30, 30);
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     [button addTarget:self action:@selector(selectType) forControlEvents:UIControlEventTouchDown];
 }
@@ -180,7 +191,9 @@
 #pragma  -mark 全选删除按钮
 -(void)selectAll
 {
+    
     if ( all == 0) {
+        
         all =1;
         for (Reading*read in _dataArray) {
             [_deleteArray addObject:read];

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="339" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="339" height="99.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="339" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWe-zA-b5j">
@@ -46,8 +46,12 @@
                             <constraint firstAttribute="width" constant="90" id="mGm-CB-0fK"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-LM-TTK">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delete.png" highlightedImage="deleteyes.png" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-LM-TTK">
                         <rect key="frame" x="57" y="5" width="38" height="84"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="84" id="9c7-YZ-eqp"/>
+                            <constraint firstAttribute="width" constant="38" id="OkM-nd-m0L"/>
+                        </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -55,16 +59,14 @@
                     <constraint firstAttribute="bottom" secondItem="C0d-6S-gjc" secondAttribute="bottom" id="1m0-Tn-U0k"/>
                     <constraint firstItem="Sse-xq-Ucy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="4zP-D7-fLM"/>
                     <constraint firstItem="AWe-zA-b5j" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="Ded-uC-Seu"/>
+                    <constraint firstItem="dD4-LM-TTK" firstAttribute="centerY" secondItem="Sse-xq-Ucy" secondAttribute="centerY" id="G4o-yj-S4l"/>
                     <constraint firstAttribute="trailing" secondItem="C0d-6S-gjc" secondAttribute="trailing" id="S0X-6A-Vh1"/>
                     <constraint firstAttribute="trailing" secondItem="fqM-wF-nhu" secondAttribute="trailing" constant="9" id="TF7-jz-hlf"/>
-                    <constraint firstItem="fqM-wF-nhu" firstAttribute="leading" secondItem="dD4-LM-TTK" secondAttribute="trailing" constant="5" id="TN5-ZP-nGH"/>
-                    <constraint firstItem="dD4-LM-TTK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="a6r-I7-4jX"/>
                     <constraint firstItem="C0d-6S-gjc" firstAttribute="top" secondItem="fqM-wF-nhu" secondAttribute="bottom" constant="35" id="eMk-7y-eld"/>
                     <constraint firstItem="C0d-6S-gjc" firstAttribute="top" secondItem="Sse-xq-Ucy" secondAttribute="bottom" constant="5" id="feu-Km-Ddz"/>
-                    <constraint firstItem="C0d-6S-gjc" firstAttribute="top" secondItem="dD4-LM-TTK" secondAttribute="bottom" constant="5" id="fjp-TA-Jnd"/>
                     <constraint firstItem="C0d-6S-gjc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ft9-Ld-NaI"/>
-                    <constraint firstItem="dD4-LM-TTK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="57" id="iLM-XS-hDN"/>
                     <constraint firstItem="Sse-xq-Ucy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="pz0-Lc-D2p"/>
+                    <constraint firstItem="dD4-LM-TTK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="57" id="rLm-Ob-9Rm"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -76,4 +78,8 @@
             <point key="canvasLocation" x="319.5" y="311"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="delete.png" width="80" height="160"/>
+        <image name="deleteyes.png" width="80" height="160"/>
+    </resources>
 </document>
