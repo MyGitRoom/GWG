@@ -26,6 +26,7 @@
 @property (nonatomic,strong)NSArray * dataArray;
 @property(nonatomic,strong)NSMutableArray * deleteArray; //删除的数组
 @property (nonatomic,strong)UIView * deleteV;//底部删除视图
+@property (nonatomic, strong) UIImageView * placeHolderView;
 @end
 
 @implementation TechnolofyCollecViewController
@@ -34,6 +35,17 @@
     self.navigationController.navigationBarHidden = NO;
     _dataArray = [NSArray array];
     _dataArray =  [[DataBaseUtil shareDataBase]selectTechnologyTable];
+    if (self.dataArray.count == 0)
+    {
+        self.placeHolderView = [[[NSBundle mainBundle]loadNibNamed:@"PlaceHolderView" owner:self options:nil]lastObject];
+        self.placeHolderView.frame = CGRectMake(0, 60, KScreenWidth, 200);
+        self.placeHolderView.backgroundColor = [UIColor colorWithRed:0.027 green:0.035 blue:0.051 alpha:1.000];
+        [self.view addSubview:_placeHolderView];
+    }
+    else
+    {
+        [self.placeHolderView removeFromSuperview];
+    }
     [_tab reloadData];
 }
 - (void)viewDidLoad {
@@ -54,11 +66,11 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
     
     //删除按钮
-    UIImage * rightImage = [UIImage imageNamed:@"clear11"];
+    UIImage * rightImage = [UIImage imageNamed:@"setting"];
     rightImage = [rightImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:rightImage forState:UIControlStateNormal];
-    button.frame = CGRectMake(0, 0, 20, 20);
+    button.frame = CGRectMake(0, 0, 30, 30);
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     [button addTarget:self action:@selector(selectType) forControlEvents:UIControlEventTouchDown];
 }

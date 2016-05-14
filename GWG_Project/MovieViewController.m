@@ -59,7 +59,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+-(void)carouselView:(XRCarouselView *)carouselView didClickImage:(NSInteger)index
+{
+}
 //获取数据
 -(void)getData {
     
