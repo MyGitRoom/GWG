@@ -159,7 +159,7 @@
     if(btn.tag == 0){
         MovieViewController *movieVc = [[MovieViewController alloc]init];
         [self.navigationController pushViewController:movieVc animated:YES];
-    }else if (btn.tag ==1){
+    }else if (btn.tag == 1){
         ReadingViewController *readingVc = [[ReadingViewController alloc]init];
         [self.navigationController pushViewController:readingVc animated:YES];
     }else if (btn.tag == 2){

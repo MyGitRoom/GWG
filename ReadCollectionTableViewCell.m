@@ -51,7 +51,7 @@
     _title.numberOfLines = 0;
     _jumpImage.frame = CGRectMake(340, 10, 30, 30);
     _jumpImage.image = [UIImage imageNamed:@"jumpTo"];
-    _deleteno.frame = CGRectMake(KCellWidth/7+10, 5, KCellWidth/8, KCellHeight-15);
+    _deleteno.frame = CGRectMake(KCellWidth/7+15, 5, KCellWidth/7-10, KCellHeight-15);
     _deleteno.alpha = 0.8;
 
 

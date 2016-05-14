@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UIImageView * albumView;
 @property (nonatomic, strong) UIImageView * imageV;
+@property (nonatomic, strong) NSArray * collectionArray;
 
 @end
 
@@ -26,6 +27,15 @@
 }
 
 #pragma mark- 懒加载
+
+- (NSArray *) collectionArray
+{
+    if (!_collectionArray)
+    {
+        self.collectionArray = [NSArray array];
+    }
+    return _collectionArray;
+}
 
 -(UIImageView *)albumView
 {
@@ -191,6 +201,21 @@
 -(void)reloadMusic
 {
     DataDetailModel * model = [self.passDataArray objectAtIndex:self.currentIndex];
+//    NSLog(@"切换下一首传过来的MO %@",model.title);
+    
+    self.collectionArray = [[DataBaseUtil shareDataBase]selectRadioTable];
+    for (DataDetailModel * model1 in _collectionArray) {
+//        NSLog(@"数据库里的MO %@",model1.title);
+        if ([model1.title isEqualToString:model.title])
+        {
+            _btn.selected = YES;
+            break;
+        }else if (![model1.title isEqualToString:model.title])
+            _btn.selected = NO;
+    }
+ 
+  
+    
     //改变旋转大图的背景
     [self.albumView sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
     [_imageV sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
@@ -206,6 +231,7 @@
     [player pause];
     [player setPlayerWithUrl:model.sound_url];
     [player play];
+    NSLog(@"shoucangzhuangtai%d",_btn.selected);
 }
 
 - (void) firstReloadMusic
@@ -271,20 +297,23 @@
 
 - (void) PopViewToCollect:(UIButton *)btn
 {
-    
+
+    DataDetailModel * model = [self.passDataArray objectAtIndex:self.currentIndex];
     if (_btn.selected == NO) {
-        [[DataBaseUtil shareDataBase]insertObjectOfRadio:_detailMod];
+        [[DataBaseUtil shareDataBase]insertObjectOfRadio:model];
         _btn.selected = YES;
         [self popToPrompt:@"收藏成功"];
         
         
     }else
     {
-        [[DataBaseUtil shareDataBase]deleteRadioWithName:_detailMod.title];
+        [[DataBaseUtil shareDataBase]deleteRadioWithName:model.title];
         [self popToPrompt:@"取消收藏"];
         _btn.selected = NO;
         
     }
+    
+//    NSLog(@"导航栏按钮%d",_btn.selected);
 }
 #pragma -mark 弹出提示框
 -(void)popToPrompt:(NSString*)str
