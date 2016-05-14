@@ -301,10 +301,7 @@
         
         MovieCollectTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
         
-       NSInteger  index = indexPath.row ;
-        
-        if (index == _i) {
-            _i = index ;
+
             if (_times ==0) {//按钮删除状态
                 [_deleteArray addObject:self.array[indexPath.row]];//删除数组
                 cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
@@ -314,33 +311,14 @@
             }else
             {
                 [_deleteArray removeObject:self.array[indexPath.row]];
-                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteN"];
                 _times =0;
                 
                 NSLog(@"%ld",_deleteArray.count);
                 
             }
  
-        }else{
-//            _times = 0 ;
-            _i = index ;
-            if (_times ==0) {//按钮删除状态
-                [_deleteArray addObject:self.array[indexPath.row]];//删除数组
-                cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
-                _times =1;
-                NSLog(@"%ld",_deleteArray.count);
-                //        }else if (_times ==1)
-            }else
-            {
-                [_deleteArray removeObject:self.array[indexPath.row]];
-                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
-                _times =0;
-                
-                NSLog(@"%ld",_deleteArray.count);
-                
-            }
- 
-        }
+
         
     }
 
