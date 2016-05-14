@@ -101,9 +101,9 @@
     
     [_imagev addSubview:_fadeC];
     
-    if ((ms.content.length>100 || ms.note.length>30)) {
-        _fadeC.text = @"知识给你力量，品格给你别人的尊敬。－－李小龙";
-        _fade.text = @"knowledge will give you power but character respect for you";
+    if ((ms.content.length>120 && ms.note.length>30)) {
+        _fadeC.text = @"把握机遇的人，才能心想事成。－－歌德";
+        _fade.text = @"He who seizes the right, moment is the right man";
         _fadeC.frame =CGRectMake(10, KScreenHeight/10,  KScreenWidth/3*2.2, KScreenHeight/6);
         _fade.frame =CGRectMake(KScreenWidth/2.4, KScreenHeight/5*2.9,KScreenWidth/3*1.8, KScreenHeight/3);
 //        _sphereView.frame =CGRectMake(40, KScreenHeight-64-49+20, 80, 80);
@@ -118,7 +118,7 @@
 -(void)createCloudTag{
     self.sphereView = [[DBSphereView alloc]initWithFrame:CGRectMake(50, KScreenHeight-64-49-20, 100, 100)];
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
-    NSArray *titleArr = [NSArray arrayWithObjects:@"Movie",@"Reading",@"Radio",@"Science", nil];
+    NSArray *titleArr = [NSArray arrayWithObjects:@"Movie",@"Reading",@"Radio",@"digital", nil];
     for (NSInteger i = 0; i<4; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         //根据tag标记进行跳转到那个页面

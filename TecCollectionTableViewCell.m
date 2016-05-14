@@ -43,7 +43,8 @@
     self.imageV.layer.cornerRadius = 8 ;
     self.imageV.layer.masksToBounds = YES ;
     
-    _deleteno.frame = CGRectMake(KCellWidth-8-KCellHeight/4, 5, KCellHeight/4, KCellHeight/2.5);
+//    _deleteno.frame = CGRectMake(KCellWidth-8-KCellHeight/4, 5, KCellHeight/4, KCellHeight/2.5);
+    self.deleteno.frame = CGRectMake(KCellWidth-55, 15, 30, 30) ;
     _deleteno.alpha =0.8;
 //    _deleteno.backgroundColor = [UIColor blueColor];
     
