@@ -118,7 +118,7 @@
 -(void)createCloudTag{
     self.sphereView = [[DBSphereView alloc]initWithFrame:CGRectMake(50, KScreenHeight-64-49-20, 100, 100)];
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
-    NSArray *titleArr = [NSArray arrayWithObjects:@"Movie",@"Reading",@"Radio",@"Science", nil];
+    NSArray *titleArr = [NSArray arrayWithObjects:@"Movie",@"Reading",@"Radio",@"digital", nil];
     for (NSInteger i = 0; i<4; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         //根据tag标记进行跳转到那个页面
