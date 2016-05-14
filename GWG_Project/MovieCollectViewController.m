@@ -145,21 +145,24 @@
     _deleteV= [[UIView alloc]initWithFrame:CGRectMake(0, KScreenHeight, KScreenWidth, 50)];
     _deleteV.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:_deleteV];
-    UIButton * leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-    [leftBtn addTarget:self action:@selector(selectAll) forControlEvents:UIControlEventTouchDown];
+    UIButton * leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 50)];
+    [leftBtn addTarget:self action:@selector(selectAll:) forControlEvents:UIControlEventTouchDown];
+    [leftBtn setImage:[UIImage imageNamed:@"selectallN"] forState:UIControlStateNormal];
     [leftBtn setTitle:@"全选" forState:UIControlStateNormal];
     [_deleteV addSubview:leftBtn];
     
     UIButton * rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth-50, 0, 50, 50)];
     [rightBtn addTarget:self action:@selector(deleteSelectCell) forControlEvents:UIControlEventTouchDown];
-    [rightBtn setTitle:@"删除" forState:UIControlStateNormal];
+//    [rightBtn setTitle:@"删除" forState:UIControlStateNormal];
+    [rightBtn setImage:[UIImage imageNamed:@"deletecollect"] forState:UIControlStateNormal];
     [_deleteV addSubview:rightBtn];
     
 }
 
 #pragma mark - 删除和全选按钮方法
--(void)selectAll{
+-(void)selectAll:(UIButton *)leftBtn{
     if ( _all == 0) {
+        [leftBtn setImage:[UIImage imageNamed:@"selectallY"] forState:UIControlStateNormal];
         _all =1;
         for (TypeOfMovieModel *movie in _array) {
             
@@ -168,6 +171,7 @@
     }
     else
     {
+         [leftBtn setImage:[UIImage imageNamed:@"selectallN"] forState:UIControlStateNormal];
         [_deleteArray removeAllObjects];
         _all=0;
     }
@@ -240,7 +244,7 @@
     if (_flag == 1) {
         if (_all ==0) {
             
-            cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+            cell.deleteimageV.image = [UIImage imageNamed:@"deleteN"];
         }else
         {
             cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];

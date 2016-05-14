@@ -180,7 +180,9 @@
 #pragma  -mark 全选删除按钮
 -(void)selectAll
 {
+    
     if ( all == 0) {
+        
         all =1;
         for (Reading*read in _dataArray) {
             [_deleteArray addObject:read];
