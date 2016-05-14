@@ -130,10 +130,10 @@
     [cell.imageV sd_setImageWithURL:[NSURL URLWithString:tec.pic_url] placeholderImage:nil ];
     if (flag == 1) {
         if (all ==0) {
-            cell.deleteno.image = [UIImage imageNamed:@"delete"];
+            cell.deleteno.image = [UIImage imageNamed:@"deleteN"];
         }else
         {
-            cell.deleteno.image = [UIImage imageNamed:@"deleteyes"];
+            cell.deleteno.image = [UIImage imageNamed:@"deleteY"];
         }
         
     }
@@ -161,12 +161,12 @@
         TecCollectionTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
         if (times ==0) {//按钮删除状态
             [_deleteArray addObject:tec];//删除数组
-            cell.deleteno.image = [UIImage imageNamed:@"deleteyes"];
+            cell.deleteno.image = [UIImage imageNamed:@"deleteY"];
             times =1;
         }else if (times ==1)
         {
             [_deleteArray removeObject:tec];
-            cell.deleteno.image = [UIImage imageNamed:@"delete"];
+            cell.deleteno.image = [UIImage imageNamed:@"deleteN"];
             times =0;
         }
     }
@@ -177,15 +177,20 @@
     _deleteV= [[UIView alloc]initWithFrame:CGRectMake(0, KScreenHeight, KScreenWidth, 50)];
     _deleteV.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:_deleteV];
-    UIButton * leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+    UIButton * leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 50)];
     [leftBtn addTarget:self action:@selector(selectAll) forControlEvents:UIControlEventTouchDown];
+    [leftBtn setImage:[UIImage imageNamed:@"selectallN"] forState:UIControlStateNormal];
     [leftBtn setTitle:@"全选" forState:UIControlStateNormal];
     [_deleteV addSubview:leftBtn];
     
     UIButton * rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth-50, 0, 50, 50)];
     [rightBtn addTarget:self action:@selector(deleteSelectCell) forControlEvents:UIControlEventTouchDown];
-    [rightBtn setTitle:@"删除" forState:UIControlStateNormal];
+//    [rightBtn setTitle:@"删除" forState:UIControlStateNormal];
+    [rightBtn setImage:[UIImage imageNamed:@"deletecollect"] forState:UIControlStateNormal];
     [_deleteV addSubview:rightBtn];
+    
+    
+
     
 }
 

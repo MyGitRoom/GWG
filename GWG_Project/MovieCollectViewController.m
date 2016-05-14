@@ -314,7 +314,7 @@
             }else
             {
                 [_deleteArray removeObject:self.array[indexPath.row]];
-                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteN"];
                 _times =0;
                 
                 NSLog(@"%ld",_deleteArray.count);
@@ -333,7 +333,7 @@
             }else
             {
                 [_deleteArray removeObject:self.array[indexPath.row]];
-                cell.deleteimageV.image = [UIImage imageNamed:@"deleteW"];
+                cell.deleteimageV.image = [UIImage imageNamed:@"deleteN"];
                 _times =0;
                 
                 NSLog(@"%ld",_deleteArray.count);
