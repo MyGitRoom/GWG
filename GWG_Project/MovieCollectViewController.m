@@ -302,6 +302,7 @@
         MovieCollectTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
         
 
+
             if (_times ==0) {//按钮删除状态
                 [_deleteArray addObject:self.array[indexPath.row]];//删除数组
                 cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
@@ -317,9 +318,7 @@
                 NSLog(@"%ld",_deleteArray.count);
                 
             }
- 
-
-        
+      
     }
 
 

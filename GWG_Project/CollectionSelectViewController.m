@@ -65,7 +65,7 @@
     //reading
     UIButton * btnReading = [[UIButton alloc]initWithFrame:CGRectMake(-10, KScreenHeight/5+50, KScreenWidth/4*3, 80)];
     [btnReading setBackgroundImage:[UIImage imageNamed:@"tagleft"] forState:UIControlStateNormal];
-    [btnReading setTitle:@"Reading" forState:UIControlStateNormal];
+    [btnReading setTitle:@"Reading文章阅读" forState:UIControlStateNormal];
     btnReading.titleLabel.font = [UIFont systemFontOfSize:20];
     btnReading.contentEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0);
     [btnReading setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -75,7 +75,7 @@
     //technology
     UIButton * btnTec = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth/4, KScreenHeight/5+150, KScreenWidth/4*3, 80)];
     [btnTec setBackgroundImage:[UIImage imageNamed:@"tagright"] forState:UIControlStateNormal];
-    [btnTec setTitle:@"Technology" forState:UIControlStateNormal];
+    [btnTec setTitle:@"Digital life 科技资讯" forState:UIControlStateNormal];
     btnTec.titleLabel.font = [UIFont systemFontOfSize:20];
     [btnTec addTarget:self action:@selector(jumpToTecCollection:) forControlEvents:UIControlEventTouchDown];
     [_imageV addSubview:btnTec];
@@ -83,7 +83,7 @@
     //movie
     UIButton * btnMovie = [[UIButton alloc]initWithFrame:CGRectMake(-10, KScreenHeight/5+250, KScreenWidth/4*3, 80)];
     [btnMovie setBackgroundImage:[UIImage imageNamed:@"tagleft"] forState:UIControlStateNormal];
-    [btnMovie setTitle:@"Radio" forState:UIControlStateNormal];
+    [btnMovie setTitle:@"Radio电台播放" forState:UIControlStateNormal];
     btnMovie.titleLabel.font = [UIFont systemFontOfSize:20];
     btnMovie.contentEdgeInsets = UIEdgeInsetsMake(10, 0, 0, 0);
     [btnMovie setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -94,7 +94,7 @@
     //radio
     UIButton * btnRadio = [[UIButton alloc]initWithFrame:CGRectMake(KScreenWidth/4, KScreenHeight/5+350, KScreenWidth/4*3, 80)];
     [btnRadio setBackgroundImage:[UIImage imageNamed:@"tagright"] forState:UIControlStateNormal];
-    [btnRadio  setTitle:@"Movie" forState:UIControlStateNormal];
+    [btnRadio  setTitle:@"Movie电影精选" forState:UIControlStateNormal];
     btnRadio .titleLabel.font = [UIFont systemFontOfSize:20];
     [btnRadio  addTarget:self action:@selector(jumpToRadioCollection:) forControlEvents:UIControlEventTouchDown];
     [_imageV addSubview:btnRadio];

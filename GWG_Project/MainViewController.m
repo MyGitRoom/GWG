@@ -118,7 +118,7 @@
 -(void)createCloudTag{
     self.sphereView = [[DBSphereView alloc]initWithFrame:CGRectMake(50, KScreenHeight-64-49-20, 100, 100)];
     NSMutableArray *array = [[NSMutableArray alloc]initWithCapacity:0];
-    NSArray *titleArr = [NSArray arrayWithObjects:@"Movie",@"Reading",@"Radio",@"Science", nil];
+    NSArray *titleArr = [NSArray arrayWithObjects:@"Movie",@"Reading",@"Radio",@"digital", nil];
     for (NSInteger i = 0; i<4; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         //根据tag标记进行跳转到那个页面
@@ -159,7 +159,7 @@
     if(btn.tag == 0){
         MovieViewController *movieVc = [[MovieViewController alloc]init];
         [self.navigationController pushViewController:movieVc animated:YES];
-    }else if (btn.tag ==1){
+    }else if (btn.tag == 1){
         ReadingViewController *readingVc = [[ReadingViewController alloc]init];
         [self.navigationController pushViewController:readingVc animated:YES];
     }else if (btn.tag == 2){
@@ -365,7 +365,6 @@
 {
     [_fade removeFromSuperview];
     [_fadeC removeFromSuperview];
-
 }
 
 
