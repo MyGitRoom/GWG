@@ -23,6 +23,7 @@
 @property (nonatomic,strong)NSArray * dataArray;
 @property(nonatomic,strong)NSMutableArray * deleteArray; //删除的数组
 @property (nonatomic,strong)UIView * deleteV;//底部删除视图
+@property (nonatomic, strong) UIImageView * placeHolderView;
 @end
 
 @implementation ReadCollectionViewController
@@ -30,6 +31,16 @@
     self.navigationController.navigationBarHidden = NO;
     _dataArray = [NSArray array];
     _dataArray =  [[DataBaseUtil shareDataBase]selectReadingTable];
+    if (self.dataArray.count == 0)
+    {
+        self.placeHolderView = [[[NSBundle mainBundle]loadNibNamed:@"PlaceHolderView" owner:self options:nil]lastObject];
+        self.placeHolderView.frame = CGRectMake(0, 60, KScreenWidth, 200);
+        [self.view addSubview:_placeHolderView];
+    }
+    else
+    {
+        [self.placeHolderView removeFromSuperview];
+    }
     [_tab reloadData];
 }
 - (void)viewDidLoad {

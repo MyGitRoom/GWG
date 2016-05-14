@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    self.title = @"收藏夹";
+    self.title = @"电台";
     _deleteArray = [NSMutableArray array];
     self.collectionArray = [[DataBaseUtil shareDataBase]selectRadioTable];
 //    NSLog(@"%@",self.collectionArray);
@@ -58,11 +58,11 @@
     leftImage = [leftImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:leftImage style:UIBarButtonItemStylePlain target:self action:@selector(touchReturn)];
     
-    UIImage * rightImage = [UIImage imageNamed:@"clear11"];
+    UIImage * rightImage = [UIImage imageNamed:@"setting"];
     rightImage = [rightImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:rightImage forState:UIControlStateNormal];
-    button.frame = CGRectMake(0, 0, 20, 20);
+    button.frame = CGRectMake(0, 0, 30, 30);
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     [button addTarget:self action:@selector(touchClear) forControlEvents:UIControlEventTouchDown];
     
@@ -87,7 +87,7 @@
     if (self.collectionArray.count == 0)
     {
         self.placeHolderView = [[[NSBundle mainBundle]loadNibNamed:@"PlaceHolderView" owner:self options:nil]lastObject];
-        self.placeHolderView.frame = self.view.bounds;
+        self.placeHolderView.frame = CGRectMake(0, 60, KScreenWidth, 200);
         [self.view addSubview:_placeHolderView];
     }
     else
@@ -124,6 +124,7 @@
     RadioCollectionTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil)
     {
+//        cell = [[RadioCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
         cell = [[[NSBundle mainBundle]loadNibNamed:@"RadioCollectionTableViewCell" owner:self options:nil]lastObject];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -137,10 +138,13 @@
     [cell.picView sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
     cell.titleLab.text = model.title;
     cell.deleteImg.alpha = 0.8;
-    if (flag == 1) {
-        if (all ==0) {
+    if (flag == 1)
+    {
+        if (all ==0)
+        {
             cell.deleteImg.image = [UIImage imageNamed:@"delete"];
-        }else
+        }
+        else
         {
             cell.deleteImg.image = [UIImage imageNamed:@"deleteyes"];
         }
@@ -174,17 +178,19 @@
         [self.navigationController pushViewController:player animated:YES];
     }
     else{
-        RadioCollectionTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (times ==0) {//按钮删除状态
+        RadioCollectionTableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (times == 0)
+        {//按钮删除状态
             [_deleteArray addObject:model];//删除数组
             cell.deleteImg.image = [UIImage imageNamed:@"deleteyes"];
             
-            times =1;
-        }else if (times ==1)
+            times = 1;
+        }
+        else if (times == 1)
         {
             [_deleteArray removeObject:model];
             cell.deleteImg.image = [UIImage imageNamed:@"delete"];
-            times =0;
+            times = 0;
         }
     }
 }
