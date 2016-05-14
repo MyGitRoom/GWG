@@ -36,6 +36,8 @@
 @property (nonatomic ,strong) UIView *deleteV ;// 底部删除视图
 
 @property (nonatomic ,assign) NSInteger i ;
+
+@property (nonatomic, strong) UIImageView * placeHolderView;
 @end
 
 @implementation MovieCollectViewController
@@ -67,6 +69,17 @@
     NSLog(@"--->%ld",self.array.count);
 //    _dataArray = [NSArray array];
 //    _dataArray =  [[DataBaseUtil shareDataBase]selectReadingTable];
+    if (self.array.count == 0)
+    {
+        self.placeHolderView = [[[NSBundle mainBundle]loadNibNamed:@"PlaceHolderView" owner:self options:nil]lastObject];
+        self.placeHolderView.frame = CGRectMake(0, 60, KScreenWidth, 200);
+        self.placeHolderView.backgroundColor = [UIColor colorWithRed:0.027 green:0.035 blue:0.055 alpha:1.000];
+        [self.view addSubview:_placeHolderView];
+    }
+    else
+    {
+        [self.placeHolderView removeFromSuperview];
+    }
     [_tab reloadData];
 
 }

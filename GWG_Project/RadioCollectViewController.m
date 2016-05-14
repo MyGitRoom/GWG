@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    self.title = @"收藏夹";
+    self.title = @"电台";
     _deleteArray = [NSMutableArray array];
     self.collectionArray = [[DataBaseUtil shareDataBase]selectRadioTable];
 //    NSLog(@"%@",self.collectionArray);
@@ -87,7 +87,7 @@
     if (self.collectionArray.count == 0)
     {
         self.placeHolderView = [[[NSBundle mainBundle]loadNibNamed:@"PlaceHolderView" owner:self options:nil]lastObject];
-        self.placeHolderView.frame = self.view.bounds;
+        self.placeHolderView.frame = CGRectMake(0, 60, KScreenWidth, 200);
         [self.view addSubview:_placeHolderView];
     }
     else
