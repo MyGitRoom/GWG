@@ -365,7 +365,6 @@
 {
     [_fade removeFromSuperview];
     [_fadeC removeFromSuperview];
-
 }
 
 
