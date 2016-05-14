@@ -210,7 +210,8 @@
         {
             _btn.selected = YES;
             break;
-        }else if (![model1.title isEqualToString:model.title])
+        }
+        else if (![model1.title isEqualToString:model.title])
             _btn.selected = NO;
     }
  
@@ -231,7 +232,7 @@
     [player pause];
     [player setPlayerWithUrl:model.sound_url];
     [player play];
-    NSLog(@"shoucangzhuangtai%d",_btn.selected);
+//    NSLog(@"shoucangzhuangtai%d",_btn.selected);
 }
 
 - (void) firstReloadMusic
@@ -299,7 +300,8 @@
 {
 
     DataDetailModel * model = [self.passDataArray objectAtIndex:self.currentIndex];
-    if (_btn.selected == NO) {
+    if (_btn.selected == NO)
+    {
         [[DataBaseUtil shareDataBase]insertObjectOfRadio:model];
         _btn.selected = YES;
         [self popToPrompt:@"收藏成功"];
@@ -310,7 +312,6 @@
         [[DataBaseUtil shareDataBase]deleteRadioWithName:model.title];
         [self popToPrompt:@"取消收藏"];
         _btn.selected = NO;
-        
     }
     
 //    NSLog(@"导航栏按钮%d",_btn.selected);
