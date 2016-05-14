@@ -19,7 +19,7 @@
 #import "CollectionSelectViewController.h"
 #import "SettingViewController.h"
 #import "MyViewController.h"
-
+#import "MyView.h"
 #define DAILYURL @"http://dict-mobile.iciba.com/interface/index.php?c=sentence&m=getsentence&client=1&type=1&field=1,2,3,4,5,6,7,8,9,10,11,12,13&timestamp=1434767570&sign=6124a62ff73a033a&uuid=3dd23ff24ea543c1bdca57073d0540e1&uid="
 @interface MainViewController ()<btnjump>
 {
@@ -75,6 +75,17 @@
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    //引导图
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *string = [user stringForKey:@"标记"];
+    if(![string isEqualToString:@"you"]){
+        MyView *view = [[MyView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        [self.view addSubview:view];
+    }
+    
+    
     Flag = NO;//记录是否出现
     self.imagev = [[UIImageView alloc]initWithFrame:self.view.frame];
     self.i = 1 ;
