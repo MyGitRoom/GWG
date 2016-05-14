@@ -60,17 +60,19 @@
             }
             
                         //分页
-            _page.frame = CGRectMake(0, HEIGHT-60, WIDTH, 30);
+            _page.frame = CGRectMake(0, HEIGHT-40, WIDTH, 30);
             _page.numberOfPages = _imageArray.count;
-            _page.currentPageIndicatorTintColor = [UIColor colorWithRed:29/255.0 green:138/255.0 blue:198/255.0 alpha:1];
+//            _page.currentPageIndicatorTintColor = [UIColor colorWithRed:29/255.0 green:138/255.0 blue:198/255.0 alpha:1];
+    _page.currentPageIndicatorTintColor = [UIColor lightGrayColor];
             _page.pageIndicatorTintColor = [UIColor whiteColor];
             [_page addTarget:self action:@selector(touchPage:) forControlEvents:UIControlEventValueChanged];
             
             //按钮
-    _button.frame = CGRectMake(0, HEIGHT*0.8, 120, 40);
+    _button.frame = CGRectMake(0, HEIGHT*0.65, 120, 40);
     _button.center = CGPointMake(WIDTH/2, _button.center.y);
     
-    [_button setTitle:@"进入应用" forState:UIControlStateNormal];
+//    [_button setTitle:@"进入应用" forState:UIControlStateNormal];
+    [_button setImage:[UIImage imageNamed:@"comeInBtn"] forState:UIControlStateNormal];
             _button.backgroundColor = [UIColor cyanColor];
             _button.layer.cornerRadius = 7;
             _button.layer.masksToBounds = YES;
@@ -82,7 +84,7 @@
 -(void)flagFirstLogin
 {
     [UIView animateWithDuration:0.3 animations:^{
-        _button.transform = CGAffineTransformMakeTranslation(0, HEIGHT*0.2+40);
+        _button.transform = CGAffineTransformMakeTranslation(0,HEIGHT*0.2+40);
     }];
     [UIView animateWithDuration:2 animations:^{
         
