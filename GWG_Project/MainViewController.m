@@ -19,11 +19,14 @@
 #import "CollectionSelectViewController.h"
 #import "SettingViewController.h"
 #import "MyViewController.h"
+#import "GuideView.h"
 
 #define DAILYURL @"http://dict-mobile.iciba.com/interface/index.php?c=sentence&m=getsentence&client=1&type=1&field=1,2,3,4,5,6,7,8,9,10,11,12,13&timestamp=1434767570&sign=6124a62ff73a033a&uuid=3dd23ff24ea543c1bdca57073d0540e1&uid="
 @interface MainViewController ()<btnjump>
 {
     BOOL  Flag;//监听按钮是否创建
+    GuideView * guideView;//新手引导视图
+    NSInteger * times; //记录在引导视图点击次数；
 }
 @property (nonatomic ,strong)DBSphereView *sphereView ;
 @property (nonatomic ,strong)UIImageView *imagev ;
@@ -75,6 +78,9 @@
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
     Flag = NO;//记录是否出现
     self.imagev = [[UIImageView alloc]initWithFrame:self.view.frame];
     self.i = 1 ;
@@ -86,6 +92,9 @@
     [self requestData];
     //创建右上角按钮
     [self creatRunningBtn];
+    
+    
+    
 }
 
 #pragma -mark 布局淡入淡出字体
@@ -223,7 +232,24 @@
     
     //图片
     self.imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight/4.5, KScreenWidth, KScreenHeight/3)];
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:msg.picture]];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:msg.picture]placeholderImage:nil options:SDWebImageProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+#pragma -mark new guide
+        //单次运行时走的方法
+        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+        NSString * str = [user objectForKey:@"456"];
+        NSLog(@"%@",str);
+        if (![str isEqualToString:@"123"]) {
+              [self creatNewGuide];
+            [user setObject:@"123" forKey:@"456"];
+            NSString * str1 =[user objectForKey:@"456"];
+            NSLog(@"创建%@",str1);
+            
+        }
+        
+    
+       
+    }];
     _imageV.layer.cornerRadius = 3;
     _imageV.layer.shadowColor = [UIColor whiteColor].CGColor;
     _imageV.layer.shadowOffset = CGSizeMake(0,0);
@@ -361,6 +387,52 @@
     [self.navigationController pushViewController:my animated:YES];
 }
 
+
+
+
+#pragma -mark 创建新手引导视图
+-(void)creatNewGuide
+{
+    NSUserDefaults  * user = [NSUserDefaults standardUserDefaults];
+    [user setValue:@"123" forKey:@"111"];
+    
+    
+    guideView  = [[GuideView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight)];
+    guideView.fullShow = YES;
+    guideView.model = GuideViewCleanModeRoundRect;
+    guideView.showRect = CGRectMake(10, KScreenHeight-64-49-20, 150, 120);
+    guideView.markText = @"转动视图有四个页面模块哦";
+    [self.view addSubview:guideView];
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if (times == 0) {
+          guideView.model = GuideViewCleanModeOval ;
+        guideView.showRect = CGRectMake(KScreenWidth-50, 0, 50, 50);
+        guideView.markText = @"点开这里显示\n收藏C\n设置S\n版权声明M ";
+         times++;
+    }else {
+        [self creatBtnGuide];
+    }
+}
+-(void)creatBtnGuide
+{
+    UIButton * btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 120, 100)];
+    btn.center = self.view.center;
+    [btn addTarget:self action:@selector(returnToMain) forControlEvents:UIControlEventTouchDown];
+    [btn setImage:[UIImage imageNamed:@"fx_livRm_guide_ok"] forState:UIControlStateNormal];
+    [guideView addSubview:btn];
+    
+    
+}
+//移除引导
+-(void)returnToMain
+{
+ [guideView removeFromSuperview];
+}
+
+#pragma -mark  视图结束
 -(void)viewWillDisappear:(BOOL)animated
 {
     [_fade removeFromSuperview];
