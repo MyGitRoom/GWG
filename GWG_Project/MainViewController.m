@@ -21,8 +21,12 @@
 #import "MyViewController.h"
 #import "GuideView.h"
 
+
+#import "FirstTimeLoginView.h"
+
 #define DAILYURL @"http://dict-mobile.iciba.com/interface/index.php?c=sentence&m=getsentence&client=1&type=1&field=1,2,3,4,5,6,7,8,9,10,11,12,13&timestamp=1434767570&sign=6124a62ff73a033a&uuid=3dd23ff24ea543c1bdca57073d0540e1&uid="
-@interface MainViewController ()<btnjump>
+@interface MainViewController ()<btnjump,newguidejump>
+
 {
     BOOL  Flag;//监听按钮是否创建
     GuideView * guideView;//新手引导视图
@@ -80,6 +84,10 @@
     [super viewDidLoad];
     
     
+    //引导图
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *string = [user stringForKey:@"guide"];
+ 
     
     Flag = NO;//记录是否出现
     self.imagev = [[UIImageView alloc]initWithFrame:self.view.frame];
@@ -93,8 +101,33 @@
     //创建右上角按钮
     [self creatRunningBtn];
     
-    
-    
+    if(![string isEqualToString:@"first"]){
+        //        MyView *view = [[MyView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        FirstTimeLoginView *vi = [[FirstTimeLoginView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight)];
+        vi.imageArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"guide1"],[UIImage imageNamed:@"guide2"],[UIImage imageNamed:@"guide3"],[UIImage imageNamed:@"guide4"], nil];
+        [self.view addSubview:vi];
+        vi.newguidedelegate =self;
+        
+    }
+}
+
+
+
+#pragma -mark 监听点击引导图点击事件
+-(void)jumptomain
+{
+#pragma -mark new guide
+    //单次运行时走的方法
+    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
+    NSString * str = [user objectForKey:@"456"];
+//    NSLog(@"%@",str);
+    if (![str isEqualToString:@"123"]) {
+        [self creatNewGuide];
+        [user setObject:@"123" forKey:@"456"];
+        NSString * str1 =[user objectForKey:@"456"];
+        NSLog(@"创建%@",str1);
+        
+    }
 }
 
 #pragma -mark 布局淡入淡出字体
@@ -234,21 +267,6 @@
     self.imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight/4.5, KScreenWidth, KScreenHeight/3)];
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:msg.picture]placeholderImage:nil options:SDWebImageProgressiveDownload progress:^(NSInteger receivedSize, NSInteger expectedSize) {
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-#pragma -mark new guide
-        //单次运行时走的方法
-        NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
-        NSString * str = [user objectForKey:@"456"];
-        NSLog(@"%@",str);
-        if (![str isEqualToString:@"123"]) {
-              [self creatNewGuide];
-            [user setObject:@"123" forKey:@"456"];
-            NSString * str1 =[user objectForKey:@"456"];
-            NSLog(@"创建%@",str1);
-            
-        }
-        
-    
-       
     }];
     _imageV.layer.cornerRadius = 3;
     _imageV.layer.shadowColor = [UIColor whiteColor].CGColor;

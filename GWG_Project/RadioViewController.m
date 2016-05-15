@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSMutableArray * loadMoreArray;
 @property (nonatomic, assign) BOOL isPlay;
 
+@property (nonatomic ,assign) BOOL flag ;
+@property (nonatomic ,assign) NSInteger i;
 
 @end
 
@@ -50,7 +52,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     page = 1;
-//    self.isPlay = YES;
+
     [[[self.navigationController.navigationBar subviews]objectAtIndex:0]setAlpha:1];
     
     [self requestData:RADIOURL];
@@ -101,9 +103,9 @@
 //        NSLog(@"%@",string);
     }
     
-    
     return cell;
 }
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -127,22 +129,18 @@
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
    
-//    if (_isPlay)
-//    {
         cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration: 1 animations:^{
             cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+          
         }];
-        
-//    }
-    
 
 }
 
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    _isPlay = YES;
-//}
+                 
+
+
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -150,10 +148,6 @@
 //    self.isPlay = YES;
 }
 
-//- (void) viewDidAppear:(BOOL)animated
-//{
-////    _isPlay = NO;
-//}
 
 
 #pragma mark- 请求数据
@@ -173,8 +167,10 @@
         }
 //        NSLog(@"%@",self.dataArray);
         dispatch_async(dispatch_get_main_queue(), ^{
-//            _isPlay = NO;
-            [_tab reloadData];
+
+                [_tab reloadData];
+
+            
         });
         
     } error:^(NSError *error) {
@@ -182,6 +178,7 @@
     }];
     
 }
+
 
 #pragma  mark- 上拉加载的方法
 - (void) creatFooterRefresh
@@ -193,8 +190,10 @@
 {
     ++page;
     [self.loadMoreArray addObject:[@"http://www.duole.fm/api/recommend/collect?app_version=2.0.5&device=iphone&limit=10&sort=3&visitor_uid=0" stringByAppendingFormat:@"&page=%d",page]];
+    
+
     [self requestData:[self.loadMoreArray lastObject]];
-  
+
     [NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
 }
 
@@ -212,6 +211,8 @@
 -(void)loadNewData
 {
     [self requestData:RADIOURL];
+    
+
     [_tab  reloadData];
     
     [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timeStopPP) userInfo:nil repeats:NO];
