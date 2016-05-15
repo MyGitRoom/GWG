@@ -30,7 +30,7 @@
 {
     BOOL  Flag;//监听按钮是否创建
     GuideView * guideView;//新手引导视图
-    NSInteger * times; //记录在引导视图点击次数；
+    int * times; //记录在引导视图点击次数；
 }
 @property (nonatomic ,strong)DBSphereView *sphereView ;
 @property (nonatomic ,strong)UIImageView *imagev ;
@@ -82,6 +82,7 @@
 #pragma mark- 加载视图
 - (void)viewDidLoad {
     [super viewDidLoad];
+    times = 0;
     
     
     //引导图
@@ -427,12 +428,24 @@
 {
     if (times == 0) {
           guideView.model = GuideViewCleanModeOval ;
+        guideView.showRect = CGRectMake(KScreenWidth-50, KScreenHeight/4.5, 50, 50);
+        guideView.markText = @"这里可以播放声音🎵";
+         times++;
+        NSLog(@"%d",(int)times);
+    }else if ((int)times ==4)
+    {
+        guideView.model = GuideViewCleanModeOval ;
         guideView.showRect = CGRectMake(KScreenWidth-50, 0, 50, 50);
         guideView.markText = @"点开这里显示\n收藏C\n设置S\n版权声明M ";
-         times++;
-    }else {
+        times++;
+    }
+    else {
         [self creatBtnGuide];
     }
+    NSLog(@"%ld",(long)times);
+    
+    
+    
 }
 -(void)creatBtnGuide
 {
