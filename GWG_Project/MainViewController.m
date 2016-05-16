@@ -430,21 +430,17 @@
           guideView.model = GuideViewCleanModeOval ;
         guideView.showRect = CGRectMake(KScreenWidth-50, KScreenHeight/4.5, 50, 50);
         guideView.markText = @"这里可以播放声音🎵";
-         times++;
-        NSLog(@"%d",(int)times);
     }else if ((int)times ==4)
     {
         guideView.model = GuideViewCleanModeOval ;
         guideView.showRect = CGRectMake(KScreenWidth-50, 0, 50, 50);
         guideView.markText = @"点开这里显示\n收藏C\n设置S\n版权声明M ";
-        times++;
     }
     else {
         [self creatBtnGuide];
     }
-    NSLog(@"%ld",(long)times);
-    
-    
+       times++;
+
     
 }
 -(void)creatBtnGuide

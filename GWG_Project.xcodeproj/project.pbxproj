@@ -59,12 +59,10 @@
 		3FB167741CE74F09002538A7 /* yue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB167731CE74F09002538A7 /* yue.png */; };
 		3FB167761CE74F6C002538A7 /* yue2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB167751CE74F6C002538A7 /* yue2.png */; };
 		3FB167781CE74FB5002538A7 /* book2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB167771CE74FB5002538A7 /* book2.png */; };
-
 		3FB1677D1CE76172002538A7 /* guide13.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB167791CE76172002538A7 /* guide13.png */; };
 		3FB1677E1CE76172002538A7 /* guide11.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB1677A1CE76172002538A7 /* guide11.png */; };
 		3FB1677F1CE76172002538A7 /* guide14.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB1677B1CE76172002538A7 /* guide14.png */; };
 		3FB167801CE76172002538A7 /* guide12.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB1677C1CE76172002538A7 /* guide12.png */; };
-
 		3FB3D8B21CD379880058CC5B /* DBSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3D8B11CD379880058CC5B /* DBSphereView.m */; };
 		3FB3D8C81CD3886D0058CC5B /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3D8C71CD3886D0058CC5B /* ReadingViewController.m */; };
 		3FB3D8CE1CD388F50058CC5B /* TechnologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3D8CD1CD388F50058CC5B /* TechnologyViewController.m */; };
@@ -80,9 +78,7 @@
 		3FD58DBA1CE6C140003C6EB4 /* deletecollect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD58DB91CE6C140003C6EB4 /* deletecollect.png */; };
 		3FD58DBC1CE6C219003C6EB4 /* selectallN.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD58DBB1CE6C219003C6EB4 /* selectallN.png */; };
 		3FD58DBE1CE6C21E003C6EB4 /* selectallY.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD58DBD1CE6C21E003C6EB4 /* selectallY.png */; };
-
 		3FD9528E1CE76D0300242A36 /* FirstTimeLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD9528C1CE76D0300242A36 /* FirstTimeLoginView.m */; };
-
 		3FDE50B11CE17ECC002D9A0B /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE50AF1CE17ECC002D9A0B /* close.png */; };
 		3FDE50B21CE17ECC002D9A0B /* showView.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE50B01CE17ECC002D9A0B /* showView.png */; };
 		3FDE50BA1CE18C7C002D9A0B /* orangeNotLike.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE50B91CE18C7C002D9A0B /* orangeNotLike.png */; };
@@ -699,11 +695,9 @@
 		3F4E86551CD3632400B9410A /* Images */ = {
 			isa = PBXGroup;
 			children = (
-
 				4E7492571CE7470000CB2214 /* fx_livRm_guide_ok.png */,
 				4E7492581CE7470000CB2214 /* fx_my_attention_guide_arrow.png */,
 				4E7492591CE7470000CB2214 /* fx_guide_arrow_down.png */,
-
 				057E58BA1CE78A7500422E3F /* comeInBtn.png */,
 				057E58BB1CE78A7500422E3F /* guide1.png */,
 				057E58BC1CE78A7500422E3F /* guide2.png */,
@@ -713,7 +707,6 @@
 				3FB1677A1CE76172002538A7 /* guide11.png */,
 				3FB1677B1CE76172002538A7 /* guide14.png */,
 				3FB1677C1CE76172002538A7 /* guide12.png */,
-
 				3FB167731CE74F09002538A7 /* yue.png */,
 				3FB167751CE74F6C002538A7 /* yue2.png */,
 				3F3E60341CE746A00022FC6E /* book.png */,
@@ -1881,6 +1874,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GWG_Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = juijkf3fged6776;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
