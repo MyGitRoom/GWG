@@ -162,7 +162,8 @@
 //取消警告提示
 -(void)dismiss{
   
-    [self dismissViewControllerAnimated:self.alert completion:nil];
+    [self.alert dismissViewControllerAnimated:YES completion:nil];
+  
     
 }
 @end

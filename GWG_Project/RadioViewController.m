@@ -14,6 +14,7 @@
 @interface RadioViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     int page;//记录页数
+    BOOL b;
 }
 @property (nonatomic, strong) UITableView * tab;
 @property (nonatomic, strong) NSMutableArray * dataArray;
@@ -128,13 +129,15 @@
 //给cell添加动画
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+//    if (!b) {
+    
+    
         cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
         [UIView animateWithDuration: 1 animations:^{
             cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
           
         }];
-
+//    }
 }
 
                  
@@ -149,7 +152,10 @@
 }
 
 
-
+//-(void)changeB
+//{
+//    b = NO;
+//}
 #pragma mark- 请求数据
 - (void) requestData:(NSString *)string
 {
@@ -167,9 +173,9 @@
         }
 //        NSLog(@"%@",self.dataArray);
         dispatch_async(dispatch_get_main_queue(), ^{
-
+//            b = YES;
                 [_tab reloadData];
-
+//            [self performSelector:@selector(changeB) withObject:nil afterDelay:0.5];
             
         });
         
