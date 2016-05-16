@@ -9,9 +9,19 @@
 #import <UIKit/UIKit.h>
 #define WIDTH [UIScreen mainScreen].bounds.size.width
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
+
+@protocol newguidejump <NSObject>
+
+-(void)jumptomain;
+
+
+@end
+
+
 @interface FirstTimeLoginView : UIView<UIScrollViewDelegate>
 
 @property(nonatomic,strong)NSArray *imageArray;//图片数组
+@property(nonatomic)id<newguidejump>newguidedelegate;
 
 
 @end

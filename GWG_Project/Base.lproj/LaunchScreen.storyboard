@@ -321,7 +321,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="VDk-8Q-qIc" secondAttribute="trailing" id="0QQ-qF-6Ne"/>
                                     <constraint firstItem="2ul-84-yRw" firstAttribute="leading" secondItem="0WH-jU-Si5" secondAttribute="leading" constant="80" id="3EN-YU-j1y"/>
@@ -335,7 +335,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0WH-jU-Si5" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="2rg-gF-rw6"/>
