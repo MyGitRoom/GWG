@@ -89,7 +89,7 @@ static DataBaseUtil *dataBase = nil;
 -(BOOL)insertObjectOfTech:(Technology *)technology{
     if ([_db open]) {
         NSInteger st = technology.aid;
-        NSString * str = [NSString stringWithFormat:@"%ld",st];
+        NSString * str = [NSString stringWithFormat:@"%ld",(long)st];
         NSString * sql = [NSString stringWithFormat:@"insert into technology (title, pic_url, aid) values ('%@','%@','%@')",technology.title,technology.pic_url,str];
         BOOL result = [_db executeUpdate:sql];
         [_db close];
@@ -107,10 +107,10 @@ static DataBaseUtil *dataBase = nil;
     return NO;
 }
 
-//此方法作废
--(BOOL)insertObjectOfMovie:(MovieModel *)radio{	
-    return nil;
-}
+////此方法作废
+//-(BOOL)insertObjectOfMovie:(MovieModel *)radio{	
+//    return nil;
+//}
 
 
 #pragma mark - 电影类型表插入数据

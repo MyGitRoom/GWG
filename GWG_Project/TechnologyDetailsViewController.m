@@ -66,7 +66,7 @@
 #pragma -mark 处理接口数据
 -(void)loadData:(NSInteger)aid
 {
-    [NetWorlRequestManager requestWithType:GET urlString:[NSString stringWithFormat:@"http://www.dgtle.com/api/dgtle_api/v1/api.php?actions=view&aid=%ld&apikeys=DGTLECOM_APITEST1&charset=UTF8&dataform=json&inapi=yes&modules=portal&platform=ios&swh=480x800&version=2.8",aid] ParDic:nil dicOfHeader:nil finish:^(NSData *data) {
+    [NetWorlRequestManager requestWithType:GET urlString:[NSString stringWithFormat:@"http://www.dgtle.com/api/dgtle_api/v1/api.php?actions=view&aid=%ld&apikeys=DGTLECOM_APITEST1&charset=UTF8&dataform=json&inapi=yes&modules=portal&platform=ios&swh=480x800&version=2.8",(long)aid] ParDic:nil dicOfHeader:nil finish:^(NSData *data) {
         
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         NSDictionary * dic1 = [dic objectForKey:@"returnData"];

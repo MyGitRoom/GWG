@@ -13,6 +13,7 @@
 @interface RadioDetaillViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     int page;
+
 }
 @property (nonatomic, strong) UITableView * tab;
 @property (nonatomic, strong) NSMutableArray * dataDetailArray;

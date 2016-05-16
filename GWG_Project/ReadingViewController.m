@@ -68,10 +68,13 @@
 -(void)loadReadingData:(NSString * )str
 {
     //单读
-    self.mbHUD = [[MBProgressHUD alloc]initWithView:_readingTableView];
-    [self.mbHUD show:YES];
-    [_readingTableView addSubview:self.mbHUD];
-    [NetWorlRequestManager requestWithType:GET urlString:str ParDic:nil dicOfHeader:nil finish:^(NSData *data) {
+    if (_mbHUD == nil) {
+        self.mbHUD = [[MBProgressHUD alloc]initWithView:_readingTableView];
+        [self.mbHUD show:YES];
+        [_readingTableView addSubview:self.mbHUD];
+
+    }
+        [NetWorlRequestManager requestWithType:GET urlString:str ParDic:nil dicOfHeader:nil finish:^(NSData *data) {
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         
         NSArray * array = [dic objectForKey:@"datas"];
@@ -85,6 +88,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [_readingTableView reloadData];
              [self.mbHUD hide: YES];
+            [_mbHUD removeFromSuperview];
+            
             
         });
         

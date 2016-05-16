@@ -22,7 +22,8 @@
 -(BOOL)insertObjectOfReading:(Reading *)reading;
 -(BOOL)insertObjectOfTech:(Technology *)technology;
 -(BOOL)insertObjectOfRadio:(DataDetailModel *)radio;
--(BOOL)insertObjectOfMovie:(MovieModel *)radio;
+//-(BOOL)insertObjectOfMovie:(MovieModel *)radio;
+
 -(BOOL)insertObjectOfTypeOfMovie:(TypeOfMovieModel *)typeMovie ;
 -(NSArray *)selectReadingTable;
 -(NSArray *)selectTechnologyTable;
