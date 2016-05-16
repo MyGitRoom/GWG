@@ -139,7 +139,7 @@ self.navigationItem.title = @"美好数字生活";
     Technology * tech = [_dataArray objectAtIndex:indexPath.row];
     TechnologyDetailsViewController * t = [[TechnologyDetailsViewController alloc]init];
     NSInteger  st = tech.aid;
-    NSString * str = [NSString stringWithFormat:@"%ld",st];
+    NSString * str = [NSString stringWithFormat:@"%ld",(long)st];
     t.aid =str;//转换成字符串
     //穿过去一个model
     t.tec = tech;

@@ -84,7 +84,7 @@
           Movie.identifier = [dict objectForKey:@"id"]; //id是关键字要单独赋值
           [self.array addObject:Movie];
       }
-       NSLog(@"%ld",self.array.count);
+       NSLog(@"%ld",(unsigned long)self.array.count);
       dispatch_async(dispatch_get_main_queue(), ^{
           [self.collectView reloadData];
           [self.mbHUD hide:YES];

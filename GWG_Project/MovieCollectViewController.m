@@ -66,7 +66,7 @@
     self.navigationController.navigationBarHidden = NO ;
     
     self.array = [[DataBaseUtil shareDataBase] selectMovieTable];
-    NSLog(@"--->%ld",self.array.count);
+    NSLog(@"--->%ld",(unsigned long)self.array.count);
 //    _dataArray = [NSArray array];
 //    _dataArray =  [[DataBaseUtil shareDataBase]selectReadingTable];
     if (self.array.count == 0)
@@ -307,7 +307,7 @@
                 [_deleteArray addObject:self.array[indexPath.row]];//删除数组
                 cell.deleteimageV.image = [UIImage imageNamed:@"deleteY"];
                 _times =1;
-                NSLog(@"%ld",_deleteArray.count);
+                NSLog(@"%ld",(unsigned long)_deleteArray.count);
                 //        }else if (_times ==1)
             }else
             {
@@ -315,7 +315,7 @@
                 cell.deleteimageV.image = [UIImage imageNamed:@"deleteN"];
                 _times =0;
                 
-                NSLog(@"%ld",_deleteArray.count);
+                NSLog(@"%ld",(unsigned long)_deleteArray.count);
                 
             }
       
