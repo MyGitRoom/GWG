@@ -83,6 +83,22 @@
           [Movie setValuesForKeysWithDictionary:dict];
           Movie.identifier = [dict objectForKey:@"id"]; //id是关键字要单独赋值
           [self.array addObject:Movie];
+//          NSLog(@"%@",Movie.name);
+          if ([Movie.name containsString:@"情色"]) {
+              NSLog(@"%@",Movie.name);
+              [_array removeObject:Movie];
+              
+          } else if ([Movie.name containsString:@"cult"]) {
+              NSLog(@"%@",Movie.name);
+              [_array removeObject:Movie];
+              
+          }
+          	else if ([Movie.name containsString:@"犯罪"]) {
+              NSLog(@"%@",Movie.name);
+              [_array removeObject:Movie];
+              
+          }
+          
       }
        NSLog(@"%ld",(unsigned long)self.array.count);
       dispatch_async(dispatch_get_main_queue(), ^{

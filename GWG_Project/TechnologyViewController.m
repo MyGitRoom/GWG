@@ -72,7 +72,37 @@ self.navigationItem.title = @"美好数字生活";
             for (NSDictionary * dicA in arr) {
                 Technology * tech = [[Technology alloc]init];
                 [tech setValuesForKeysWithDictionary:dicA];
-                [_dataArray addObject:tech];
+                  [_dataArray addObject:tech];
+                if ([tech.title containsString:@"小米"]) {
+                    NSLog(@"%@",tech.title);
+                    [_dataArray removeObject:tech];
+                }
+                else if ([tech.title containsString:@"Google"])
+                {
+                    NSLog(@"%@",tech.title);
+                    [_dataArray removeObject:tech];
+                }
+                else if ([tech.title containsString:@"Android"])
+                {
+                    NSLog(@"%@",tech.title);
+                    [_dataArray removeObject:tech];
+                }
+                else if ([tech.title containsString:@"数字尾巴"])
+                {
+                    NSLog(@"%@",tech.title);
+                    [_dataArray removeObject:tech];
+                }
+                else if ([tech.title containsString:@"android"])
+                {
+                    NSLog(@"%@",tech.title);
+                    [_dataArray removeObject:tech];
+                }
+                else if ([tech.title containsString:@"google"])
+                {
+                    NSLog(@"%@",tech.title);
+                    [_dataArray removeObject:tech];
+                }
+    
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_collectionView reloadData];
@@ -120,7 +150,8 @@ self.navigationItem.title = @"美好数字生活";
 #pragma -mark 滑动监听方法
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (_collectionView.contentOffset.y>3000*i) {
+    NSLog(@"%f",_collectionView.contentOffset.y);
+    if (_collectionView.contentOffset.y>2000*i) {
          [self loadMoreData];
     }
 }
