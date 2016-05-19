@@ -59,12 +59,6 @@
 		3FB167741CE74F09002538A7 /* yue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB167731CE74F09002538A7 /* yue.png */; };
 		3FB167761CE74F6C002538A7 /* yue2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB167751CE74F6C002538A7 /* yue2.png */; };
 		3FB167781CE74FB5002538A7 /* book2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB167771CE74FB5002538A7 /* book2.png */; };
-
-		3FB1677D1CE76172002538A7 /* guide13.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB167791CE76172002538A7 /* guide13.png */; };
-		3FB1677E1CE76172002538A7 /* guide11.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB1677A1CE76172002538A7 /* guide11.png */; };
-		3FB1677F1CE76172002538A7 /* guide14.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB1677B1CE76172002538A7 /* guide14.png */; };
-		3FB167801CE76172002538A7 /* guide12.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB1677C1CE76172002538A7 /* guide12.png */; };
-
 		3FB3D8B21CD379880058CC5B /* DBSphereView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3D8B11CD379880058CC5B /* DBSphereView.m */; };
 		3FB3D8C81CD3886D0058CC5B /* ReadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3D8C71CD3886D0058CC5B /* ReadingViewController.m */; };
 		3FB3D8CE1CD388F50058CC5B /* TechnologyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB3D8CD1CD388F50058CC5B /* TechnologyViewController.m */; };
@@ -701,12 +695,6 @@
 				057E58BC1CE78A7500422E3F /* guide2.png */,
 				057E58BD1CE78A7500422E3F /* guide3.png */,
 				057E58B81CE78A6500422E3F /* guide4.png */,
-
-				3FB167791CE76172002538A7 /* guide13.png */,
-				3FB1677A1CE76172002538A7 /* guide11.png */,
-				3FB1677B1CE76172002538A7 /* guide14.png */,
-				3FB1677C1CE76172002538A7 /* guide12.png */,
-
 				3FB167731CE74F09002538A7 /* yue.png */,
 				3FB167751CE74F6C002538A7 /* yue2.png */,
 				3F3E60341CE746A00022FC6E /* book.png */,
@@ -1852,13 +1840,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hou lei (Y89L95Z25H)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hou lei (Y89L95Z25H)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GWG_Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = gwgid16888;
+				PRODUCT_BUNDLE_IDENTIFIER = gwgid168881;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b67217cd-8585-4b8a-a28f-a8d5d3d1f7f0";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1866,18 +1854,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: hou lei (Y89L95Z25H)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: hou lei (Y89L95Z25H)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GWG_Project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-
-				PRODUCT_BUNDLE_IDENTIFIER = gwgid16888;
-
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = juijkf3fged6776;
-
+				PRODUCT_BUNDLE_IDENTIFIER = gwgid168881;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b67217cd-8585-4b8a-a28f-a8d5d3d1f7f0";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

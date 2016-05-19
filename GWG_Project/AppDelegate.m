@@ -27,6 +27,8 @@
     
     nav.navigationBar.barStyle = UIBarStyleBlack;
     [[[nav.navigationBar subviews]objectAtIndex:0]setAlpha:1];
+    //真机无法进入后台，加上此。
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     
     return YES;
 }
